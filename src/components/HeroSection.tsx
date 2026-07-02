@@ -3,7 +3,7 @@
 import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
 import { useApp } from '@/context/AppContext';
-import { Github, Linkedin, Twitter, Mail, ArrowRight, Sparkles, Server, Instagram } from 'lucide-react';
+import { Github, Linkedin, Twitter, Mail, ArrowRight, Sparkles, Server, Instagram, Download } from 'lucide-react';
 import dynamic from 'next/dynamic';
 
 // Dynamically load the WebGL scene to prevent hydration mismatches
@@ -116,6 +116,19 @@ export const HeroSection: React.FC = () => {
           >
             <span>Let's Build Together</span>
           </motion.button>
+          <motion.a
+            href="/resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            onMouseEnter={playHoverSound}
+            onClick={playClickSound}
+            whileHover={{ scale: 1.05, y: -3 }}
+            whileTap={{ scale: 0.95 }}
+            className="w-full sm:w-auto flex items-center justify-center space-x-2 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl px-7 py-4 text-xs font-mono text-white transition-all cursor-pointer"
+          >
+            <Download className="w-4 h-4 text-brand-blue" />
+            <span>Download CV</span>
+          </motion.a>
         </motion.div>
 
         {/* Social Icons row */}

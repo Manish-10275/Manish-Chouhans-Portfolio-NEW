@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useApp } from '@/context/AppContext';
-import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter, Calendar, Check, AlertCircle, X, Instagram } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter, Calendar, Check, AlertCircle, X, Instagram, Download } from 'lucide-react';
 import dynamic from 'next/dynamic';
 
 // Dynamically load the 3D globe to avoid SSR window errors
@@ -103,6 +103,20 @@ export const ContactSection: React.FC = () => {
                 <Calendar className="w-4.5 h-4.5" />
                 <span>Schedule a 1:1 Video Sync</span>
               </button>
+
+              <motion.a
+                href="/resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                onMouseEnter={playHoverSound}
+                onClick={playClickSound}
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+                className="flex items-center space-x-2 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl px-5 py-3 text-xs font-mono text-white transition-all cursor-pointer"
+              >
+                <Download className="w-4.5 h-4.5 text-brand-blue" />
+                <span>Download CV</span>
+              </motion.a>
 
               {/* Social Icons row */}
               <div className="flex space-x-3.5">
