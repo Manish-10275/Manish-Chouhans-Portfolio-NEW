@@ -34,7 +34,7 @@ export const ProjectsSection: React.FC = () => {
       imgUrl: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=800&auto=format&fit=crop',
       tech: ['Next.js', 'OpenAI APIs', 'Tailwind CSS', 'Node.js', 'MongoDB'],
       liveUrl: 'https://devoqlabs.com',
-      gitUrl: 'https://github.com/manishchouhan123',
+      gitUrl: 'https://github.com/Manish-10275',
       caseStudy: {
         problem: 'Access to psychiatric support is expensive and suffers from structural delays, making quick relief hard for people undergoing mild anxiety attacks.',
         solution: 'Mind Mitra operates 24/7, employing customized prompts and sentiment classification architectures to offer immediate, conversational relief strategies.',
@@ -53,7 +53,7 @@ export const ProjectsSection: React.FC = () => {
       imgUrl: 'https://images.unsplash.com/photo-1560493676-04071c5f467b?q=80&w=800&auto=format&fit=crop',
       tech: ['Python', 'TensorFlow', 'FastAPI', 'React Native', 'AWS S3'],
       liveUrl: 'https://devoqlabs.com',
-      gitUrl: 'https://github.com/manishchouhan123',
+      gitUrl: 'https://github.com/Manish-10275',
       caseStudy: {
         problem: 'Rural farmers lose up to 40% of seasonal yields due to delayed identification of leaf pathogens and incorrect pesticide applications.',
         solution: 'AgriBuddy lets farmers photograph crop leaves and instantly runs it through a mobile-optimized CNN model to deliver highly accurate diagnosis files.',
@@ -72,7 +72,7 @@ export const ProjectsSection: React.FC = () => {
       imgUrl: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop',
       tech: ['Next.js 15', 'TypeScript', 'PostgreSQL', 'Tailwind', 'Stripe'],
       liveUrl: 'https://devoqlabs.com',
-      gitUrl: 'https://github.com/manishchouhan123',
+      gitUrl: 'https://github.com/Manish-10275',
       caseStudy: {
         problem: 'Technical agency operations suffer from fragmented tool stacks (Jira, Google Drive, Stripe), delaying project delivery and review feedback.',
         solution: 'Devoq Labs Portal merges client communications, live milestone tracking, visual design approvals, and invoicing into a unified WebGL workspace.',
@@ -91,7 +91,7 @@ export const ProjectsSection: React.FC = () => {
       imgUrl: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=800&auto=format&fit=crop',
       tech: ['React.js', 'FastAPI', 'Tableau API', 'Pandas', 'Docker'],
       liveUrl: 'https://devoqlabs.com',
-      gitUrl: 'https://github.com/manishchouhan123',
+      gitUrl: 'https://github.com/Manish-10275',
       caseStudy: {
         problem: 'Retail investors struggle to dissect complex market data sets and coordinate financial variables across different charting portals.',
         solution: 'Finozest parses global indicators, summarizes trends using LLMs, and presents real-time data through glassmorphic charts.',
@@ -110,7 +110,7 @@ export const ProjectsSection: React.FC = () => {
       imgUrl: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&auto=format&fit=crop',
       tech: ['Next.js 15', 'Three.js', 'Framer Motion', 'Web Audio API', 'SEO'],
       liveUrl: '#',
-      gitUrl: 'https://github.com/manishchouhan123',
+      gitUrl: 'https://github.com/Manish-10275',
       caseStudy: {
         problem: 'Most developer portfolios are flat, templated, and fail to demonstrate high-end engineering capabilities, blending into generic layouts.',
         solution: 'Built a multi-sensory futuristic dashboard that highlights technical mastery, data analytics expertise, and design aesthetics simultaneously.',
@@ -322,9 +322,12 @@ const ProjectCard: React.FC<CardProps> = ({ project, onClick, playHoverSound, in
         }}
         className="group bg-white/[0.02] border border-white/5 rounded-2xl overflow-hidden glass-panel-hover cursor-pointer p-4 flex flex-col justify-between h-[380px] relative"
       >
-        <div>
+        <div style={{ transform: 'translateZ(10px)', transformStyle: 'preserve-3d' }}>
           {/* Project Thumbnail */}
-          <div className="w-full h-[160px] rounded-xl overflow-hidden mb-5 border border-white/5 relative">
+          <div
+            style={{ transform: 'translateZ(30px)' }}
+            className="w-full h-[160px] rounded-xl overflow-hidden mb-5 border border-white/5 relative"
+          >
             <img
               src={project.imgUrl}
               alt={project.title}
@@ -336,13 +339,22 @@ const ProjectCard: React.FC<CardProps> = ({ project, onClick, playHoverSound, in
             </span>
           </div>
 
-          <span className="text-[10px] font-mono text-brand-blue uppercase tracking-widest mb-1.5 block">
+          <span
+            style={{ transform: 'translateZ(20px)' }}
+            className="text-[10px] font-mono text-brand-blue uppercase tracking-widest mb-1.5 block"
+          >
             {project.subtitle}
           </span>
-          <h3 className="text-lg md:text-xl font-bold text-white tracking-tight mb-2 group-hover:text-brand-purple transition-colors">
+          <h3
+            style={{ transform: 'translateZ(40px)' }}
+            className="text-lg md:text-xl font-bold text-white tracking-tight mb-2 group-hover:text-brand-purple transition-colors"
+          >
             {project.title}
           </h3>
-          <p className="text-white/60 text-xs md:text-sm line-clamp-2 leading-relaxed font-sans mb-4">
+          <p
+            style={{ transform: 'translateZ(25px)' }}
+            className="text-white/60 text-xs md:text-sm line-clamp-2 leading-relaxed font-sans mb-4"
+          >
             {project.description}
           </p>
         </div>

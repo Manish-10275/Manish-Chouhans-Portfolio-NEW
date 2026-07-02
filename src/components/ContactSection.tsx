@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useApp } from '@/context/AppContext';
-import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter, Calendar, Check, AlertCircle, X } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter, Calendar, Check, AlertCircle, X, Instagram } from 'lucide-react';
 import dynamic from 'next/dynamic';
 
 // Dynamically load the 3D globe to avoid SSR window errors
@@ -106,30 +106,54 @@ export const ContactSection: React.FC = () => {
 
               {/* Social Icons row */}
               <div className="flex space-x-3.5">
-                <a
+                <motion.a
                   href="https://www.linkedin.com/in/manish-chouhan-2301a7230/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-11 h-11 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center text-white/70 hover:text-white hover:border-brand-blue/30 transition-all"
+                  className="w-11 h-11 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center text-white/70 hover:text-white hover:border-brand-blue/30 transition-all cursor-pointer"
+                  whileHover={{ scale: 1.15, y: -3, rotate: 2 }}
+                  whileTap={{ scale: 0.95 }}
+                  onMouseEnter={playHoverSound}
+                  onClick={playClickSound}
                 >
                   <Linkedin className="w-5 h-5" />
-                </a>
-                <a
+                </motion.a>
+                <motion.a
                   href="https://github.com/Manish-10275"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-11 h-11 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center text-white/70 hover:text-white hover:border-brand-purple/30 transition-all"
+                  className="w-11 h-11 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center text-white/70 hover:text-white hover:border-brand-purple/30 transition-all cursor-pointer"
+                  whileHover={{ scale: 1.15, y: -3, rotate: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                  onMouseEnter={playHoverSound}
+                  onClick={playClickSound}
                 >
                   <Github className="w-5 h-5" />
-                </a>
-                <a
+                </motion.a>
+                <motion.a
                   href="https://twitter.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-11 h-11 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center text-white/70 hover:text-white hover:border-brand-accent/30 transition-all"
+                  className="w-11 h-11 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center text-white/70 hover:text-white hover:border-brand-accent/30 transition-all cursor-pointer"
+                  whileHover={{ scale: 1.15, y: -3, rotate: 2 }}
+                  whileTap={{ scale: 0.95 }}
+                  onMouseEnter={playHoverSound}
+                  onClick={playClickSound}
                 >
                   <Twitter className="w-5 h-5" />
-                </a>
+                </motion.a>
+                <motion.a
+                  href="https://www.instagram.com/i_m_manish_chouhan/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-11 h-11 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center text-white/70 hover:text-white hover:border-pink-500/30 transition-all cursor-pointer"
+                  whileHover={{ scale: 1.15, y: -3, rotate: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                  onMouseEnter={playHoverSound}
+                  onClick={playClickSound}
+                >
+                  <Instagram className="w-5 h-5" />
+                </motion.a>
               </div>
             </div>
           </div>
