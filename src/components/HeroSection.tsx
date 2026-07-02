@@ -117,7 +117,7 @@ export const HeroSection: React.FC = () => {
             <span>Let's Build Together</span>
           </motion.button>
           <motion.a
-            href="/resume.pdf"
+            href="https://canva.link/z8w8qqvzceccfyk"
             target="_blank"
             rel="noopener noreferrer"
             onMouseEnter={playHoverSound}

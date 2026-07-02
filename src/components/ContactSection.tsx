@@ -105,7 +105,7 @@ export const ContactSection: React.FC = () => {
               </button>
 
               <motion.a
-                href="/resume.pdf"
+                href="https://canva.link/z8w8qqvzceccfyk"
                 target="_blank"
                 rel="noopener noreferrer"
                 onMouseEnter={playHoverSound}
