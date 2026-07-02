@@ -36,7 +36,7 @@ export const ContactSection: React.FC = () => {
       setSubmitStatus('success');
       playChimeSound();
       setFormData({ name: '', email: '', message: '' });
-      
+
       // Reset status after 5s
       setTimeout(() => setSubmitStatus('idle'), 5000);
     }, 1500);
@@ -107,7 +107,7 @@ export const ContactSection: React.FC = () => {
               {/* Social Icons row */}
               <div className="flex space-x-3.5">
                 <a
-                  href="https://linkedin.com"
+                  href="https://www.linkedin.com/in/manish-chouhan-2301a7230/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-11 h-11 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center text-white/70 hover:text-white hover:border-brand-blue/30 transition-all"
@@ -115,7 +115,7 @@ export const ContactSection: React.FC = () => {
                   <Linkedin className="w-5 h-5" />
                 </a>
                 <a
-                  href="https://github.com/manishchouhan123"
+                  href="https://github.com/Manish-10275"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-11 h-11 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center text-white/70 hover:text-white hover:border-brand-purple/30 transition-all"
