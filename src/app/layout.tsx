@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://manishchouhan.com',
+    url: 'https://manish.devoq-labs.online',
     title: 'Manish Chouhan | Founder & CEO, Devoq Labs | IIT Madras Data Science',
     description: 'Founder & CEO of Devoq Labs, IIT Madras BS Data Science student, tech builder, and author. Explore custom AI systems and scalable SaaS applications.',
     siteName: 'Manish Chouhan Portfolio',
@@ -64,7 +64,7 @@ export const metadata: Metadata = {
     follow: true,
   },
   alternates: {
-    canonical: 'https://manishchouhan.com',
+    canonical: 'https://manish.devoq-labs.online',
   }
 };
 
@@ -78,7 +78,7 @@ export default function RootLayout({
     "@graph": [
       {
         "@type": "Person",
-        "@id": "https://manishchouhan.com/#person",
+        "@id": "https://manish.devoq-labs.online/#person",
         "name": "Manish Chouhan",
         "jobTitle": "Founder & CEO",
         "worksFor": {
@@ -92,7 +92,7 @@ export default function RootLayout({
           "alternateName": "IIT Madras"
         },
         "email": "manishchouhan123@gmail.com",
-        "url": "https://manishchouhan.com",
+        "url": "https://manish.devoq-labs.online",
         "image": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=300&auto=format&fit=crop",
         "sameAs": [
           "https://linkedin.com",
@@ -105,7 +105,7 @@ export default function RootLayout({
         "name": "Devoq Labs",
         "url": "https://devoqlabs.com",
         "founder": {
-          "@id": "https://manishchouhan.com/#person"
+          "@id": "https://manish.devoq-labs.online/#person"
         }
       }
     ]

@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/api/', '/_next/'],
     },
-    sitemap: 'https://manishchouhan.com/sitemap.xml',
+    sitemap: 'https://manish.devoq-labs.online/sitemap.xml',
   };
 }
