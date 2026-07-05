@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useApp } from '@/context/AppContext';
 import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter, Calendar, Check, AlertCircle, X, Instagram, Download } from 'lucide-react';
 import dynamic from 'next/dynamic';
+import Magnetic from './Magnetic';
 
 // Dynamically load the 3D globe to avoid SSR window errors
 const ContactGlobe = dynamic(() => import('./ContactGlobe'), {
@@ -92,82 +93,97 @@ export const ContactSection: React.FC = () => {
             {/* Socials & Calendar Trigger */}
             <div className="flex flex-col sm:flex-row items-center gap-4 w-full justify-center lg:justify-start">
               {/* Calendly button */}
-              <button
-                onClick={() => {
-                  setCalendlyOpen(true);
-                  playClickSound();
-                }}
-                onMouseEnter={playHoverSound}
-                className="flex items-center space-x-2 bg-gradient-to-r from-brand-blue to-brand-purple hover:shadow-lg rounded-xl px-5 py-3 text-xs font-mono text-white transition-all cursor-pointer"
-              >
-                <Calendar className="w-4.5 h-4.5" />
-                <span>Schedule a 1:1 Video Sync</span>
-              </button>
+              <Magnetic>
+                <button
+                  onClick={() => {
+                    setCalendlyOpen(true);
+                    playClickSound();
+                  }}
+                  onMouseEnter={playHoverSound}
+                  className="flex items-center space-x-2 bg-gradient-to-r from-brand-blue to-brand-purple hover:shadow-lg rounded-xl px-5 py-3 text-xs font-mono text-white transition-all cursor-pointer"
+                >
+                  <Calendar className="w-4.5 h-4.5" />
+                  <span>Schedule a 1:1 Video Sync</span>
+                </button>
+              </Magnetic>
 
-              <motion.a
-                href="https://canva.link/z8w8qqvzceccfyk"
-                target="_blank"
-                rel="noopener noreferrer"
-                onMouseEnter={playHoverSound}
-                onClick={playClickSound}
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-                className="flex items-center space-x-2 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl px-5 py-3 text-xs font-mono text-white transition-all cursor-pointer"
-              >
-                <Download className="w-4.5 h-4.5 text-brand-blue" />
-                <span>Download CV</span>
-              </motion.a>
+              <Magnetic>
+                <motion.a
+                  href="https://canva.link/z8w8qqvzceccfyk"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onMouseEnter={playHoverSound}
+                  onClick={playClickSound}
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="flex items-center space-x-2 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl px-5 py-3 text-xs font-mono text-white transition-all cursor-pointer"
+                >
+                  <Download className="w-4.5 h-4.5 text-brand-blue" />
+                  <span>Download CV</span>
+                </motion.a>
+              </Magnetic>
 
               {/* Social Icons row */}
               <div className="flex space-x-3.5">
-                <motion.a
-                  href="https://www.linkedin.com/in/manish-chouhan-2301a7230/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-11 h-11 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center text-white/70 hover:text-white hover:border-brand-blue/30 transition-all cursor-pointer"
-                  whileHover={{ scale: 1.15, y: -3, rotate: 2 }}
-                  whileTap={{ scale: 0.95 }}
-                  onMouseEnter={playHoverSound}
-                  onClick={playClickSound}
-                >
-                  <Linkedin className="w-5 h-5" />
-                </motion.a>
-                <motion.a
-                  href="https://github.com/Manish-10275"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-11 h-11 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center text-white/70 hover:text-white hover:border-brand-purple/30 transition-all cursor-pointer"
-                  whileHover={{ scale: 1.15, y: -3, rotate: -2 }}
-                  whileTap={{ scale: 0.95 }}
-                  onMouseEnter={playHoverSound}
-                  onClick={playClickSound}
-                >
-                  <Github className="w-5 h-5" />
-                </motion.a>
-                <motion.a
-                  href="https://twitter.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-11 h-11 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center text-white/70 hover:text-white hover:border-brand-accent/30 transition-all cursor-pointer"
-                  whileHover={{ scale: 1.15, y: -3, rotate: 2 }}
-                  whileTap={{ scale: 0.95 }}
-                  onMouseEnter={playHoverSound}
-                  onClick={playClickSound}
-                >
-                  <Twitter className="w-5 h-5" />
-                </motion.a>
-                <motion.a
-                  href="https://www.instagram.com/i_m_manish_chouhan/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-11 h-11 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center text-white/70 hover:text-white hover:border-pink-500/30 transition-all cursor-pointer"
-                  whileHover={{ scale: 1.15, y: -3, rotate: -2 }}
-                  whileTap={{ scale: 0.95 }}
-                  onMouseEnter={playHoverSound}
-                  onClick={playClickSound}
-                >
-                  <Instagram className="w-5 h-5" />
-                </motion.a>
+                <Magnetic range={40} actionStrength={0.5}>
+                  <motion.a
+                    href="https://www.linkedin.com/in/manish-chouhan-2301a7230/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-11 h-11 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center text-white/70 hover:text-white hover:border-brand-blue/30 transition-all cursor-pointer"
+                    whileHover={{ scale: 1.15, y: -3, rotate: 2 }}
+                    whileTap={{ scale: 0.95 }}
+                    onMouseEnter={playHoverSound}
+                    onClick={playClickSound}
+                  >
+                    <Linkedin className="w-5 h-5" />
+                  </motion.a>
+                </Magnetic>
+                
+                <Magnetic range={40} actionStrength={0.5}>
+                  <motion.a
+                    href="https://github.com/Manish-10275"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-11 h-11 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center text-white/70 hover:text-white hover:border-brand-purple/30 transition-all cursor-pointer"
+                    whileHover={{ scale: 1.15, y: -3, rotate: -2 }}
+                    whileTap={{ scale: 0.95 }}
+                    onMouseEnter={playHoverSound}
+                    onClick={playClickSound}
+                  >
+                    <Github className="w-5 h-5" />
+                  </motion.a>
+                </Magnetic>
+                
+                <Magnetic range={40} actionStrength={0.5}>
+                  <motion.a
+                    href="https://twitter.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-11 h-11 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center text-white/70 hover:text-white hover:border-brand-accent/30 transition-all cursor-pointer"
+                    whileHover={{ scale: 1.15, y: -3, rotate: 2 }}
+                    whileTap={{ scale: 0.95 }}
+                    onMouseEnter={playHoverSound}
+                    onClick={playClickSound}
+                  >
+                    <Twitter className="w-5 h-5" />
+                  </motion.a>
+                </Magnetic>
+                
+                <Magnetic range={40} actionStrength={0.5}>
+                  <motion.a
+                    href="https://www.instagram.com/i_m_manish_chouhan/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-11 h-11 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center text-white/70 hover:text-white hover:border-pink-500/30 transition-all cursor-pointer"
+                    whileHover={{ scale: 1.15, y: -3, rotate: -2 }}
+                    whileTap={{ scale: 0.95 }}
+                    onMouseEnter={playHoverSound}
+                    onClick={playClickSound}
+                  >
+                    <Instagram className="w-5 h-5" />
+                  </motion.a>
+                </Magnetic>
               </div>
             </div>
           </div>

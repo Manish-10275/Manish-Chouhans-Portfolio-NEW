@@ -1,23 +1,59 @@
 'use client';
 
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useApp } from '@/context/AppContext';
 import { Github, Linkedin, Twitter, Mail, ArrowRight, Sparkles, Server, Instagram, Download } from 'lucide-react';
 import dynamic from 'next/dynamic';
+import Magnetic from './Magnetic';
 
 // Dynamically load the WebGL scene to prevent hydration mismatches
-const HeroScene = dynamic(() => import('./HeroScene'), {
-  ssr: false,
-  loading: () => (
-    <div className="absolute inset-0 bg-[#050505] flex items-center justify-center">
-      <div className="w-8 h-8 rounded-full border-2 border-brand-blue border-t-transparent animate-spin" />
+const HeroScene = dynamic(() => import('./HeroScene'), { ssr: false });
+
+const SparklesBackground: React.FC = () => {
+  const [sparkles, setSparkles] = useState<{ id: number; x: number; y: number; size: number }[]>([]);
+
+  useEffect(() => {
+    // Generate 16 random sparkles
+    const initialSparkles = Array.from({ length: 16 }).map((_, i) => ({
+      id: i,
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      size: Math.random() * 3.5 + 1,
+    }));
+    setSparkles(initialSparkles);
+  }, []);
+
+  return (
+    <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+      {sparkles.map((sp) => (
+        <motion.div
+          key={sp.id}
+          className="absolute rounded-full bg-brand-purple"
+          style={{
+            left: `${sp.x}%`,
+            top: `${sp.y}%`,
+            width: sp.size,
+            height: sp.size,
+          }}
+          animate={{
+            scale: [0, 1, 0],
+            opacity: [0, 0.6, 0],
+            y: [0, -40],
+          }}
+          transition={{
+            duration: Math.random() * 2 + 1.8,
+            repeat: Infinity,
+            delay: Math.random() * 2,
+          }}
+        />
+      ))}
     </div>
-  )
-});
+  );
+};
 
 export const HeroSection: React.FC = () => {
-  const { playClickSound, playHoverSound } = useApp();
+  const { playHoverSound, playClickSound } = useApp();
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -25,18 +61,18 @@ export const HeroSection: React.FC = () => {
       opacity: 1,
       transition: {
         staggerChildren: 0.15,
-        delayChildren: 0.4,
-      }
-    }
+        delayChildren: 0.3,
+      },
+    },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: 25 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { type: 'spring', stiffness: 100, damping: 18 }
-    }
+      transition: { type: 'spring', stiffness: 100, damping: 15 },
+    },
   };
 
   const scrollToSection = (id: string) => {
@@ -51,6 +87,9 @@ export const HeroSection: React.FC = () => {
     <section id="hero" className="relative min-h-screen flex items-center justify-center px-4 md:px-8 py-20 overflow-hidden select-none">
       {/* 3D WebGL particle space scene background */}
       <HeroScene />
+
+      {/* Dynamic Sparkles Floating Backdrop */}
+      <SparklesBackground />
 
       {/* Main Overlay Contents */}
       <motion.div
@@ -95,105 +134,127 @@ export const HeroSection: React.FC = () => {
         {/* CTA Buttons */}
         <motion.div
           variants={itemVariants}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto"
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto z-20"
         >
-          <motion.button
-            onClick={() => scrollToSection('projects')}
-            onMouseEnter={playHoverSound}
-            whileHover={{ scale: 1.05, y: -3 }}
-            whileTap={{ scale: 0.95 }}
-            className="w-full sm:w-auto flex items-center justify-center space-x-2 bg-gradient-to-r from-brand-blue via-brand-purple to-brand-accent hover:shadow-lg rounded-xl px-7 py-4 text-xs font-mono text-white transition-all cursor-pointer"
-          >
-            <span>View Projects</span>
-            <ArrowRight className="w-4 h-4" />
-          </motion.button>
-          <motion.button
-            onClick={() => scrollToSection('contact')}
-            onMouseEnter={playHoverSound}
-            whileHover={{ scale: 1.05, y: -3 }}
-            whileTap={{ scale: 0.95 }}
-            className="w-full sm:w-auto flex items-center justify-center space-x-2 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl px-7 py-4 text-xs font-mono text-white transition-all cursor-pointer"
-          >
-            <span>Let's Build Together</span>
-          </motion.button>
-          <motion.a
-            href="https://canva.link/z8w8qqvzceccfyk"
-            target="_blank"
-            rel="noopener noreferrer"
-            onMouseEnter={playHoverSound}
-            onClick={playClickSound}
-            whileHover={{ scale: 1.05, y: -3 }}
-            whileTap={{ scale: 0.95 }}
-            className="w-full sm:w-auto flex items-center justify-center space-x-2 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl px-7 py-4 text-xs font-mono text-white transition-all cursor-pointer"
-          >
-            <Download className="w-4 h-4 text-brand-blue" />
-            <span>Download CV</span>
-          </motion.a>
+          <Magnetic>
+            <motion.button
+              onClick={() => scrollToSection('projects')}
+              onMouseEnter={playHoverSound}
+              whileHover={{ scale: 1.05, y: -3 }}
+              whileTap={{ scale: 0.95 }}
+              className="w-full sm:w-auto flex items-center justify-center space-x-2 bg-gradient-to-r from-brand-blue via-brand-purple to-brand-accent hover:shadow-lg rounded-xl px-7 py-4 text-xs font-mono text-white transition-all cursor-pointer"
+            >
+              <span>View Projects</span>
+              <ArrowRight className="w-4 h-4" />
+            </motion.button>
+          </Magnetic>
+
+          <Magnetic>
+            <motion.button
+              onClick={() => scrollToSection('contact')}
+              onMouseEnter={playHoverSound}
+              whileHover={{ scale: 1.05, y: -3 }}
+              whileTap={{ scale: 0.95 }}
+              className="w-full sm:w-auto flex items-center justify-center space-x-2 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl px-7 py-4 text-xs font-mono text-white transition-all cursor-pointer"
+            >
+              <span>Let's Build Together</span>
+            </motion.button>
+          </Magnetic>
+
+          <Magnetic>
+            <motion.a
+              href="https://canva.link/z8w8qqvzceccfyk"
+              target="_blank"
+              rel="noopener noreferrer"
+              onMouseEnter={playHoverSound}
+              onClick={playClickSound}
+              whileHover={{ scale: 1.05, y: -3 }}
+              whileTap={{ scale: 0.95 }}
+              className="w-full sm:w-auto flex items-center justify-center space-x-2 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl px-7 py-4 text-xs font-mono text-white transition-all cursor-pointer"
+            >
+              <Download className="w-4 h-4 text-brand-blue" />
+              <span>Download CV</span>
+            </motion.a>
+          </Magnetic>
         </motion.div>
 
         {/* Social Icons row */}
         <motion.div
           variants={itemVariants}
-          className="flex items-center space-x-5 pt-4"
+          className="flex items-center space-x-5 pt-4 z-20"
         >
-          <motion.a
-            href="https://www.linkedin.com/in/manish-chouhan-2301a7230/"
-            target="_blank"
-            rel="noopener noreferrer"
-            onMouseEnter={playHoverSound}
-            onClick={playClickSound}
-            whileHover={{ scale: 1.2, y: -4, rotate: 3 }}
-            whileTap={{ scale: 0.9 }}
-            className="text-white/40 hover:text-white transition-all flex items-center justify-center cursor-pointer"
-          >
-            <Linkedin className="w-5.5 h-5.5" />
-          </motion.a>
-          <motion.a
-            href="https://github.com/Manish-10275"
-            target="_blank"
-            rel="noopener noreferrer"
-            onMouseEnter={playHoverSound}
-            onClick={playClickSound}
-            whileHover={{ scale: 1.2, y: -4, rotate: -3 }}
-            whileTap={{ scale: 0.9 }}
-            className="text-white/40 hover:text-white transition-all flex items-center justify-center cursor-pointer"
-          >
-            <Github className="w-5.5 h-5.5" />
-          </motion.a>
-          <motion.a
-            href="https://twitter.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            onMouseEnter={playHoverSound}
-            onClick={playClickSound}
-            whileHover={{ scale: 1.2, y: -4, rotate: 3 }}
-            whileTap={{ scale: 0.9 }}
-            className="text-white/40 hover:text-white transition-all flex items-center justify-center cursor-pointer"
-          >
-            <Twitter className="w-5.5 h-5.5" />
-          </motion.a>
-          <motion.a
-            href="https://www.instagram.com/i_m_manish_chouhan/"
-            target="_blank"
-            rel="noopener noreferrer"
-            onMouseEnter={playHoverSound}
-            onClick={playClickSound}
-            whileHover={{ scale: 1.2, y: -4, rotate: -3 }}
-            whileTap={{ scale: 0.9 }}
-            className="text-white/40 hover:text-white transition-all flex items-center justify-center cursor-pointer"
-          >
-            <Instagram className="w-5.5 h-5.5" />
-          </motion.a>
-          <motion.a
-            href="mailto:manishchouhan123@gmail.com"
-            onMouseEnter={playHoverSound}
-            onClick={playClickSound}
-            whileHover={{ scale: 1.2, y: -4, rotate: 3 }}
-            whileTap={{ scale: 0.9 }}
-            className="text-white/40 hover:text-white transition-all flex items-center justify-center cursor-pointer"
-          >
-            <Mail className="w-5.5 h-5.5" />
-          </motion.a>
+          <Magnetic range={40} actionStrength={0.5}>
+            <motion.a
+              href="https://www.linkedin.com/in/manish-chouhan-2301a7230/"
+              target="_blank"
+              rel="noopener noreferrer"
+              onMouseEnter={playHoverSound}
+              onClick={playClickSound}
+              whileHover={{ scale: 1.2, y: -4, rotate: 3 }}
+              whileTap={{ scale: 0.9 }}
+              className="text-white/40 hover:text-white transition-all flex items-center justify-center cursor-pointer p-1"
+            >
+              <Linkedin className="w-5.5 h-5.5" />
+            </motion.a>
+          </Magnetic>
+
+          <Magnetic range={40} actionStrength={0.5}>
+            <motion.a
+              href="https://github.com/Manish-10275"
+              target="_blank"
+              rel="noopener noreferrer"
+              onMouseEnter={playHoverSound}
+              onClick={playClickSound}
+              whileHover={{ scale: 1.2, y: -4, rotate: -3 }}
+              whileTap={{ scale: 0.9 }}
+              className="text-white/40 hover:text-white transition-all flex items-center justify-center cursor-pointer p-1"
+            >
+              <Github className="w-5.5 h-5.5" />
+            </motion.a>
+          </Magnetic>
+
+          <Magnetic range={40} actionStrength={0.5}>
+            <motion.a
+              href="https://twitter.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              onMouseEnter={playHoverSound}
+              onClick={playClickSound}
+              whileHover={{ scale: 1.2, y: -4, rotate: 3 }}
+              whileTap={{ scale: 0.9 }}
+              className="text-white/40 hover:text-white transition-all flex items-center justify-center cursor-pointer p-1"
+            >
+              <Twitter className="w-5.5 h-5.5" />
+            </motion.a>
+          </Magnetic>
+
+          <Magnetic range={40} actionStrength={0.5}>
+            <motion.a
+              href="https://www.instagram.com/i_m_manish_chouhan/"
+              target="_blank"
+              rel="noopener noreferrer"
+              onMouseEnter={playHoverSound}
+              onClick={playClickSound}
+              whileHover={{ scale: 1.2, y: -4, rotate: -3 }}
+              whileTap={{ scale: 0.9 }}
+              className="text-white/40 hover:text-white transition-all flex items-center justify-center cursor-pointer p-1"
+            >
+              <Instagram className="w-5.5 h-5.5" />
+            </motion.a>
+          </Magnetic>
+
+          <Magnetic range={40} actionStrength={0.5}>
+            <motion.a
+              href="mailto:manishchouhan123@gmail.com"
+              onMouseEnter={playHoverSound}
+              onClick={playClickSound}
+              whileHover={{ scale: 1.2, y: -4, rotate: 3 }}
+              whileTap={{ scale: 0.9 }}
+              className="text-white/40 hover:text-white transition-all flex items-center justify-center cursor-pointer p-1"
+            >
+              <Mail className="w-5.5 h-5.5" />
+            </motion.a>
+          </Magnetic>
         </motion.div>
       </motion.div>
 

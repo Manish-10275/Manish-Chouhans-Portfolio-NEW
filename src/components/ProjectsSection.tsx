@@ -282,6 +282,8 @@ const ProjectCard: React.FC<CardProps> = ({ project, onClick, playHoverSound, in
   const cardRef = useRef<HTMLDivElement>(null);
   const [rotateX, setRotateX] = useState(0);
   const [rotateY, setRotateY] = useState(0);
+  const [coords, setCoords] = useState({ x: 0, y: 0 });
+  const [isHovered, setIsHovered] = useState(false);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!cardRef.current) return;
@@ -295,11 +297,18 @@ const ProjectCard: React.FC<CardProps> = ({ project, onClick, playHoverSound, in
     // Set rotation angles
     setRotateX(-y * 15); // Rotate around X based on vertical offset
     setRotateY(x * 15);  // Rotate around Y based on horizontal offset
+
+    // Track cursor coordinates relative to card bounds
+    setCoords({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top
+    });
   };
 
   const handleMouseLeave = () => {
     setRotateX(0);
     setRotateY(0);
+    setIsHovered(false);
   };
 
   return (
@@ -313,15 +322,44 @@ const ProjectCard: React.FC<CardProps> = ({ project, onClick, playHoverSound, in
         ref={cardRef}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
-        onMouseEnter={playHoverSound}
+        onMouseEnter={() => {
+          setIsHovered(true);
+          playHoverSound();
+        }}
         onClick={onClick}
         style={{
           transformStyle: 'preserve-3d',
           transform: `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`,
           transition: 'transform 0.15s cubic-bezier(0.25, 1, 0.5, 1)'
         }}
-        className="group bg-white/[0.02] border border-white/5 rounded-2xl overflow-hidden glass-panel-hover cursor-pointer p-4 flex flex-col justify-between h-[380px] relative"
+        className="group bg-white/[0.02] border border-white/5 rounded-2xl overflow-hidden glass-panel-hover cursor-pointer p-4 flex flex-col justify-between h-[380px] relative select-none"
       >
+        {/* Spotlight Background Glow */}
+        {isHovered && (
+          <div
+            className="absolute pointer-events-none transition-opacity duration-300 z-0"
+            style={{
+              width: '400px',
+              height: '400px',
+              background: `radial-gradient(circle 140px at ${coords.x}px ${coords.y}px, rgba(139, 92, 246, 0.08), transparent)`,
+              left: 0,
+              top: 0,
+              transform: 'translate(-50%, -50%)',
+            }}
+          />
+        )}
+
+        {/* Spotlight Border */}
+        {isHovered && (
+          <div
+            className="absolute inset-0 pointer-events-none rounded-2xl z-10"
+            style={{
+              border: '1px solid rgba(59, 130, 246, 0.3)',
+              maskImage: `radial-gradient(circle 120px at ${coords.x}px ${coords.y}px, black, transparent)`,
+              WebkitMaskImage: `radial-gradient(circle 120px at ${coords.x}px ${coords.y}px, black, transparent)`,
+            }}
+          />
+        )}
         <div style={{ transform: 'translateZ(10px)', transformStyle: 'preserve-3d' }}>
           {/* Project Thumbnail */}
           <div
