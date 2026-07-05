@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useApp } from '@/context/AppContext';
 import { Sparkles, Star, Target, Code, Database, Globe, Lightbulb, TrendingUp } from 'lucide-react';
+import Magnetic from './Magnetic';
 
 interface SkillCategory {
   name: string;
@@ -78,6 +79,19 @@ export const SkillsSection: React.FC = () => {
     }
   ];
 
+  // Ref to hold hoveredNode to prevent closure state bugs in listeners
+  const hoveredNodeRef = useRef<string | null>(null);
+  useEffect(() => {
+    hoveredNodeRef.current = hoveredNode;
+  }, [hoveredNode]);
+
+  // Ref to hold categories to avoid redeclaration dependency trigger in canvas loop
+  const categoriesRef = useRef<SkillCategory[]>(categories);
+  const selectedCategoryRef = useRef<number>(selectedCategory);
+  useEffect(() => {
+    selectedCategoryRef.current = selectedCategory;
+  }, [selectedCategory]);
+
   // 3D Tag Sphere Logic on Canvas
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -108,11 +122,11 @@ export const SkillsSection: React.FC = () => {
       radius: number;
     }
 
-    const radius = Math.min(width, height) * 0.35;
+    const radius = Math.min(width, height) * 0.33;
     const points: Point3D[] = [];
 
     // Calculate golden spiral points for sphere
-    const count = categories.length;
+    const count = categoriesRef.current.length;
     for (let i = 0; i < count; i++) {
       const phi = Math.acos(-1 + (2 * i + 1) / count);
       const theta = Math.sqrt(count * Math.PI) * phi;
@@ -125,8 +139,8 @@ export const SkillsSection: React.FC = () => {
         y2d: 0,
         scale: 0,
         alpha: 0,
-        label: categories[i].name,
-        color: categories[i].color,
+        label: categoriesRef.current[i].name,
+        color: categoriesRef.current[i].color,
         radius: 6
       });
     }
@@ -154,8 +168,19 @@ export const SkillsSection: React.FC = () => {
       setHoveredNode(null);
     };
 
+    const handleCanvasClick = () => {
+      if (hoveredNodeRef.current) {
+        const idx = categoriesRef.current.findIndex(cat => cat.name === hoveredNodeRef.current);
+        if (idx !== -1) {
+          setSelectedCategory(idx);
+          playClickSound();
+        }
+      }
+    };
+
     canvas.addEventListener('mousemove', handleMouseMove);
     canvas.addEventListener('mouseleave', handleMouseLeave);
+    canvas.addEventListener('click', handleCanvasClick);
 
     const handleResize = () => {
       if (!canvas) return;
@@ -203,23 +228,38 @@ export const SkillsSection: React.FC = () => {
       const sortedPoints = [...points].sort((a, b) => b.z - a.z);
 
       // Draw Orbit Lines
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.02)';
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.015)';
       ctx.lineWidth = 1;
       ctx.beginPath();
       ctx.arc(width / 2, height / 2, radius, 0, Math.PI * 2);
       ctx.stroke();
 
+      // Render neural link constellation connections from selected category node
+      const activeNode = points.find(p => p.label === categoriesRef.current[selectedCategoryRef.current].name);
+      if (activeNode && activeNode.alpha > 0) {
+        points.forEach((other) => {
+          if (other.label !== activeNode.label && other.alpha > 0) {
+            ctx.strokeStyle = `rgba(139, 92, 246, ${0.12 * activeNode.alpha * other.alpha * activeNode.scale})`;
+            ctx.lineWidth = 0.5 * other.scale;
+            ctx.beginPath();
+            ctx.moveTo(activeNode.x2d, activeNode.y2d);
+            ctx.lineTo(other.x2d, other.y2d);
+            ctx.stroke();
+          }
+        });
+      }
+
       // Render nodes
       sortedPoints.forEach((p) => {
         if (p.alpha <= 0) return;
 
-        // Check if mouse is hovering over node center (20px radius hit)
+        // Check if mouse is hovering over node center (22px radius hit)
         const dx = (mouseX + width / 2) - p.x2d;
         const dy = (mouseY + height / 2) - p.y2d;
         const dist = Math.sqrt(dx * dx + dy * dy);
         const isHovered = dist < 22;
 
-        if (isHovered && hoveredNode !== p.label) {
+        if (isHovered && hoveredNodeRef.current !== p.label) {
           setHoveredNode(p.label);
           playHoverSound();
         }
@@ -227,26 +267,54 @@ export const SkillsSection: React.FC = () => {
         ctx.save();
         ctx.globalAlpha = Math.min(Math.max(p.alpha, 0), 1);
         
+        const isSelected = p.label === categoriesRef.current[selectedCategoryRef.current].name;
+
+        // Selected Pulsing Ring
+        if (isSelected) {
+          const pulse = 1.2 + Math.sin(Date.now() * 0.005) * 0.2;
+          ctx.strokeStyle = p.color;
+          ctx.lineWidth = 1.5;
+          ctx.beginPath();
+          ctx.arc(p.x2d, p.y2d, p.radius * p.scale * 2 * pulse, 0, Math.PI * 2);
+          ctx.stroke();
+        }
+
         // Node Glow Ring
-        if (isHovered) {
+        if (isHovered || isSelected) {
           ctx.shadowBlur = 15;
           ctx.shadowColor = p.color;
           ctx.strokeStyle = p.color;
-          ctx.lineWidth = 2;
+          ctx.lineWidth = isHovered ? 2.5 : 1.5;
           ctx.beginPath();
           ctx.arc(p.x2d, p.y2d, p.radius * p.scale * 2.2, 0, Math.PI * 2);
           ctx.stroke();
         }
 
         // Inner glowing node point
-        ctx.fillStyle = isHovered ? '#ffffff' : p.color;
+        ctx.fillStyle = (isHovered || isSelected) ? '#ffffff' : p.color;
         ctx.beginPath();
-        ctx.arc(p.x2d, p.y2d, p.radius * p.scale * (isHovered ? 1.5 : 1), 0, Math.PI * 2);
+        ctx.arc(p.x2d, p.y2d, p.radius * p.scale * (isHovered || isSelected ? 1.5 : 1), 0, Math.PI * 2);
         ctx.fill();
+
+        // Selected orbital electrons
+        if (isSelected) {
+          const time = Date.now() * 0.0035;
+          for (let j = 0; j < 3; j++) {
+            const orbitRadius = 16 + j * 5;
+            const orbitAngle = time + j * (Math.PI * 2 / 3);
+            const particleX = p.x2d + Math.cos(orbitAngle) * orbitRadius * p.scale;
+            const particleY = p.y2d + Math.sin(orbitAngle) * orbitRadius * p.scale;
+
+            ctx.fillStyle = p.color;
+            ctx.beginPath();
+            ctx.arc(particleX, particleY, 2 * p.scale, 0, Math.PI * 2);
+            ctx.fill();
+          }
+        }
 
         // Label
         ctx.font = `bold ${Math.round(11 * p.scale)}px var(--font-sans)`;
-        ctx.fillStyle = isHovered ? '#ffffff' : 'rgba(255, 255, 255, 0.7)';
+        ctx.fillStyle = (isHovered || isSelected) ? '#ffffff' : 'rgba(255, 255, 255, 0.7)';
         ctx.textAlign = 'center';
         ctx.fillText(p.label, p.x2d, p.y2d - 14 * p.scale);
 
@@ -262,12 +330,13 @@ export const SkillsSection: React.FC = () => {
       cancelAnimationFrame(animationId);
       canvas.removeEventListener('mousemove', handleMouseMove);
       canvas.removeEventListener('mouseleave', handleMouseLeave);
+      canvas.removeEventListener('click', handleCanvasClick);
       window.removeEventListener('resize', handleResize);
     };
-  }, [categories, hoveredNode, playHoverSound]);
+  }, [playHoverSound, playClickSound]);
 
   return (
-    <section id="skills" className="py-24 relative overflow-hidden bg-background">
+    <section id="skills" className="py-24 relative overflow-hidden bg-background select-none">
       {/* Background Gradients */}
       <div className="absolute top-0 right-0 w-[400px] h-[400px] rounded-full bg-brand-purple/5 blur-[120px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] rounded-full bg-brand-blue/5 blur-[150px] pointer-events-none" />
@@ -287,7 +356,7 @@ export const SkillsSection: React.FC = () => {
             Interactive <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue via-brand-purple to-brand-accent">3D Skill Galaxy</span>
           </h2>
           <p className="text-white/60 text-sm md:text-lg max-w-2xl mx-auto font-sans">
-            Spin the galaxy node matrix. Click on any category below or hover over nodes to extract tech parameters.
+            Spin the galaxy node matrix. Click directly on nodes or choose from the categories below to activate specific constellations.
           </p>
         </div>
 
@@ -296,24 +365,25 @@ export const SkillsSection: React.FC = () => {
           {categories.map((cat, idx) => {
             const isSelected = selectedCategory === idx;
             return (
-              <button
-                key={cat.name}
-                onClick={() => {
-                  setSelectedCategory(idx);
-                  playClickSound();
-                }}
-                onMouseEnter={playHoverSound}
-                className={`flex items-center space-x-3 p-3.5 rounded-xl border text-left transition-all duration-300 ${
-                  isSelected
-                    ? 'bg-gradient-to-r from-brand-blue/15 to-brand-purple/15 border-brand-blue text-white shadow-lg'
-                    : 'bg-white/5 border-white/5 text-white/60 hover:border-white/15 hover:bg-white/10 hover:text-white'
-                }`}
-              >
-                <div className={`p-2 rounded-lg ${isSelected ? 'bg-brand-blue/20 text-white' : 'bg-white/5 text-white/50'}`}>
-                  {cat.icon}
-                </div>
-                <span className="text-xs md:text-sm font-semibold whitespace-nowrap overflow-hidden text-ellipsis">{cat.name}</span>
-              </button>
+              <Magnetic key={cat.name} range={40} actionStrength={0.35}>
+                <button
+                  onClick={() => {
+                    setSelectedCategory(idx);
+                    playClickSound();
+                  }}
+                  onMouseEnter={playHoverSound}
+                  className={`flex items-center space-x-3 p-3.5 rounded-xl border text-left transition-all duration-300 w-full ${
+                    isSelected
+                      ? 'bg-gradient-to-r from-brand-blue/15 to-brand-purple/15 border-brand-blue text-white shadow-lg'
+                      : 'bg-white/5 border-white/5 text-white/60 hover:border-white/15 hover:bg-white/10 hover:text-white'
+                  }`}
+                >
+                  <div className={`p-2 rounded-lg ${isSelected ? 'bg-brand-blue/20 text-white' : 'bg-white/5 text-white/50'}`}>
+                    {cat.icon}
+                  </div>
+                  <span className="text-xs md:text-sm font-semibold whitespace-nowrap overflow-hidden text-ellipsis">{cat.name}</span>
+                </button>
+              </Magnetic>
             );
           })}
         </div>
