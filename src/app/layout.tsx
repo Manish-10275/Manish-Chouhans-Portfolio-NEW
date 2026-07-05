@@ -7,6 +7,7 @@ import LoadingScreen from '@/components/LoadingScreen';
 import CommandPalette from '@/components/CommandPalette';
 import AIAssistant from '@/components/AIAssistant';
 import SmoothScroll from '@/components/SmoothScroll';
+import InteractiveMesh from '@/components/InteractiveMesh';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -124,6 +125,9 @@ export default function RootLayout({
           <SmoothScroll>
             {/* Custom Cursor for interactive mouse feedback */}
             <CustomCursor />
+            
+            {/* Interactive Warp mesh background */}
+            <InteractiveMesh />
             
             {/* Initial Boot Up Loading Screen */}
             <LoadingScreen />
