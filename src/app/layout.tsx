@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Inter, Outfit } from 'next/font/google';
+import { DM_Sans, Space_Grotesk } from 'next/font/google';
 import '@/app/globals.css';
 import { AppProvider } from '@/context/AppContext';
 import CustomCursor from '@/components/CustomCursor';
@@ -9,13 +9,13 @@ import AIAssistant from '@/components/AIAssistant';
 import SmoothScroll from '@/components/SmoothScroll';
 import InteractiveMesh from '@/components/InteractiveMesh';
 
-const inter = Inter({
+const dmSans = DM_Sans({
   subsets: ['latin'],
   variable: '--font-sans',
   display: 'swap',
 });
 
-const outfit = Outfit({
+const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
   variable: '--font-display',
   display: 'swap',
@@ -113,7 +113,7 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en" className={`${inter.variable} ${outfit.variable} dark`} suppressHydrationWarning>
+    <html lang="en" className={`${dmSans.variable} ${spaceGrotesk.variable} dark`} suppressHydrationWarning>
       <head>
         <script
           type="application/ld+json"

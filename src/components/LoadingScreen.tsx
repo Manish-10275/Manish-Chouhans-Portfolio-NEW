@@ -57,8 +57,8 @@ export const LoadingScreen: React.FC = () => {
           key="loader"
           initial={{ opacity: 1 }}
           exit={{ 
-            opacity: 0,
-            transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
+            y: '-100%',
+            transition: { duration: 0.9, ease: [0.76, 0, 0.24, 1] }
           }}
           className="fixed inset-0 bg-[#050505] z-[99999] flex flex-col justify-between p-8 md:p-16 select-none overflow-hidden"
         >
