@@ -6,6 +6,7 @@ import ExperienceSection from '@/components/ExperienceSection';
 import ProjectsSection from '@/components/ProjectsSection';
 import ProductShowcase3D from '@/components/ProductShowcase3D';
 import CreativeLab from '@/components/CreativeLab';
+import DesignPlayground3D from '@/components/DesignPlayground3D';
 import DigitalWorkbench from '@/components/DigitalWorkbench';
 import AchievementsSection from '@/components/AchievementsSection';
 import TestimonialsSection from '@/components/TestimonialsSection';
@@ -35,6 +36,9 @@ export default function Home() {
 
       {/* Creative Design Lab */}
       <CreativeLab />
+
+      {/* 3D Design Systems Customizer Playground */}
+      <DesignPlayground3D />
 
       {/* Digital Archival Workbench */}
       <DigitalWorkbench />
