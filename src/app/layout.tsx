@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { DM_Sans, Space_Grotesk } from 'next/font/google';
+import { DM_Sans, Space_Grotesk, Playfair_Display, Caveat } from 'next/font/google';
 import '@/app/globals.css';
 import { AppProvider } from '@/context/AppContext';
 import CustomCursor from '@/components/CustomCursor';
@@ -18,6 +18,18 @@ const dmSans = DM_Sans({
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
   variable: '--font-display',
+  display: 'swap',
+});
+
+const playfair = Playfair_Display({
+  subsets: ['latin'],
+  variable: '--font-serif',
+  display: 'swap',
+});
+
+const caveat = Caveat({
+  subsets: ['latin'],
+  variable: '--font-script',
   display: 'swap',
 });
 
@@ -113,7 +125,7 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en" className={`${dmSans.variable} ${spaceGrotesk.variable} dark`} suppressHydrationWarning>
+    <html lang="en" className={`${dmSans.variable} ${spaceGrotesk.variable} ${playfair.variable} ${caveat.variable} dark`} suppressHydrationWarning>
       <head>
         <script
           type="application/ld+json"
