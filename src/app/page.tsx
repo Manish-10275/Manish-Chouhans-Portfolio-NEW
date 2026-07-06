@@ -4,10 +4,7 @@ import AboutSection from '@/components/AboutSection';
 import SkillsSection from '@/components/SkillsSection';
 import ExperienceSection from '@/components/ExperienceSection';
 import ProjectsSection from '@/components/ProjectsSection';
-import ProductShowcase3D from '@/components/ProductShowcase3D';
 import CreativeLab from '@/components/CreativeLab';
-import DesignPlayground3D from '@/components/DesignPlayground3D';
-import DigitalWorkbench from '@/components/DigitalWorkbench';
 import AchievementsSection from '@/components/AchievementsSection';
 import TestimonialsSection from '@/components/TestimonialsSection';
 import ContactSection from '@/components/ContactSection';
@@ -31,17 +28,8 @@ export default function Home() {
       {/* Projects Showcase */}
       <ProjectsSection />
 
-      {/* 3D Product Exploded Showcase */}
-      <ProductShowcase3D />
-
       {/* Creative Design Lab */}
       <CreativeLab />
-
-      {/* 3D Design Systems Customizer Playground */}
-      <DesignPlayground3D />
-
-      {/* Digital Archival Workbench */}
-      <DigitalWorkbench />
 
       {/* Achievements Wall */}
       <AchievementsSection />
