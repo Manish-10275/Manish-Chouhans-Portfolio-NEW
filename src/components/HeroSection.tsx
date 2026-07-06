@@ -110,7 +110,7 @@ export const HeroSection: React.FC = () => {
         {/* Title */}
         <motion.h1
           variants={itemVariants}
-          className="text-5xl md:text-8xl font-display font-black tracking-tight leading-none text-white select-text"
+          className="text-5xl md:text-8xl font-ranade font-black tracking-tight leading-none text-white select-text"
         >
           MANISH CHOUHAN
         </motion.h1>

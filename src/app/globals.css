@@ -1,3 +1,4 @@
+@import url('https://api.fontshare.com/v2/css?f[]=ranade@300,400,700,900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -195,4 +196,9 @@ html.lenis, html.lenis body {
 .no-scrollbar {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
+}
+
+/* Custom Font utility for Manish's name */
+.font-ranade {
+  font-family: 'Ranade', sans-serif !important;
 }

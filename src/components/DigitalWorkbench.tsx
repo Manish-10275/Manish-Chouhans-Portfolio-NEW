@@ -33,8 +33,8 @@ export const DigitalWorkbench: React.FC = () => {
       id,
       title,
       content,
-      x: 50 + offset,
-      y: 60 + offset,
+      x: 120 + offset,
+      y: 30 + offset,
     };
     
     setOpenWindows([...openWindows, newWindow]);
@@ -187,7 +187,7 @@ export const DigitalWorkbench: React.FC = () => {
         {/* Workbench Desktop Area */}
         <div 
           ref={workbenchRef}
-          className="relative min-h-[580px] border border-white/5 bg-[#08080a] rounded-3xl overflow-hidden p-6 md:p-8"
+          className="relative min-h-[460px] border border-white/5 bg-[#08080a] rounded-3xl overflow-hidden p-6 md:p-8"
           style={{ backgroundImage: 'radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px)', backgroundSize: '24px 24px' }}
         >
           {/* Cursive Doodles/Handwritten Annotation */}
@@ -213,7 +213,7 @@ export const DigitalWorkbench: React.FC = () => {
             dragConstraints={workbenchRef}
             dragElastic={0.08}
             onDoubleClick={() => openWindow('projects', 'Projects Archive', projectsContent)}
-            className="absolute top-16 left-12 cursor-grab active:cursor-grabbing z-20 flex flex-col items-center space-y-1.5 p-3 rounded-2xl hover:bg-white/5 transition-colors"
+            className="absolute top-10 left-10 cursor-grab active:cursor-grabbing z-20 flex flex-col items-center space-y-1.5 p-3 rounded-2xl hover:bg-white/5 transition-colors"
           >
             <div className="relative">
               <Folder className="w-12 h-12 text-yellow-500/80 fill-yellow-500/20" />
@@ -228,7 +228,7 @@ export const DigitalWorkbench: React.FC = () => {
             dragConstraints={workbenchRef}
             dragElastic={0.08}
             onDoubleClick={() => openWindow('design_specs', 'Design System Spec Sheet', designSpecsContent)}
-            className="absolute top-48 left-16 cursor-grab active:cursor-grabbing z-20 flex flex-col items-center space-y-1.5 p-3 rounded-2xl hover:bg-white/5 transition-colors"
+            className="absolute top-150 left-10 cursor-grab active:cursor-grabbing z-20 flex flex-col items-center space-y-1.5 p-3 rounded-2xl hover:bg-white/5 transition-colors"
           >
             <div className="relative">
               <Folder className="w-12 h-12 text-brand-blue/80 fill-brand-blue/20" />
@@ -243,7 +243,7 @@ export const DigitalWorkbench: React.FC = () => {
             dragConstraints={workbenchRef}
             dragElastic={0.08}
             onDoubleClick={() => openWindow('identity', 'Digital Identity Card', identityContent)}
-            className="absolute top-80 left-12 cursor-grab active:cursor-grabbing z-20 flex flex-col items-center space-y-1.5 p-3 rounded-2xl hover:bg-white/5 transition-colors"
+            className="absolute top-290 left-10 cursor-grab active:cursor-grabbing z-20 flex flex-col items-center space-y-1.5 p-3 rounded-2xl hover:bg-white/5 transition-colors"
           >
             <div className="relative">
               <Folder className="w-12 h-12 text-brand-purple/80 fill-brand-purple/20" />
@@ -257,7 +257,7 @@ export const DigitalWorkbench: React.FC = () => {
             drag
             dragConstraints={workbenchRef}
             dragElastic={0.08}
-            className="absolute top-16 right-16 cursor-grab active:cursor-grabbing z-20 w-44 p-4 rounded-xl bg-pink-900/10 border border-pink-500/30 text-pink-300 shadow-xl flex flex-col justify-between rotate-[-3deg] hover:bg-pink-900/15 transition-all"
+            className="absolute top-10 right-10 cursor-grab active:cursor-grabbing z-20 w-44 p-4 rounded-xl bg-pink-900/10 border border-pink-500/30 text-pink-300 shadow-xl flex flex-col justify-between rotate-[-3deg] hover:bg-pink-900/15 transition-all"
           >
             <div className="flex justify-between items-center mb-2 pb-1 border-b border-pink-500/20">
               <span className="text-[9px] font-mono tracking-wider font-bold">STICKY_TASK</span>
@@ -276,7 +276,7 @@ export const DigitalWorkbench: React.FC = () => {
             drag
             dragConstraints={workbenchRef}
             dragElastic={0.08}
-            className="absolute bottom-16 right-16 cursor-grab active:cursor-grabbing z-20 w-40 p-3 bg-neutral-900 border border-white/10 rounded-lg shadow-2xl flex flex-col space-y-3 rotate-[4deg] hover:border-white/20 transition-all"
+            className="absolute bottom-10 right-10 cursor-grab active:cursor-grabbing z-20 w-40 p-3 bg-neutral-900 border border-white/10 rounded-lg shadow-2xl flex flex-col space-y-3 rotate-[4deg] hover:border-white/20 transition-all"
           >
             {/* Visual display box */}
             <div className="w-full h-28 bg-[#121214] border border-white/5 rounded flex items-center justify-center relative overflow-hidden">

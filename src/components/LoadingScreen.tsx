@@ -80,7 +80,7 @@ export const LoadingScreen: React.FC = () => {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4 }}
-              className="text-4xl md:text-6xl font-display font-black tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-white via-white/80 to-white/40"
+              className="text-4xl md:text-6xl font-ranade font-black tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-white via-white/80 to-white/40"
             >
               MANISH CHOUHAN
             </motion.h1>
