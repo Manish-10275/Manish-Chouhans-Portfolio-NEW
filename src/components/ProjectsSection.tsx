@@ -1,415 +1,386 @@
 'use client';
 
-import React, { useState, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { useApp } from '@/context/AppContext';
-import { ExternalLink, Github, Sparkles, X, ChevronRight, Check } from 'lucide-react';
+import React from 'react';
+import { ArrowUpRight, Github, AlertCircle, CheckCircle2, Layers, Cpu, Server, Sprout, Building2 } from 'lucide-react';
 
 interface Project {
-  id: number;
+  id: string;
   title: string;
-  subtitle: string;
+  category: string;
+  status: string;
   description: string;
-  imgUrl: string;
-  tech: string[];
-  liveUrl: string;
-  gitUrl: string;
-  caseStudy: {
-    problem: string;
-    solution: string;
-    features: string[];
-  };
+  problem: string;
+  solution: string;
+  contribution: string;
+  technologies: string[];
+  disclaimer?: string;
+  repoUrl?: string;
+  liveUrl?: string;
+  isPrimary: boolean;
+  icon: React.ReactNode;
 }
 
+const PROJECTS: Project[] = [
+  {
+    id: 'hbb-mutation-analyzer',
+    title: 'HBB Mutation Analyzer',
+    category: 'Bioinformatics & Genomic Analysis',
+    status: 'Ongoing Technical Project',
+    icon: <Cpu className="w-5 h-5 text-[#58745C]" />,
+    description:
+      'A tool for exploring hemoglobin beta gene variants, HGVS notation, molecular consequences, ClinVar evidence, and supporting research. The project combines variant interpretation utilities with evidence retrieval and an AI assisted research workflow.',
+    problem:
+      'Genetic variant interpretation in hemoglobin beta (HBB) requires reconciling sequence coordinate formats, validating codon changes, cross-referencing ClinVar pathogenicity records, and reviewing scientific publications scattered across disparate databases.',
+    solution:
+      'Engineered an integrated exploration utility that parses HGVS variant strings, analyzes coding consequences, queries ClinVar assertion records, and uses Gemini to synthesize supporting biomedical research literature into a structured evidence view.',
+    contribution:
+      'Designed the variant parsing logic, integrated external biomedical APIs (ClinVar & PubMed), implemented LLM-assisted literature evidence synthesis, and built a clean research interface.',
+    technologies: [
+      'Python',
+      'HGVS Parsing',
+      'ClinVar API',
+      'PubMed E-Utilities',
+      'Gemini API',
+      'Bioinformatics Data Models'
+    ],
+    disclaimer:
+      'Research & exploratory software: This project is built for technical research and literature synthesis. It does not replace professional clinical interpretation, genetic counseling, or certified medical diagnostic procedures.',
+    repoUrl: 'https://github.com/Manish-10275',
+    isPrimary: true,
+  },
+  {
+    id: 'ad-automation-os',
+    title: 'Ad Automation OS',
+    category: 'AI Automation & SaaS',
+    status: 'In Development / Core Prototype',
+    icon: <Layers className="w-5 h-5 text-[#58745C]" />,
+    description:
+      'An operations platform for connecting advertising services, managing automation workflows, and bringing rules execution, audit logs, and operational visibility into a unified interface.',
+    problem:
+      'Campaign teams managing multi-channel ad operations struggle with fragmented interfaces, inconsistent rule triggers, lack of central audit trails, and manual intervention when execution anomalies occur.',
+    solution:
+      'Developed a unified operations console that connects external advertising providers, enables structured automation rule authoring, tracks execution history, and records detailed audit logs for operational traceability.',
+    contribution:
+      'Architected the rule trigger execution pipeline, designed schema-validated logging mechanisms, built the operational dashboard UI in Next.js, and standardized API connector interfaces.',
+    technologies: [
+      'Next.js',
+      'TypeScript',
+      'Node.js',
+      'Rules Engine',
+      'Audit Logging',
+      'REST APIs',
+      'Tailwind CSS'
+    ],
+    repoUrl: 'https://github.com/Manish-10275',
+    isPrimary: true,
+  },
+  {
+    id: 'devoq-speech-services',
+    title: 'Devoq Labs Speech Services',
+    category: 'AI Infrastructure & APIs',
+    status: 'Backend API & Infrastructure',
+    icon: <Server className="w-5 h-5 text-[#58745C]" />,
+    description:
+      'A backend service that brings speech transcription and AI voice generation behind a consistent API, with a focus on straightforward integration into other applications.',
+    problem:
+      'Integrating speech capabilities across different products often requires juggling disparate audio formats, differing vendor payload structures, and variable provider rate limits.',
+    solution:
+      'Created a centralized gateway microservice that abstracts speech-to-text and text-to-speech providers behind a standardized, predictable REST API with structured response schemas and error normalization.',
+    contribution:
+      'Implemented provider integrations with Google Cloud Speech-to-Text and AI33.pro voice APIs, configured payload translation layers, and created API documentation for developer consumption.',
+    technologies: [
+      'Node.js',
+      'Express',
+      'Google Speech-to-Text',
+      'AI33.pro TTS API',
+      'RESTful Architecture',
+      'Audio Stream Handling'
+    ],
+    repoUrl: 'https://github.com/Manish-10275',
+    isPrimary: true,
+  },
+  {
+    id: 'agribuddy',
+    title: 'AgriBuddy',
+    category: 'Agricultural AI',
+    status: 'Concept & Prototype',
+    icon: <Sprout className="w-5 h-5 text-[#58745C]" />,
+    description:
+      'An AI powered plant disease detection concept focused on helping identify plant leaf diseases from images and exploring how computer vision can support agricultural decision making.',
+    problem:
+      'Delayed identification of crop plant foliar diseases causes preventable crop degradation, while agricultural expertise remains physically inaccessible in many rural farming areas.',
+    solution:
+      'Prototyped a convolutional neural network workflow that evaluates crop leaf imagery against established plant pathology datasets, outputting candidate condition indicators and standard remedial guidelines.',
+    contribution:
+      'Curated crop training datasets, experimented with CNN image classification architectures in Python, and evaluated model inferences on test leaf anomalies.',
+    technologies: [
+      'Python',
+      'Computer Vision',
+      'CNN / Deep Learning',
+      'Dataset Preprocessing',
+      'Model Evaluation'
+    ],
+    repoUrl: 'https://github.com/Manish-10275',
+    isPrimary: false,
+  },
+  {
+    id: 'devoq-labs-studio',
+    title: 'Devoq Labs',
+    category: 'Entrepreneurship & Product Development',
+    status: 'Active Digital Studio',
+    icon: <Building2 className="w-5 h-5 text-[#58745C]" />,
+    description:
+      'An independent digital and AI focused studio founded by Manish Chouhan, working across web applications, software development, UI and UX, and AI integration.',
+    problem:
+      'Early-stage businesses and founders often need technical partners who understand modern full-stack development, LLM integrations, and rapid product scoping without enterprise agency bloat.',
+    solution:
+      'Founded Devoq Labs as an agile product studio that translates technical concepts into functioning software, combining frontend engineering, AI workflows, and structured delivery management.',
+    contribution:
+      'Founder and lead developer. Responsible for client project scoping, architecture decisions, code implementation, developer coordination, and product delivery.',
+    technologies: [
+      'Next.js',
+      'React',
+      'Node.js',
+      'AI Integration',
+      'UI/UX Architecture',
+      'Agile Delivery'
+    ],
+    liveUrl: 'https://devoqlabs.com',
+    repoUrl: 'https://github.com/Manish-10275',
+    isPrimary: false,
+  },
+];
+
 export const ProjectsSection: React.FC = () => {
-  const { playClickSound, playHoverSound } = useApp();
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-
-  const projects: Project[] = [
-    {
-      id: 0,
-      title: 'Mind Mitra',
-      subtitle: 'AI Mental Companion',
-      description: 'An intelligent AI counseling agent leveraging deep natural language processing models to deliver real-time emotional support and cognitive coping techniques.',
-      imgUrl: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=800&auto=format&fit=crop',
-      tech: ['Next.js', 'OpenAI APIs', 'Tailwind CSS', 'Node.js', 'MongoDB'],
-      liveUrl: 'https://devoqlabs.com',
-      gitUrl: 'https://github.com/Manish-10275',
-      caseStudy: {
-        problem: 'Access to psychiatric support is expensive and suffers from structural delays, making quick relief hard for people undergoing mild anxiety attacks.',
-        solution: 'Mind Mitra operates 24/7, employing customized prompts and sentiment classification architectures to offer immediate, conversational relief strategies.',
-        features: [
-          'Conversational sentiment analysis tracking patient emotional spikes.',
-          'Secure, anonymous database storage ensuring maximum compliance.',
-          'Dynamic cognitive therapy suggestions triggered based on user prompts.'
-        ]
-      }
-    },
-    {
-      id: 1,
-      title: 'AgriBuddy',
-      subtitle: 'Smart Crop Diagnosis',
-      description: 'A futuristic agro-tech pipeline using computer vision to diagnose crop plant pathogens from simple cell photos, advising corrective treatments.',
-      imgUrl: 'https://images.unsplash.com/photo-1560493676-04071c5f467b?q=80&w=800&auto=format&fit=crop',
-      tech: ['Python', 'TensorFlow', 'FastAPI', 'React Native', 'AWS S3'],
-      liveUrl: 'https://devoqlabs.com',
-      gitUrl: 'https://github.com/Manish-10275',
-      caseStudy: {
-        problem: 'Rural farmers lose up to 40% of seasonal yields due to delayed identification of leaf pathogens and incorrect pesticide applications.',
-        solution: 'AgriBuddy lets farmers photograph crop leaves and instantly runs it through a mobile-optimized CNN model to deliver highly accurate diagnosis files.',
-        features: [
-          'Off-line compatible Convolutional Neural Network (CNN) model caching.',
-          'Automated multi-lingual treatment sheets listing organic and chemical remedies.',
-          'GPS-linked mapping tracking local crop disease spreads.'
-        ]
-      }
-    },
-    {
-      id: 2,
-      title: 'Devoq Labs Portal',
-      subtitle: 'Startup Agency Systems',
-      description: 'The core business dashboard for Devoq Labs, handling automated project milestones, ticketing structures, client invoices, and live UI reviews.',
-      imgUrl: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop',
-      tech: ['Next.js 15', 'TypeScript', 'PostgreSQL', 'Tailwind', 'Stripe'],
-      liveUrl: 'https://devoqlabs.com',
-      gitUrl: 'https://github.com/Manish-10275',
-      caseStudy: {
-        problem: 'Technical agency operations suffer from fragmented tool stacks (Jira, Google Drive, Stripe), delaying project delivery and review feedback.',
-        solution: 'Devoq Labs Portal merges client communications, live milestone tracking, visual design approvals, and invoicing into a unified WebGL workspace.',
-        features: [
-          'Integrated Figma review components letting clients comment on live site frames.',
-          'Smart contract/invoice generation synced with Stripe milestones.',
-          'Encrypted project file storage and task delegation dashboards.'
-        ]
-      }
-    },
-    {
-      id: 3,
-      title: 'Finozest',
-      subtitle: 'Market Intelligence Engine',
-      description: 'A clean financial modeling application displaying asset patterns, forecasting market spikes, and compiling personalized stock reports.',
-      imgUrl: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=800&auto=format&fit=crop',
-      tech: ['React.js', 'FastAPI', 'Tableau API', 'Pandas', 'Docker'],
-      liveUrl: 'https://devoqlabs.com',
-      gitUrl: 'https://github.com/Manish-10275',
-      caseStudy: {
-        problem: 'Retail investors struggle to dissect complex market data sets and coordinate financial variables across different charting portals.',
-        solution: 'Finozest parses global indicators, summarizes trends using LLMs, and presents real-time data through glassmorphic charts.',
-        features: [
-          'Auto-updating chart pipelines plotting historical prices and moving averages.',
-          'AI-synthesized morning portfolio reports compiled automatically.',
-          'Interactive sliders for simulating investment return scenarios.'
-        ]
-      }
-    },
-    {
-      id: 4,
-      title: 'Space Portfolio',
-      subtitle: 'Cinematic Digital Realm',
-      description: 'The award-winning portfolio you are experiencing, featuring Web Audio API sound engines, raw Three.js particle spheres, and Command Palettes.',
-      imgUrl: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&auto=format&fit=crop',
-      tech: ['Next.js 15', 'Three.js', 'Framer Motion', 'Web Audio API', 'SEO'],
-      liveUrl: '#',
-      gitUrl: 'https://github.com/Manish-10275',
-      caseStudy: {
-        problem: 'Most developer portfolios are flat, templated, and fail to demonstrate high-end engineering capabilities, blending into generic layouts.',
-        solution: 'Built a multi-sensory futuristic dashboard that highlights technical mastery, data analytics expertise, and design aesthetics simultaneously.',
-        features: [
-          'On-the-fly browser synthesized sound effects utilizing Web Audio API oscillators.',
-          'Lightweight WebGL galaxy models and responsive custom cursor rings.',
-          'Structured JSON-LD entity mappings achieving perfect 100 SEO scores.'
-        ]
-      }
-    }
-  ];
-
   return (
-    <section id="projects" className="py-24 relative overflow-hidden bg-background">
-      {/* Decorative grids */}
-      <div className="absolute top-1/2 left-0 w-[450px] h-[450px] rounded-full bg-brand-blue/5 blur-[130px] pointer-events-none" />
-      <div className="absolute bottom-0 right-0 w-[350px] h-[350px] rounded-full bg-brand-purple/5 blur-[100px] pointer-events-none" />
-
-      <div className="max-w-6xl mx-auto px-4 md:px-8">
+    <section id="work" className="py-24 px-6 md:px-10 border-b border-[#E2E4DC]">
+      <div className="max-w-6xl mx-auto">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="inline-flex items-center space-x-2 bg-white/5 border border-white/10 rounded-full px-3 py-1 text-xs text-brand-purple mb-4 tracking-widest uppercase font-mono"
-          >
-            <span>Showcase</span>
-          </motion.div>
-          <h2 className="text-3xl md:text-5xl font-display font-black tracking-tight mb-4">
-            Innovative <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue via-brand-purple to-brand-accent">Build Showcase</span>
+        <div className="max-w-3xl mb-16">
+          <div className="inline-flex items-center space-x-2 text-xs font-mono uppercase tracking-wider text-[#58745C] font-semibold mb-3">
+            <span>Selected Work</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-semibold tracking-tight text-[#20231F] mb-4">
+            Products, systems, and technical explorations.
           </h2>
-          <p className="text-white/60 text-sm md:text-lg max-w-2xl mx-auto font-sans">
-            Explore advanced AI systems, enterprise SaaS frameworks, and custom web experiences. Click a card to read case study details.
+          <p className="text-base md:text-lg text-[#6B7168] leading-relaxed">
+            A curated selection of software projects, AI automation pipelines, and infrastructure services built with a focus on real utility and sound engineering.
           </p>
         </div>
 
-        {/* Horizontal Projects Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.map((proj, idx) => (
-            <ProjectCard
-              key={proj.id}
-              project={proj}
-              onClick={() => {
-                setSelectedProject(proj);
-                playClickSound();
-              }}
-              playHoverSound={playHoverSound}
-              index={idx}
-            />
-          ))}
-        </div>
-      </div>
-
-      {/* Case Study Modal */}
-      <AnimatePresence>
-        {selectedProject && (
-          <div className="fixed inset-0 z-[9995] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              transition={{ duration: 0.3, ease: 'easeOut' }}
-              className="w-full max-w-3xl bg-background/95 border border-white/10 rounded-2xl overflow-hidden shadow-2xl glass-panel max-h-[85vh] flex flex-col"
+        {/* Primary Projects (Top 3) */}
+        <div className="space-y-10 mb-14">
+          {PROJECTS.filter((p) => p.isPrimary).map((project, index) => (
+            <article
+              key={project.id}
+              className="bg-white border border-[#E2E4DC] rounded-2xl p-7 md:p-10 shadow-card-subtle hover:border-[#D1D4CA] transition-all duration-200"
             >
-              {/* Header */}
-              <div className="px-6 py-4 border-b border-white/10 bg-white/5 flex justify-between items-center flex-shrink-0">
-                <div className="flex items-center space-x-2">
-                  <Sparkles className="w-5 h-5 text-brand-blue" />
-                  <span className="text-xs font-mono text-white/50 uppercase tracking-widest">Case Study Analysis</span>
+              {/* Header meta */}
+              <div className="flex flex-wrap items-center justify-between gap-3 mb-6 pb-6 border-b border-[#EBECE6]">
+                <div className="flex items-center space-x-3">
+                  <div className="p-2 rounded-lg bg-[#EBF1EC] border border-[#D7E2D9]">
+                    {project.icon}
+                  </div>
+                  <div>
+                    <span className="text-xs font-mono uppercase tracking-wider text-[#6B7168] block">
+                      {project.category}
+                    </span>
+                    <span className="text-xs font-mono font-medium text-[#58745C]">
+                      Project 0{index + 1}
+                    </span>
+                  </div>
                 </div>
-                <button
-                  onClick={() => {
-                    setSelectedProject(null);
-                    playClickSound();
-                  }}
-                  className="text-white/50 hover:text-white transition-colors"
-                >
-                  <X className="w-6 h-6" />
-                </button>
+
+                <div className="flex items-center space-x-3">
+                  <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-mono font-medium bg-[#F1F2EC] text-[#20231F] border border-[#E2E4DC]">
+                    {project.status}
+                  </span>
+                </div>
               </div>
 
-              {/* Scrollable Modal Content */}
-              <div className="p-6 md:p-8 overflow-y-auto space-y-8 no-scrollbar flex-1">
-                {/* Intro */}
+              {/* Title & Description */}
+              <h3 className="text-2xl sm:text-3xl font-display font-bold text-[#20231F] tracking-tight mb-4">
+                {project.title}
+              </h3>
+              <p className="text-base md:text-lg text-[#20231F]/90 leading-relaxed font-normal mb-8 max-w-4xl">
+                {project.description}
+              </p>
+
+              {/* Problem / Solution / Contribution Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 pt-6 border-t border-[#EBECE6]">
                 <div>
-                  <h3 className="text-2xl md:text-4xl font-display font-black tracking-tight text-white mb-2">
-                    {selectedProject.title}
-                  </h3>
-                  <p className="text-brand-blue font-mono text-xs md:text-sm">{selectedProject.subtitle}</p>
+                  <h4 className="text-xs font-mono uppercase tracking-wider text-[#6B7168] font-semibold mb-2">
+                    The Problem
+                  </h4>
+                  <p className="text-sm text-[#6B7168] leading-relaxed">
+                    {project.problem}
+                  </p>
                 </div>
 
-                {/* Grid info */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 border-y border-white/5 py-6">
-                  <div>
-                    <h4 className="text-xs font-bold font-mono tracking-wider text-white/40 mb-2 uppercase">The Problem</h4>
-                    <p className="text-white/70 text-xs md:text-sm leading-relaxed font-sans">{selectedProject.caseStudy.problem}</p>
-                  </div>
-                  <div>
-                    <h4 className="text-xs font-bold font-mono tracking-wider text-white/40 mb-2 uppercase">Our Solution</h4>
-                    <p className="text-white/70 text-xs md:text-sm leading-relaxed font-sans">{selectedProject.caseStudy.solution}</p>
-                  </div>
-                </div>
-
-                {/* Key specs */}
                 <div>
-                  <h4 className="text-xs font-bold font-mono tracking-wider text-white/40 mb-4 uppercase">Core Capabilities & Integrations</h4>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                    {selectedProject.caseStudy.features.map((feat, fIdx) => (
-                      <div key={fIdx} className="flex items-start space-x-3 bg-white/5 border border-white/5 rounded-xl p-3.5">
-                        <Check className="w-4.5 h-4.5 text-brand-purple flex-shrink-0 mt-0.5" />
-                        <span className="text-xs md:text-sm text-white/70 leading-relaxed font-sans">{feat}</span>
-                      </div>
-                    ))}
-                  </div>
+                  <h4 className="text-xs font-mono uppercase tracking-wider text-[#6B7168] font-semibold mb-2">
+                    Solution Built
+                  </h4>
+                  <p className="text-sm text-[#20231F] leading-relaxed">
+                    {project.solution}
+                  </p>
                 </div>
 
-                {/* Tech tags */}
-                <div className="space-y-3">
-                  <h4 className="text-xs font-bold font-mono tracking-wider text-white/40 uppercase">Technology Constellation</h4>
-                  <div className="flex flex-wrap gap-2">
-                    {selectedProject.tech.map((tag) => (
-                      <span key={tag} className="text-xs font-mono bg-white/5 border border-white/10 rounded-full px-3 py-1.5 text-white/80">
-                        {tag}
+                <div>
+                  <h4 className="text-xs font-mono uppercase tracking-wider text-[#6B7168] font-semibold mb-2">
+                    My Contribution
+                  </h4>
+                  <p className="text-sm text-[#6B7168] leading-relaxed">
+                    {project.contribution}
+                  </p>
+                </div>
+              </div>
+
+              {/* Disclaimer if present */}
+              {project.disclaimer && (
+                <div className="mb-6 p-3.5 rounded-lg bg-[#FAF9F5] border border-[#E2E4DC] flex items-start space-x-2.5 text-xs text-[#6B7168] leading-relaxed">
+                  <AlertCircle className="w-4 h-4 text-[#58745C] flex-shrink-0 mt-0.5" />
+                  <span>{project.disclaimer}</span>
+                </div>
+              )}
+
+              {/* Tech Tags & Actions */}
+              <div className="pt-6 border-t border-[#EBECE6] flex flex-wrap items-center justify-between gap-4">
+                <div className="flex flex-wrap items-center gap-1.5">
+                  {project.technologies.map((tech) => (
+                    <span
+                      key={tech}
+                      className="text-xs font-mono px-2.5 py-1 rounded bg-[#F1F2EC] text-[#20231F] border border-[#E2E4DC]"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+
+                <div className="flex items-center space-x-3">
+                  {project.repoUrl && (
+                    <a
+                      href={project.repoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center space-x-1.5 text-xs font-medium text-[#20231F] hover:text-[#58745C] transition-colors py-1 px-2 rounded hover:bg-[#F1F2EC]"
+                    >
+                      <Github className="w-4 h-4" />
+                      <span>Code repository</span>
+                      <ArrowUpRight className="w-3.5 h-3.5" />
+                    </a>
+                  )}
+                  {project.liveUrl && (
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center space-x-1.5 text-xs font-medium text-[#58745C] hover:text-[#47604B] transition-colors py-1 px-2 rounded hover:bg-[#EBF1EC]"
+                    >
+                      <span>Live Website</span>
+                      <ArrowUpRight className="w-3.5 h-3.5" />
+                    </a>
+                  )}
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        {/* Secondary Projects Grid (Projects 4 & 5) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {PROJECTS.filter((p) => !p.isPrimary).map((project, index) => (
+            <article
+              key={project.id}
+              className="bg-white border border-[#E2E4DC] rounded-2xl p-7 md:p-8 shadow-card-subtle hover:border-[#D1D4CA] transition-all duration-200 flex flex-col justify-between"
+            >
+              <div>
+                <div className="flex items-center justify-between gap-2 mb-5">
+                  <div className="flex items-center space-x-2.5">
+                    <div className="p-1.5 rounded-md bg-[#EBF1EC] border border-[#D7E2D9]">
+                      {project.icon}
+                    </div>
+                    <span className="text-xs font-mono uppercase tracking-wider text-[#6B7168]">
+                      {project.category}
+                    </span>
+                  </div>
+                  <span className="text-xs font-mono px-2 py-0.5 rounded bg-[#F1F2EC] text-[#20231F] border border-[#E2E4DC]">
+                    {project.status}
+                  </span>
+                </div>
+
+                <h3 className="text-xl md:text-2xl font-display font-bold text-[#20231F] tracking-tight mb-3">
+                  {project.title}
+                </h3>
+                <p className="text-sm text-[#20231F]/90 leading-relaxed mb-6 font-normal">
+                  {project.description}
+                </p>
+
+                <div className="space-y-4 mb-6 pt-5 border-t border-[#EBECE6] text-xs">
+                  <div>
+                    <span className="font-mono uppercase tracking-wider text-[#6B7168] block mb-1">
+                      Problem &amp; Approach
+                    </span>
+                    <p className="text-[#6B7168] leading-relaxed">
+                      {project.solution}
+                    </p>
+                  </div>
+                  <div>
+                    <span className="font-mono uppercase tracking-wider text-[#6B7168] block mb-1">
+                      Contribution
+                    </span>
+                    <p className="text-[#20231F] leading-relaxed">
+                      {project.contribution}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <div className="pt-5 border-t border-[#EBECE6] flex flex-wrap items-center justify-between gap-3">
+                  <div className="flex flex-wrap gap-1.5">
+                    {project.technologies.slice(0, 4).map((tech) => (
+                      <span
+                        key={tech}
+                        className="text-[11px] font-mono px-2 py-0.5 rounded bg-[#F1F2EC] text-[#20231F] border border-[#E2E4DC]"
+                      >
+                        {tech}
                       </span>
                     ))}
                   </div>
+
+                  <div className="flex items-center space-x-2">
+                    {project.repoUrl && (
+                      <a
+                        href={project.repoUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center space-x-1 text-xs font-medium text-[#20231F] hover:text-[#58745C] transition-colors"
+                      >
+                        <Github className="w-3.5 h-3.5" />
+                        <span>Source</span>
+                        <ArrowUpRight className="w-3 h-3" />
+                      </a>
+                    )}
+                    {project.liveUrl && (
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center space-x-1 text-xs font-medium text-[#58745C] hover:text-[#47604B] transition-colors ml-2"
+                      >
+                        <span>Visit</span>
+                        <ArrowUpRight className="w-3 h-3" />
+                      </a>
+                    )}
+                  </div>
                 </div>
               </div>
-
-              {/* Footer */}
-              <div className="px-6 py-4 border-t border-white/10 bg-white/5 flex justify-end space-x-3 flex-shrink-0">
-                <a
-                  href={selectedProject.gitUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center space-x-2 border border-white/10 hover:border-white/20 bg-white/5 hover:bg-white/10 rounded-xl px-4 py-2.5 text-xs font-mono text-white transition-all cursor-pointer"
-                >
-                  <Github className="w-4 h-4" />
-                  <span>GitHub Repository</span>
-                </a>
-                <a
-                  href={selectedProject.liveUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center space-x-2 bg-gradient-to-r from-brand-blue to-brand-purple hover:shadow-lg rounded-xl px-4 py-2.5 text-xs font-mono text-white transition-all cursor-pointer"
-                >
-                  <ExternalLink className="w-4 h-4" />
-                  <span>Execute Live Demo</span>
-                </a>
-              </div>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
-    </section>
-  );
-};
-
-// 3D Tilt Card Wrapper Component
-interface CardProps {
-  project: Project;
-  onClick: () => void;
-  playHoverSound: () => void;
-  index: number;
-}
-
-const ProjectCard: React.FC<CardProps> = ({ project, onClick, playHoverSound, index }) => {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const [rotateX, setRotateX] = useState(0);
-  const [rotateY, setRotateY] = useState(0);
-  const [coords, setCoords] = useState({ x: 0, y: 0 });
-  const [isHovered, setIsHovered] = useState(false);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current) return;
-    const card = cardRef.current;
-    const rect = card.getBoundingClientRect();
-    
-    // Normalize coordinates to [-0.5, 0.5] relative to center
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-
-    // Set rotation angles
-    setRotateX(-y * 15); // Rotate around X based on vertical offset
-    setRotateY(x * 15);  // Rotate around Y based on horizontal offset
-
-    // Track cursor coordinates relative to card bounds
-    setCoords({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top
-    });
-  };
-
-  const handleMouseLeave = () => {
-    setRotateX(0);
-    setRotateY(0);
-    setIsHovered(false);
-  };
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-    >
-      <div
-        ref={cardRef}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-        onMouseEnter={() => {
-          setIsHovered(true);
-          playHoverSound();
-        }}
-        onClick={onClick}
-        style={{
-          transformStyle: 'preserve-3d',
-          transform: `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`,
-          transition: 'transform 0.15s cubic-bezier(0.25, 1, 0.5, 1)'
-        }}
-        className="group bg-white/[0.02] border border-white/5 rounded-2xl overflow-hidden glass-panel-hover cursor-pointer p-4 flex flex-col justify-between h-[380px] relative select-none"
-      >
-        {/* Spotlight Background Glow */}
-        {isHovered && (
-          <div
-            className="absolute pointer-events-none transition-opacity duration-300 z-0"
-            style={{
-              width: '400px',
-              height: '400px',
-              background: `radial-gradient(circle 140px at ${coords.x}px ${coords.y}px, rgba(139, 92, 246, 0.08), transparent)`,
-              left: 0,
-              top: 0,
-              transform: 'translate(-50%, -50%)',
-            }}
-          />
-        )}
-
-        {/* Spotlight Border */}
-        {isHovered && (
-          <div
-            className="absolute inset-0 pointer-events-none rounded-2xl z-10"
-            style={{
-              border: '1px solid rgba(59, 130, 246, 0.3)',
-              maskImage: `radial-gradient(circle 120px at ${coords.x}px ${coords.y}px, black, transparent)`,
-              WebkitMaskImage: `radial-gradient(circle 120px at ${coords.x}px ${coords.y}px, black, transparent)`,
-            }}
-          />
-        )}
-        <div style={{ transform: 'translateZ(10px)', transformStyle: 'preserve-3d' }}>
-          {/* Project Thumbnail */}
-          <div
-            style={{ transform: 'translateZ(30px)' }}
-            className="w-full h-[160px] rounded-xl overflow-hidden mb-5 border border-white/5 relative"
-          >
-            <img
-              src={project.imgUrl}
-              alt={project.title}
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/10 to-transparent opacity-60" />
-            <span className="absolute bottom-3 right-3 text-[9px] font-mono text-white/70 bg-black/80 px-2 py-0.5 rounded border border-white/10 uppercase tracking-widest">
-              {project.tech[0]}
-            </span>
-          </div>
-
-          <span
-            style={{ transform: 'translateZ(20px)' }}
-            className="text-[10px] font-mono text-brand-blue uppercase tracking-widest mb-1.5 block"
-          >
-            {project.subtitle}
-          </span>
-          <h3
-            style={{ transform: 'translateZ(40px)' }}
-            className="text-lg md:text-xl font-bold text-white tracking-tight mb-2 group-hover:text-brand-purple transition-colors"
-          >
-            {project.title}
-          </h3>
-          <p
-            style={{ transform: 'translateZ(25px)' }}
-            className="text-white/60 text-xs md:text-sm line-clamp-2 leading-relaxed font-sans mb-4"
-          >
-            {project.description}
-          </p>
-        </div>
-
-        <div className="flex justify-between items-center mt-4 pt-4 border-t border-white/5">
-          {/* Render tags */}
-          <div className="flex space-x-1">
-            {project.tech.slice(0, 3).map((t) => (
-              <span key={t} className="text-[8px] md:text-[9px] font-mono bg-white/5 border border-white/5 px-2 py-0.5 rounded text-white/50">
-                {t}
-              </span>
-            ))}
-          </div>
-          <ChevronRight className="w-4 h-4 text-white/30 group-hover:text-brand-blue group-hover:translate-x-1.5 transition-all" />
+            </article>
+          ))}
         </div>
       </div>
-    </motion.div>
+    </section>
   );
 };
 

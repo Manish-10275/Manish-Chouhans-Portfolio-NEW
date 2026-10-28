@@ -1,189 +1,186 @@
 'use client';
 
 import React from 'react';
-import { motion } from 'framer-motion';
-import { useApp } from '@/context/AppContext';
-import { Briefcase, Calendar, MapPin, CheckCircle } from 'lucide-react';
+import { Calendar, MapPin, Building, Briefcase } from 'lucide-react';
 
-interface ExperienceItem {
-  id: number;
+interface Experience {
+  id: string;
   role: string;
   company: string;
+  period: string;
   location: string;
-  duration: string;
-  description: string[];
+  summary: string;
+  responsibilities: string[];
   skills: string[];
+  isCurrent?: boolean;
 }
 
+const EXPERIENCES: Experience[] = [
+  {
+    id: 'devoq-labs',
+    role: 'Founder & CEO',
+    company: 'Devoq Labs',
+    period: 'Jun 2025 — Present',
+    location: 'Remote',
+    summary:
+      'Directing an independent digital and software development studio focused on custom AI integrations, web application engineering, and technical project delivery.',
+    responsibilities: [
+      'Lead end-to-end technical scoping, architecture decisions, and software delivery sprints for startup products.',
+      'Coordinate developers, UI designers, and outreach contributors to ensure predictable milestone releases.',
+      'Build functioning client platforms integrating LLM workflows, speech APIs, and modern frontend stacks.'
+    ],
+    skills: ['Startup Operations', 'Software Architecture', 'AI Integrations', 'Agile Delivery', 'Technical Scoping'],
+    isCurrent: true,
+  },
+  {
+    id: 'jjgillespie',
+    role: 'Project Manager',
+    company: 'JJGillespie.com',
+    period: 'Nov 2025 — Present',
+    location: 'Remote',
+    summary:
+      'Managing distributed technical development sprints, engineering roadmaps, and stakeholder communication for web platforms.',
+    responsibilities: [
+      'Organize development backlogs, sprint scopes, and priority queues to maintain regular delivery cadence.',
+      'Bridge communications between commercial stakeholders and technical developers to prevent scope ambiguity.',
+      'Standardize Git repository practices, issue tracking, and sprint retrospectives across the engineering workflow.'
+    ],
+    skills: ['Sprint Planning', 'Agile / Scrum', 'Stakeholder Communication', 'Git Workflows', 'Task Delegation'],
+    isCurrent: true,
+  },
+  {
+    id: 'excelerate',
+    role: 'Associate Project Manager Intern',
+    company: 'Excelerate',
+    period: 'May 2025 — Jun 2025',
+    location: 'Remote',
+    summary:
+      'Supported management in milestone tracking, developer-client alignment, and technical documentation.',
+    responsibilities: [
+      'Assisted in preparing weekly sprint review dashboards and tracking task completion rates.',
+      'Facilitated feedback syncs between clients and engineering contributors to address blockers.',
+      'Maintained project documentation and backlog tracking in Jira and shared documentation hubs.'
+    ],
+    skills: ['Sprint Dashboards', 'Technical Documentation', 'Client Syncs', 'Requirements Tracking'],
+  },
+  {
+    id: 'scaler',
+    role: 'Student Intern',
+    company: 'Scaler School of Technology',
+    period: '2025',
+    location: 'Remote',
+    summary:
+      'Participated in hands-on computer science modules, software problem solving, and technical build assignments.',
+    responsibilities: [
+      'Implemented foundational data structures, algorithm optimizations, and modular software designs.',
+      'Collaborated on group technical assignments and code review sessions.'
+    ],
+    skills: ['Algorithms', 'Software Fundamentals', 'Code Reviews', 'Collaborative Coding'],
+  },
+  {
+    id: 'codveda',
+    role: 'Python Programmer Intern',
+    company: 'Codveda Technologies',
+    period: '2025',
+    location: 'Remote',
+    summary:
+      'Developed automated Python scripts for parsing data files and supporting codebase maintenance.',
+    responsibilities: [
+      'Wrote automated script routines for processing text datasets and structuring file directories.',
+      'Assisted senior developers with bug fixes, unit test execution, and Git version control.'
+    ],
+    skills: ['Python Scripting', 'Data Processing', 'Regex & Parsing', 'Git Versioning'],
+  },
+];
+
 export const ExperienceSection: React.FC = () => {
-  const { playHoverSound } = useApp();
-
-  const experiences: ExperienceItem[] = [
-    {
-      id: 0,
-      role: 'Founder & CEO',
-      company: 'Devoq Labs',
-      location: 'Remote',
-      duration: 'Jun 2025 - Present',
-      description: [
-        'Founded and lead a cutting-edge software agency providing premium web interfaces, customized AI endpoints, high-end UI layouts, and corporate digital transformations.',
-        'Supervise end-to-end delivery milestones: coordinating client reviews, sprints, task priorities, and deployment logs.',
-        'Orchestrate a team of developers, graphic artists, and outreach specialists, reducing overall MVP release latency by 35%.',
-        'Direct business growth and client acquisition pipelines, closing high-value service contracts with international startups.'
-      ],
-      skills: ['Startup Operations', 'Agile Delivery', 'Software Architectures', 'AI API Integration', 'Team Coordination']
-    },
-    {
-      id: 1,
-      role: 'Project Manager',
-      company: 'JJGillespie.com',
-      location: 'Remote',
-      duration: 'Nov 2025 - Present',
-      description: [
-        'Lead distributed teams of engineers and testers to build robust, secure, and enterprise-grade platforms.',
-        'Manage task delegation pipelines, monitor milestones, and resolve blockages to maintain delivery velocity.',
-        'Bridge communications between commercial project stakeholders and technical execution teams.',
-        'Introduced agile boards and Git workflow protocols that boosted product release velocity by 20%.'
-      ],
-      skills: ['Agile Scrums', 'Git Workflows', 'Stakeholder Communications', 'Sprint Scoping', 'Jira Boards']
-    },
-    {
-      id: 2,
-      role: 'Core Team Member',
-      company: 'Paradox, IIT Madras',
-      location: 'Chennai, India',
-      duration: '2026',
-      description: [
-        'Organized operations, sponsor relations, and event execution for Paradox, IIT Madras\'s flagship annual student symposium.',
-        'Coordinated sponsor deals with external brand partners, securing crucial sponsorships from Unacademy and Kryptonix LLP.',
-        'Directed an on-ground logistics sub-group managing operations for 2,000+ national student delegates.'
-      ],
-      skills: ['Event Logistics', 'Brand Relations', 'Team Leadership', 'Corporate Sponsorships']
-    },
-    {
-      id: 3,
-      role: 'Associate Project Manager Intern',
-      company: 'Excelerate',
-      location: 'Remote',
-      duration: 'May 2025 - Jun 2025',
-      description: [
-        'Assisted senior management in mapping project milestones and preparing weekly sprint review dashboards.',
-        'Coordinated feedback roundtables with developers and clients to resolve requirements disputes rapidly.',
-        'Organized project records and updated technical backlogs, increasing team documentation fidelity.'
-      ],
-      skills: ['Sprint Dashboards', 'Client Relations', 'Risk Identification', 'Technical Documentation']
-    },
-    {
-      id: 4,
-      role: 'Python Programmer Intern',
-      company: 'Codveda Technologies',
-      location: 'Remote',
-      duration: '2025',
-      description: [
-        'Wrote and optimized automated scripting pipelines for processing large text datasets and indexing directories.',
-        'Collaborated closely with code leads to squash critical bugs, write modular tests, and refine codebase performance.',
-        'Earned practical knowledge in production repository environments, CI pipelines, and version controls.'
-      ],
-      skills: ['Python Scripting', 'Data Processing', 'Regex & Parsing', 'Git Versioning']
-    }
-  ];
-
   return (
-    <section id="experience" className="py-24 relative overflow-hidden bg-background">
-      {/* Decorative grids */}
-      <div className="absolute top-1/4 left-1/4 w-[350px] h-[350px] rounded-full bg-brand-blue/5 blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-brand-purple/5 blur-[120px] pointer-events-none" />
-
-      <div className="max-w-5xl mx-auto px-4 md:px-8">
+    <section id="experience" className="py-24 px-6 md:px-10 border-b border-[#E2E4DC]">
+      <div className="max-w-6xl mx-auto">
         {/* Section Header */}
-        <div className="text-center mb-20">
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="inline-flex items-center space-x-2 bg-white/5 border border-white/10 rounded-full px-3 py-1 text-xs text-brand-blue mb-4 tracking-widest uppercase font-mono"
-          >
-            <span>Timeline</span>
-          </motion.div>
-          <h2 className="text-3xl md:text-5xl font-display font-black tracking-tight mb-4">
-            Professional <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue via-brand-purple to-brand-accent">Experience</span>
+        <div className="max-w-3xl mb-16">
+          <div className="inline-flex items-center space-x-2 text-xs font-mono uppercase tracking-wider text-[#58745C] font-semibold mb-3">
+            <span>Career History</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-semibold tracking-tight text-[#20231F] mb-4">
+            Professional experience &amp; roles.
           </h2>
-          <p className="text-white/60 text-sm md:text-lg max-w-2xl mx-auto font-sans">
-            Building startup systems, organizing complex timelines, and shipping modular code.
+          <p className="text-base md:text-lg text-[#6B7168] leading-relaxed">
+            A chronological timeline of founder responsibilities, project management leadership, and software development internships.
           </p>
         </div>
 
-        {/* Vertical Timeline Wrapper */}
-        <div className="relative border-l border-white/10 pl-6 md:pl-10 space-y-12 ml-4 md:ml-8">
-          {/* Vertical scroll progress bar line */}
-          <div className="absolute top-0 bottom-0 left-0 w-[1px] bg-gradient-to-b from-brand-blue via-brand-purple to-transparent pointer-events-none" />
+        {/* Compact Timeline */}
+        <div className="relative border-l border-[#E2E4DC] ml-2 md:ml-4 pl-6 md:pl-10 space-y-12">
+          {EXPERIENCES.map((exp) => (
+            <div key={exp.id} className="relative group">
+              {/* Timeline Bullet Node */}
+              <div
+                className={`absolute -left-[31px] md:-left-[47px] top-1.5 w-3.5 h-3.5 rounded-full border-2 ${
+                  exp.isCurrent
+                    ? 'border-[#58745C] bg-[#58745C]'
+                    : 'border-[#E2E4DC] bg-white group-hover:border-[#58745C] transition-colors'
+                }`}
+              />
 
-          {experiences.map((exp, index) => (
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: '-100px' }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              onMouseEnter={playHoverSound}
-              key={exp.id}
-              className="relative group"
-            >
-              {/* Bullet Node Indicator */}
-              <div className="absolute -left-[31px] md:-left-[47px] top-1.5 w-4 h-4 rounded-full bg-[#050505] border-2 border-brand-purple flex items-center justify-center z-10 group-hover:border-brand-blue transition-colors">
-                <span className="w-1.5 h-1.5 rounded-full bg-brand-purple group-hover:bg-brand-blue transition-colors" />
-              </div>
-
-              {/* Experience Card */}
-              <div className="p-6 md:p-8 rounded-2xl glass-panel glass-panel-hover relative overflow-hidden">
-                {/* Micro-glow */}
-                <div className="absolute top-0 right-0 w-[100px] h-[100px] rounded-full bg-brand-blue/5 blur-[40px] pointer-events-none" />
-
-                <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-3">
+              {/* Card Container */}
+              <div className="bg-white border border-[#E2E4DC] rounded-xl p-6 md:p-8 shadow-card-subtle hover:border-[#D1D4CA] transition-colors duration-150">
+                {/* Role Header */}
+                <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 mb-3">
                   <div>
-                    <h3 className="text-lg md:text-2xl font-bold text-white tracking-tight group-hover:text-brand-blue transition-colors">
+                    <h3 className="text-xl md:text-2xl font-display font-bold text-[#20231F] tracking-tight">
                       {exp.role}
                     </h3>
-                    <div className="flex items-center space-x-1.5 text-xs text-white/50 font-mono mt-1">
-                      <span className="text-white/80 font-semibold">{exp.company}</span>
+                    <div className="flex items-center space-x-2 text-sm text-[#6B7168] mt-1 font-medium">
+                      <span className="text-[#20231F] font-semibold">{exp.company}</span>
                       <span>•</span>
                       <span className="flex items-center space-x-1">
-                        <MapPin className="w-3 h-3" />
+                        <MapPin className="w-3.5 h-3.5 text-[#8D938A]" />
                         <span>{exp.location}</span>
                       </span>
                     </div>
                   </div>
 
-                  <div className="flex items-center space-x-1.5 bg-white/5 border border-white/10 rounded-full px-3.5 py-1 text-[10px] md:text-xs font-mono text-white/70 shadow-sm">
-                    <Calendar className="w-3.5 h-3.5 text-brand-purple" />
-                    <span>{exp.duration}</span>
+                  <div className="flex items-center space-x-1.5 text-xs font-mono text-[#58745C] bg-[#EBF1EC] px-3 py-1 rounded-full border border-[#D7E2D9] self-start sm:self-auto">
+                    <Calendar className="w-3.5 h-3.5" />
+                    <span>{exp.period}</span>
                   </div>
                 </div>
 
-                <div className="space-y-3.5 mb-6">
-                  {exp.description.map((bullet, bIdx) => (
-                    <div key={bIdx} className="flex items-start space-x-2.5 text-xs md:text-sm text-white/60 leading-relaxed font-sans">
-                      <CheckCircle className="w-4 h-4 text-brand-blue flex-shrink-0 mt-0.5" />
-                      <span>{bullet}</span>
-                    </div>
+                {/* Summary */}
+                <p className="text-sm md:text-base text-[#20231F]/90 leading-relaxed mb-4 font-normal">
+                  {exp.summary}
+                </p>
+
+                {/* Responsibilities list */}
+                <ul className="space-y-2 mb-6">
+                  {exp.responsibilities.map((item, idx) => (
+                    <li
+                      key={idx}
+                      className="flex items-start space-x-2.5 text-xs md:text-sm text-[#6B7168] leading-relaxed"
+                    >
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#58745C] mt-2 flex-shrink-0" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                {/* Skills tags */}
+                <div className="pt-4 border-t border-[#EBECE6] flex flex-wrap items-center gap-1.5">
+                  <span className="text-[10px] font-mono uppercase tracking-wider text-[#8D938A] mr-2">
+                    Focus:
+                  </span>
+                  {exp.skills.map((skill) => (
+                    <span
+                      key={skill}
+                      className="text-[11px] font-mono px-2.5 py-0.5 rounded bg-[#F1F2EC] text-[#20231F] border border-[#E2E4DC]"
+                    >
+                      {skill}
+                    </span>
                   ))}
                 </div>
-
-                {/* Tech tags */}
-                <div>
-                  <div className="text-[10px] font-bold font-mono tracking-wider text-white/30 mb-2 uppercase">Capabilities Utilized</div>
-                  <div className="flex flex-wrap gap-1.5">
-                    {exp.skills.map((skill) => (
-                      <span
-                        key={skill}
-                        className="text-[10px] md:text-xs font-mono bg-white/5 border border-white/5 rounded px-2.5 py-1 text-white/70"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </div>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

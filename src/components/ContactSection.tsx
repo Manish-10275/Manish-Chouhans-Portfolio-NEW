@@ -1,317 +1,245 @@
 'use client';
 
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { useApp } from '@/context/AppContext';
-import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter, Calendar, Check, AlertCircle, X, Instagram, Download } from 'lucide-react';
-import dynamic from 'next/dynamic';
-import Magnetic from './Magnetic';
-
-// Dynamically load the 3D globe to avoid SSR window errors
-const ContactGlobe = dynamic(() => import('./ContactGlobe'), {
-  ssr: false,
-  loading: () => (
-    <div className="w-full h-full min-h-[350px] flex items-center justify-center">
-      <div className="w-8 h-8 rounded-full border-2 border-brand-blue border-t-transparent animate-spin" />
-    </div>
-  )
-});
+import { Mail, Linkedin, Github, FileText, ExternalLink, Copy, Check, Send, MapPin } from 'lucide-react';
 
 export const ContactSection: React.FC = () => {
-  const { playClickSound, playHoverSound, playChimeSound } = useApp();
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
-  const [calendlyOpen, setCalendlyOpen] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText('manishchouhan123@gmail.com');
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2500);
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.message) return;
 
-    setIsSubmitting(true);
-    playClickSound();
+    // Build mailto link for direct reliable dispatch
+    const subjectLine = encodeURIComponent(
+      formData.subject ? `[Portfolio Inquiry] ${formData.subject}` : `[Portfolio Inquiry] From ${formData.name}`
+    );
+    const bodyText = encodeURIComponent(
+      `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
+    );
 
-    // Simulate API request
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setSubmitStatus('success');
-      playChimeSound();
-      setFormData({ name: '', email: '', message: '' });
-
-      // Reset status after 5s
-      setTimeout(() => setSubmitStatus('idle'), 5000);
-    }, 1500);
+    window.location.href = `mailto:manishchouhan123@gmail.com?subject=${subjectLine}&body=${bodyText}`;
+    setSubmitted(true);
   };
 
   return (
-    <section id="contact" className="py-24 relative overflow-hidden bg-background">
-      {/* Decorative background effects */}
-      <div className="absolute top-1/4 left-1/4 w-[450px] h-[450px] rounded-full bg-brand-blue/5 blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/4 w-[450px] h-[450px] rounded-full bg-brand-purple/5 blur-[120px] pointer-events-none" />
-
-      <div className="max-w-6xl mx-auto px-4 md:px-8">
+    <section id="contact" className="py-24 px-6 md:px-10">
+      <div className="max-w-6xl mx-auto">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="inline-flex items-center space-x-2 bg-white/5 border border-white/10 rounded-full px-3 py-1 text-xs text-brand-blue mb-4 tracking-widest uppercase font-mono"
-          >
-            <span>Network</span>
-          </motion.div>
-          <h2 className="text-3xl md:text-5xl font-display font-black tracking-tight mb-4">
-            Let's Build Something <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue via-brand-purple to-brand-accent">Extraordinary</span>
+        <div className="max-w-3xl mb-16">
+          <div className="inline-flex items-center space-x-2 text-xs font-mono uppercase tracking-wider text-[#58745C] font-semibold mb-3">
+            <span>Contact &amp; Connect</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-semibold tracking-tight text-[#20231F] mb-4">
+            Let&apos;s start a conversation.
           </h2>
-          <p className="text-white/60 text-sm md:text-lg max-w-2xl mx-auto font-sans">
-            Ready to scale your next digital product, integrate custom AI models, or structure technical sprints? Drop a line.
+          <p className="text-base md:text-lg text-[#6B7168] leading-relaxed">
+            I am always open to discussing new technical projects, AI automation initiatives, engineering roles, and product collaborations. Reach out directly via email or the form below.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          {/* Left: 3D Globe & Contacts */}
-          <div className="lg:col-span-6 space-y-8 flex flex-col items-center lg:items-start text-center lg:text-left">
-            {/* 3D Globe container */}
-            <div className="w-full max-w-[450px] aspect-square rounded-3xl bg-white/[0.01] border border-white/5 relative overflow-hidden">
-              <ContactGlobe />
+        {/* 2-Column Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          {/* Left Column: Direct Information & Credentials */}
+          <div className="lg:col-span-5 space-y-6">
+            {/* Direct Email Card */}
+            <div className="bg-white border border-[#E2E4DC] rounded-xl p-6 shadow-card-subtle">
+              <span className="text-xs font-mono uppercase tracking-wider text-[#6B7168] block mb-2">
+                Direct Email
+              </span>
+              <a
+                href="mailto:manishchouhan123@gmail.com"
+                className="text-base md:text-lg font-mono font-medium text-[#20231F] hover:text-[#58745C] transition-colors block break-all mb-4"
+              >
+                manishchouhan123@gmail.com
+              </a>
+
+              <button
+                type="button"
+                onClick={handleCopyEmail}
+                className="inline-flex items-center space-x-2 px-3 py-1.5 rounded-lg text-xs font-medium text-[#20231F] bg-[#F1F2EC] hover:bg-[#E8EAE2] transition-colors border border-[#E2E4DC]"
+              >
+                {copied ? (
+                  <>
+                    <Check className="w-3.5 h-3.5 text-[#58745C]" />
+                    <span className="text-[#58745C] font-semibold">Email copied to clipboard</span>
+                  </>
+                ) : (
+                  <>
+                    <Copy className="w-3.5 h-3.5 text-[#6B7168]" />
+                    <span>Copy email address</span>
+                  </>
+                )}
+              </button>
             </div>
 
-            {/* Direct Details */}
-            <div className="space-y-4 font-mono text-xs md:text-sm text-white/70 w-full max-w-[400px]">
-              <div className="flex items-center space-x-3.5 justify-center lg:justify-start">
-                <Mail className="w-5 h-5 text-brand-blue" />
-                <a href="mailto:manishchouhan123@gmail.com" className="hover:text-white transition-colors">
-                  manishchouhan123@gmail.com
-                </a>
-              </div>
-              <div className="flex items-center space-x-3.5 justify-center lg:justify-start">
-                <MapPin className="w-5 h-5 text-brand-purple" />
-                <span>Sojat Road, Pali, Rajasthan, India (306103)</span>
-              </div>
-            </div>
+            {/* Profiles & Location */}
+            <div className="bg-white border border-[#E2E4DC] rounded-xl p-6 shadow-card-subtle space-y-4">
+              <span className="text-xs font-mono uppercase tracking-wider text-[#6B7168] block">
+                Verified Profiles
+              </span>
 
-            {/* Socials & Calendar Trigger */}
-            <div className="flex flex-col sm:flex-row items-center gap-4 w-full justify-center lg:justify-start">
-              {/* Calendly button */}
-              <Magnetic>
-                <button
-                  onClick={() => {
-                    setCalendlyOpen(true);
-                    playClickSound();
-                  }}
-                  onMouseEnter={playHoverSound}
-                  className="flex items-center space-x-2 bg-gradient-to-r from-brand-blue to-brand-purple hover:shadow-lg rounded-xl px-5 py-3 text-xs font-mono text-white transition-all cursor-pointer"
+              <div className="space-y-3">
+                <a
+                  href="https://www.linkedin.com/in/manish-chouhan-2301a7230/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-between p-3 rounded-lg hover:bg-[#F1F2EC] transition-colors text-sm text-[#20231F]"
                 >
-                  <Calendar className="w-4.5 h-4.5" />
-                  <span>Schedule a 1:1 Video Sync</span>
-                </button>
-              </Magnetic>
+                  <div className="flex items-center space-x-3">
+                    <Linkedin className="w-4 h-4 text-[#58745C]" />
+                    <span className="font-medium">LinkedIn Profile</span>
+                  </div>
+                  <ExternalLink className="w-3.5 h-3.5 text-[#8D938A]" />
+                </a>
 
-              <Magnetic>
-                <motion.a
+                <a
+                  href="https://github.com/Manish-10275"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-between p-3 rounded-lg hover:bg-[#F1F2EC] transition-colors text-sm text-[#20231F]"
+                >
+                  <div className="flex items-center space-x-3">
+                    <Github className="w-4 h-4 text-[#58745C]" />
+                    <span className="font-medium">GitHub Repositories</span>
+                  </div>
+                  <ExternalLink className="w-3.5 h-3.5 text-[#8D938A]" />
+                </a>
+
+                <div className="flex items-center space-x-3 p-3 text-sm text-[#6B7168]">
+                  <MapPin className="w-4 h-4 text-[#8D938A]" />
+                  <span>Sojat Road, Pali, Rajasthan, India</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Resume Access Card */}
+            <div className="bg-white border border-[#E2E4DC] rounded-xl p-6 shadow-card-subtle">
+              <span className="text-xs font-mono uppercase tracking-wider text-[#6B7168] block mb-2">
+                Curriculum Vitae
+              </span>
+              <p className="text-xs text-[#6B7168] leading-relaxed mb-4">
+                Download the verified PDF version of my resume or view the live hosted document online.
+              </p>
+
+              <div className="flex flex-wrap gap-2.5">
+                <a
+                  href="/resume.pdf"
+                  download="Manish_Chouhan_Resume.pdf"
+                  className="inline-flex items-center space-x-1.5 px-3.5 py-2 rounded-lg text-xs font-medium text-white bg-[#20231F] hover:bg-[#353A33] transition-colors"
+                >
+                  <FileText className="w-3.5 h-3.5" />
+                  <span>Download PDF</span>
+                </a>
+
+                <a
                   href="https://canva.link/z8w8qqvzceccfyk"
                   target="_blank"
                   rel="noopener noreferrer"
-                  onMouseEnter={playHoverSound}
-                  onClick={playClickSound}
-                  whileHover={{ scale: 1.05, y: -2 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="flex items-center space-x-2 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl px-5 py-3 text-xs font-mono text-white transition-all cursor-pointer"
+                  className="inline-flex items-center space-x-1.5 px-3.5 py-2 rounded-lg text-xs font-medium text-[#20231F] bg-[#F1F2EC] hover:bg-[#E8EAE2] transition-colors border border-[#E2E4DC]"
                 >
-                  <Download className="w-4.5 h-4.5 text-brand-blue" />
-                  <span>Download CV</span>
-                </motion.a>
-              </Magnetic>
-
-              {/* Social Icons row */}
-              <div className="flex space-x-3.5">
-                <Magnetic range={40} actionStrength={0.5}>
-                  <motion.a
-                    href="https://www.linkedin.com/in/manish-chouhan-2301a7230/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-11 h-11 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center text-white/70 hover:text-white hover:border-brand-blue/30 transition-all cursor-pointer"
-                    whileHover={{ scale: 1.15, y: -3, rotate: 2 }}
-                    whileTap={{ scale: 0.95 }}
-                    onMouseEnter={playHoverSound}
-                    onClick={playClickSound}
-                  >
-                    <Linkedin className="w-5 h-5" />
-                  </motion.a>
-                </Magnetic>
-                
-                <Magnetic range={40} actionStrength={0.5}>
-                  <motion.a
-                    href="https://github.com/Manish-10275"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-11 h-11 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center text-white/70 hover:text-white hover:border-brand-purple/30 transition-all cursor-pointer"
-                    whileHover={{ scale: 1.15, y: -3, rotate: -2 }}
-                    whileTap={{ scale: 0.95 }}
-                    onMouseEnter={playHoverSound}
-                    onClick={playClickSound}
-                  >
-                    <Github className="w-5 h-5" />
-                  </motion.a>
-                </Magnetic>
-                
-                <Magnetic range={40} actionStrength={0.5}>
-                  <motion.a
-                    href="https://twitter.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-11 h-11 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center text-white/70 hover:text-white hover:border-brand-accent/30 transition-all cursor-pointer"
-                    whileHover={{ scale: 1.15, y: -3, rotate: 2 }}
-                    whileTap={{ scale: 0.95 }}
-                    onMouseEnter={playHoverSound}
-                    onClick={playClickSound}
-                  >
-                    <Twitter className="w-5 h-5" />
-                  </motion.a>
-                </Magnetic>
-                
-                <Magnetic range={40} actionStrength={0.5}>
-                  <motion.a
-                    href="https://www.instagram.com/i_m_manish_chouhan/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-11 h-11 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center text-white/70 hover:text-white hover:border-pink-500/30 transition-all cursor-pointer"
-                    whileHover={{ scale: 1.15, y: -3, rotate: -2 }}
-                    whileTap={{ scale: 0.95 }}
-                    onMouseEnter={playHoverSound}
-                    onClick={playClickSound}
-                  >
-                    <Instagram className="w-5 h-5" />
-                  </motion.a>
-                </Magnetic>
+                  <span>View Online CV</span>
+                  <ExternalLink className="w-3.5 h-3.5 text-[#6B7168]" />
+                </a>
               </div>
             </div>
           </div>
 
-          {/* Right: Glassmorphic Contact Form */}
-          <div className="lg:col-span-6">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="p-6 md:p-8 rounded-3xl glass-panel relative overflow-hidden shadow-2xl"
-            >
-              {/* Internal microglow */}
-              <div className="absolute top-0 right-0 w-[150px] h-[150px] rounded-full bg-brand-purple/5 blur-[50px] pointer-events-none" />
-
-              <h3 className="text-xl md:text-2xl font-bold text-white tracking-tight mb-6 font-display">
-                Initialize Transmission
+          {/* Right Column: Clean Functional Message Form */}
+          <div className="lg:col-span-7">
+            <div className="bg-white border border-[#E2E4DC] rounded-2xl p-7 md:p-9 shadow-card-subtle">
+              <h3 className="text-xl font-display font-bold text-[#20231F] tracking-tight mb-2">
+                Send a Message
               </h3>
+              <p className="text-xs md:text-sm text-[#6B7168] leading-relaxed mb-6">
+                Fill out the fields below and submit to trigger a direct email transmission with your pre-formatted note.
+              </p>
 
-              <form onSubmit={handleSubmit} className="space-y-5">
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-mono uppercase tracking-wider text-[#6B7168] mb-1.5 font-medium">
+                      Your Name <span className="text-[#58745C]">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      placeholder="e.g. Sarah Jenkins"
+                      className="w-full bg-[#FAF9F5] border border-[#E2E4DC] rounded-lg px-3.5 py-2.5 text-sm text-[#20231F] outline-none placeholder-[#8D938A] focus:border-[#58745C] focus:bg-white transition-colors"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-mono uppercase tracking-wider text-[#6B7168] mb-1.5 font-medium">
+                      Email Address <span className="text-[#58745C]">*</span>
+                    </label>
+                    <input
+                      type="email"
+                      required
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      placeholder="e.g. sarah@example.com"
+                      className="w-full bg-[#FAF9F5] border border-[#E2E4DC] rounded-lg px-3.5 py-2.5 text-sm text-[#20231F] outline-none placeholder-[#8D938A] focus:border-[#58745C] focus:bg-white transition-colors"
+                    />
+                  </div>
+                </div>
+
                 <div>
-                  <label className="block text-[10px] font-bold font-mono tracking-wider text-white/40 mb-2 uppercase">Full Name</label>
+                  <label className="block text-xs font-mono uppercase tracking-wider text-[#6B7168] mb-1.5 font-medium">
+                    Subject / Topic
+                  </label>
                   <input
                     type="text"
-                    required
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    placeholder="Enter your name"
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-xs md:text-sm text-white outline-none placeholder-white/20 focus:border-brand-blue/50 focus:bg-white/[0.08] transition-all font-sans"
+                    value={formData.subject}
+                    onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                    placeholder="e.g. AI Automation Project / Collaboration Inquiry"
+                    className="w-full bg-[#FAF9F5] border border-[#E2E4DC] rounded-lg px-3.5 py-2.5 text-sm text-[#20231F] outline-none placeholder-[#8D938A] focus:border-[#58745C] focus:bg-white transition-colors"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-[10px] font-bold font-mono tracking-wider text-white/40 mb-2 uppercase">Email Address</label>
-                  <input
-                    type="email"
-                    required
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    placeholder="Enter your email"
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-xs md:text-sm text-white outline-none placeholder-white/20 focus:border-brand-blue/50 focus:bg-white/[0.08] transition-all font-sans"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-[10px] font-bold font-mono tracking-wider text-white/40 mb-2 uppercase">Your Message</label>
+                  <label className="block text-xs font-mono uppercase tracking-wider text-[#6B7168] mb-1.5 font-medium">
+                    Message <span className="text-[#58745C]">*</span>
+                  </label>
                   <textarea
                     required
-                    rows={4}
+                    rows={5}
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    placeholder="Describe your project goals or queries..."
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-xs md:text-sm text-white outline-none placeholder-white/20 focus:border-brand-blue/50 focus:bg-white/[0.08] transition-all font-sans resize-none"
+                    placeholder="Describe your project, timeline, question, or role details..."
+                    className="w-full bg-[#FAF9F5] border border-[#E2E4DC] rounded-lg px-3.5 py-2.5 text-sm text-[#20231F] outline-none placeholder-[#8D938A] focus:border-[#58745C] focus:bg-white transition-colors resize-none"
                   />
                 </div>
 
                 <button
                   type="submit"
-                  disabled={isSubmitting}
-                  className="w-full bg-gradient-to-r from-brand-blue to-brand-purple hover:shadow-lg rounded-xl py-3.5 text-xs font-mono text-white transition-all flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                  className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 px-6 py-3 rounded-lg text-sm font-medium text-white bg-[#58745C] hover:bg-[#47604B] transition-colors shadow-sm cursor-pointer"
                 >
-                  {isSubmitting ? (
-                    <div className="w-5 h-5 rounded-full border-2 border-white border-t-transparent animate-spin" />
-                  ) : (
-                    <>
-                      <Send className="w-4.5 h-4.5" />
-                      <span>Transmit Message</span>
-                    </>
-                  )}
+                  <Send className="w-4 h-4" />
+                  <span>Send Message via Email</span>
                 </button>
 
-                {/* Notifications */}
-                <AnimatePresence>
-                  {submitStatus === 'success' && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0 }}
-                      className="bg-green-500/10 border border-green-500/30 rounded-xl p-3.5 flex items-center space-x-3 text-green-400"
-                    >
-                      <Check className="w-5 h-5 flex-shrink-0" />
-                      <span className="text-xs font-mono">Transmission Successful. Manish will follow up shortly.</span>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                {submitted && (
+                  <div className="p-3.5 rounded-lg bg-[#EBF1EC] border border-[#D7E2D9] text-[#354837] text-xs font-mono flex items-center space-x-2">
+                    <Check className="w-4 h-4 text-[#58745C] flex-shrink-0" />
+                    <span>Your mail client has been opened with your message. Thank you for connecting!</span>
+                  </div>
+                )}
               </form>
-            </motion.div>
+            </div>
           </div>
         </div>
       </div>
-
-      {/* Calendly Booking Iframe Modal */}
-      <AnimatePresence>
-        {calendlyOpen && (
-          <div className="fixed inset-0 z-[9995] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.3 }}
-              className="w-full max-w-4xl bg-background border border-white/10 rounded-3xl overflow-hidden shadow-2xl flex flex-col h-[80vh]"
-            >
-              <div className="px-6 py-4 border-b border-white/10 bg-white/5 flex justify-between items-center">
-                <span className="text-xs font-mono text-white/50 uppercase tracking-widest">Live Schedule Sync</span>
-                <button
-                  onClick={() => {
-                    setCalendlyOpen(false);
-                    playClickSound();
-                  }}
-                  className="text-white/50 hover:text-white transition-colors"
-                >
-                  <X className="w-6 h-6" />
-                </button>
-              </div>
-              <div className="flex-1 w-full h-full bg-[#151515]">
-                {/* Calendly Iframe Mockup for Manish Chouhan */}
-                <iframe
-                  src="https://calendly.com/manishchouhan10042006?embed_domain=localhost&embed_type=Inline"
-                  width="100%"
-                  height="100%"
-                  frameBorder="0"
-                  className="w-full h-full rounded-b-3xl"
-                />
-              </div>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
     </section>
   );
 };

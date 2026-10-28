@@ -1,47 +1,53 @@
 import React from 'react';
+import Header from '@/components/Header';
 import HeroSection from '@/components/HeroSection';
+import ProjectsSection from '@/components/ProjectsSection';
+import ExperienceSection from '@/components/ExperienceSection';
 import AboutSection from '@/components/AboutSection';
 import SkillsSection from '@/components/SkillsSection';
-import ExperienceSection from '@/components/ExperienceSection';
-import ProjectsSection from '@/components/ProjectsSection';
-import CreativeLab from '@/components/CreativeLab';
 import AchievementsSection from '@/components/AchievementsSection';
-import TestimonialsSection from '@/components/TestimonialsSection';
 import ContactSection from '@/components/ContactSection';
-import FloatingDock from '@/components/FloatingDock';
+import Footer from '@/components/Footer';
 
 export default function Home() {
   return (
-    <main className="relative bg-[#050505] min-h-screen text-white select-none">
-      {/* Hero Section */}
-      <HeroSection />
+    <div className="min-h-screen bg-[#F7F7F2] text-[#20231F] selection:bg-[#EBF1EC] selection:text-[#20231F]">
+      {/* Accessible skip to main content */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-[#20231F] focus:text-white focus:rounded focus:outline-none"
+      >
+        Skip to main content
+      </a>
 
-      {/* About Section */}
-      <AboutSection />
+      {/* Main Navigation Header */}
+      <Header />
 
-      {/* Skills Section */}
-      <SkillsSection />
+      <main id="main-content" tabIndex={-1} className="outline-none">
+        {/* Section B: Hero */}
+        <HeroSection />
 
-      {/* Experience Section */}
-      <ExperienceSection />
+        {/* Section C: Selected Work (Most Important Section) */}
+        <ProjectsSection />
 
-      {/* Projects Showcase */}
-      <ProjectsSection />
+        {/* Section 4: Professional Experience */}
+        <ExperienceSection />
 
-      {/* Creative Design Lab */}
-      <CreativeLab />
+        {/* Section 5: About Me */}
+        <AboutSection />
 
-      {/* Achievements Wall */}
-      <AchievementsSection />
+        {/* Section 6: Skills & Technologies */}
+        <SkillsSection />
 
-      {/* Testimonials Carousel */}
-      <TestimonialsSection />
+        {/* Section 7: Achievements & Credentials */}
+        <AchievementsSection />
 
-      {/* Contact Form & 3D Globe */}
-      <ContactSection />
+        {/* Section 9: Contact */}
+        <ContactSection />
+      </main>
 
-      {/* Floating Bottom Nav Dock */}
-      <FloatingDock />
-    </main>
+      {/* Site Footer */}
+      <Footer />
+    </div>
   );
 }
