@@ -11,59 +11,42 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: '#050505',
-        foreground: '#ffffff',
-        brand: {
-          blue: '#3B82F6',
-          purple: '#8B5CF6',
-          accent: '#A78BFA',
-          dark: '#0B0F19',
-          card: 'rgba(255, 255, 255, 0.03)',
-          border: 'rgba(255, 255, 255, 0.08)',
-        }
+        theme: {
+          bg: '#F7F7F2',
+          card: '#FFFFFF',
+          text: '#20231F',
+          muted: '#6B7168',
+          subtle: '#8D938A',
+          border: '#E2E4DC',
+          'border-subtle': '#EBECE6',
+          surface: '#F1F2EC',
+          'surface-hover': '#E8EAE2',
+          accent: {
+            DEFAULT: '#58745C',
+            hover: '#47604B',
+            light: '#EBF1EC',
+            subtle: '#D7E2D9',
+            dark: '#354837',
+          },
+        },
+        // Fallbacks and standard semantic mappings
+        background: '#F7F7F2',
+        foreground: '#20231F',
       },
       fontFamily: {
-        sans: ['var(--font-sans)', 'system-ui', 'sans-serif'],
-        display: ['var(--font-display)', 'system-ui', 'sans-serif'],
+        sans: ['var(--font-sans)', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+        display: ['var(--font-display)', 'var(--font-sans)', 'sans-serif'],
         serif: ['var(--font-serif)', 'Georgia', 'serif'],
-        script: ['var(--font-script)', 'cursive'],
-      },
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-        'grid-pattern': "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40' fill='none' stroke='rgba(255,255,255,0.015)' stroke-width='1'/%3E%3C/svg%3E\")",
-      },
-      animation: {
-        'marquee': 'marquee 25s linear infinite',
-        'marquee-reverse': 'marquee-reverse 25s linear infinite',
-        'spin-slow': 'spin 15s linear infinite',
-        'float': 'float 6s ease-in-out infinite',
-        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-        'glow-pulse': 'glow-pulse 2s ease-in-out infinite',
-      },
-      keyframes: {
-        marquee: {
-          '0%': { transform: 'translateX(0%)' },
-          '100%': { transform: 'translateX(-50%)' },
-        },
-        'marquee-reverse': {
-          '0%': { transform: 'translateX(-50%)' },
-          '100%': { transform: 'translateX(0%)' },
-        },
-        float: {
-          '0%, 100%': { transform: 'translateY(0)' },
-          '50%': { transform: 'translateY(-10px)' },
-        },
-        'glow-pulse': {
-          '0%, 100%': { opacity: '0.6', filter: 'drop-shadow(0 0 5px rgba(59, 130, 246, 0.5))' },
-          '50%': { opacity: '1', filter: 'drop-shadow(0 0 15px rgba(139, 92, 246, 0.8))' },
-        }
+        mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'monospace'],
       },
       boxShadow: {
-        'glass-sm': '0 2px 8px 0 rgba(0, 0, 0, 0.37)',
-        'glass-md': '0 8px 32px 0 rgba(0, 0, 0, 0.37)',
-        'glass-lg': 'inset 0 1px 1px 0 rgba(255, 255, 255, 0.05), 0 8px 32px 0 rgba(0, 0, 0, 0.37)',
-      }
+        'card-subtle': '0 1px 3px rgba(32, 35, 31, 0.04), 0 1px 2px rgba(32, 35, 31, 0.02)',
+        'card-hover': '0 10px 30px -10px rgba(32, 35, 31, 0.08), 0 4px 6px -2px rgba(32, 35, 31, 0.03)',
+        'elevation': '0 20px 40px -15px rgba(32, 35, 31, 0.1)',
+      },
+      maxWidth: {
+        'content': '72rem', // 1152px
+      },
     },
   },
   plugins: [tailwindAnimate],

@@ -1,415 +1,219 @@
 'use client';
 
-import React, { useState, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { useApp } from '@/context/AppContext';
-import { ExternalLink, Github, Sparkles, X, ChevronRight, Check } from 'lucide-react';
+import React from 'react';
+import { ArrowUpRight, Github, AlertCircle, Layers, Cpu, Server, Sprout, HeartPulse } from 'lucide-react';
 
 interface Project {
-  id: number;
+  id: string;
   title: string;
   subtitle: string;
-  description: string;
-  imgUrl: string;
-  tech: string[];
-  liveUrl: string;
-  gitUrl: string;
-  caseStudy: {
-    problem: string;
-    solution: string;
-    features: string[];
-  };
+  category: string;
+  status: string;
+  isPrototype: boolean;
+  technologies: string[];
+  bullets: string[];
+  disclaimer?: string;
+  repoUrl?: string;
+  liveUrl?: string;
+  icon: React.ReactNode;
 }
 
+const PROJECTS: Project[] = [
+  {
+    id: 'ad-automation-os',
+    title: 'Ad Automation OS',
+    subtitle: 'Full-Stack / Backend Engineering Project',
+    category: 'Full-Stack & Backend Systems',
+    status: 'Core Implementation',
+    isPrototype: false,
+    icon: <Layers className="w-5 h-5 text-[#58745C]" />,
+    technologies: ['Next.js', 'Fastify', 'Prisma', 'Meta Graph API', 'PostgreSQL', 'Supabase', 'Vercel', 'Railway', 'CI/CD'],
+    bullets: [
+      'Architected and developed a full-stack automated ad management system integrating Meta Graph API with robust backend services.',
+      'Engineered scalable database schemas using Prisma and PostgreSQL/Supabase, deployed via Vercel and Railway with CI/CD pipelines.'
+    ],
+    repoUrl: 'https://github.com/Manish-10275',
+  },
+  {
+    id: 'mind-mitra',
+    title: 'Mind Mitra',
+    subtitle: 'AI-Powered Mental Health Platform',
+    category: 'AI Application & UX Design',
+    status: 'Platform Prototype',
+    isPrototype: true,
+    icon: <HeartPulse className="w-5 h-5 text-[#58745C]" />,
+    technologies: ['Lovable AI', 'UI/UX', 'NLP Pipelines', 'Prompt Engineering', 'Dual Dashboards'],
+    bullets: [
+      'Spearheaded product conceptualization and development of a scalable mental health platform with dual-user dashboards.',
+      'Developed an AI counseling companion utilizing natural language processing pipelines to deliver real-time emotional support and cognitive coping techniques.'
+    ],
+    disclaimer:
+      'Exploratory wellness tool: Mind Mitra is designed as an interactive prototype companion for emotional reflection and coping strategies. It does not provide medical advice, psychotherapy, or clinical psychiatric diagnostic services.',
+    repoUrl: 'https://github.com/Manish-10275',
+  },
+  {
+    id: 'agribuddy',
+    title: 'AgriBuddy',
+    subtitle: 'Smart Crop Pathogen Diagnosis Pipeline (Prototype)',
+    category: 'Agricultural AI Prototype',
+    status: 'Research Prototype',
+    isPrototype: true,
+    icon: <Sprout className="w-5 h-5 text-[#58745C]" />,
+    technologies: ['Python', 'TensorFlow', 'FastAPI', 'Computer Vision', 'Image Inferences'],
+    bullets: [
+      'Developed an agro-tech prototype pipeline using computer vision designed to diagnose crop plant pathogens and leaf diseases from uploaded photos.',
+      'Configured a FastAPI service interface to process image inputs and serve diagnostic guidance for common agricultural conditions.'
+    ],
+    disclaimer:
+      'Agricultural research prototype: This system was built to explore the feasibility of computer vision for crop foliar anomaly identification. It has not undergone field trials for production agricultural certification.',
+    repoUrl: 'https://github.com/Manish-10275',
+  },
+  {
+    id: 'devoq-speech-services',
+    title: 'Devoq Labs Speech Services',
+    subtitle: 'Voice Synthesis & Audio Processing Gateway',
+    category: 'AI Infrastructure & APIs',
+    status: 'Backend Microservice',
+    isPrototype: false,
+    icon: <Server className="w-5 h-5 text-[#58745C]" />,
+    technologies: ['Node.js', 'Express.js', 'Google Cloud Speech-to-Text', 'AI33.pro TTS', 'Docker'],
+    bullets: [
+      'Engineered a centralized microservice gateway integrating Google Speech-to-Text with AI33.pro Text-to-Speech endpoints for automated voice synthesis.',
+      'Implemented client API key authentication, request validation, and containerized deployment workflows using Docker.'
+    ],
+    repoUrl: 'https://github.com/Manish-10275',
+  },
+  {
+    id: 'hbb-mutation-analyzer',
+    title: 'HBB Mutation Analyzer',
+    subtitle: 'Genomic Variant Research Tool (Prototype)',
+    category: 'Bioinformatics Research Prototype',
+    status: 'Research Prototype',
+    isPrototype: true,
+    icon: <Cpu className="w-5 h-5 text-[#58745C]" />,
+    technologies: ['Python', 'HGVS Parsing', 'ClinVar API', 'PubMed API', 'Google Gemini API', 'Codon Analysis'],
+    bullets: [
+      'Designed a bioinformatics prototype to parse human Beta-Globin (HBB) gene variants using standard HGVS nomenclature and extract codon consequences.',
+      'Aggregated variant classifications from NCBI ClinVar and literature citations via PubMed API, integrating Gemini AI to generate structured research summaries.'
+    ],
+    disclaimer:
+      'Genomic variant research prototype: Built exclusively as an exploratory software tool to demonstrate variant nomenclature parsing and automated evidence synthesis. It is not a clinically validated diagnostic tool and must not be used for clinical decision-making or genetic counseling.',
+    repoUrl: 'https://github.com/Manish-10275',
+  },
+];
+
 export const ProjectsSection: React.FC = () => {
-  const { playClickSound, playHoverSound } = useApp();
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-
-  const projects: Project[] = [
-    {
-      id: 0,
-      title: 'Mind Mitra',
-      subtitle: 'AI Mental Companion',
-      description: 'An intelligent AI counseling agent leveraging deep natural language processing models to deliver real-time emotional support and cognitive coping techniques.',
-      imgUrl: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=800&auto=format&fit=crop',
-      tech: ['Next.js', 'OpenAI APIs', 'Tailwind CSS', 'Node.js', 'MongoDB'],
-      liveUrl: 'https://devoqlabs.com',
-      gitUrl: 'https://github.com/Manish-10275',
-      caseStudy: {
-        problem: 'Access to psychiatric support is expensive and suffers from structural delays, making quick relief hard for people undergoing mild anxiety attacks.',
-        solution: 'Mind Mitra operates 24/7, employing customized prompts and sentiment classification architectures to offer immediate, conversational relief strategies.',
-        features: [
-          'Conversational sentiment analysis tracking patient emotional spikes.',
-          'Secure, anonymous database storage ensuring maximum compliance.',
-          'Dynamic cognitive therapy suggestions triggered based on user prompts.'
-        ]
-      }
-    },
-    {
-      id: 1,
-      title: 'AgriBuddy',
-      subtitle: 'Smart Crop Diagnosis',
-      description: 'A futuristic agro-tech pipeline using computer vision to diagnose crop plant pathogens from simple cell photos, advising corrective treatments.',
-      imgUrl: 'https://images.unsplash.com/photo-1560493676-04071c5f467b?q=80&w=800&auto=format&fit=crop',
-      tech: ['Python', 'TensorFlow', 'FastAPI', 'React Native', 'AWS S3'],
-      liveUrl: 'https://devoqlabs.com',
-      gitUrl: 'https://github.com/Manish-10275',
-      caseStudy: {
-        problem: 'Rural farmers lose up to 40% of seasonal yields due to delayed identification of leaf pathogens and incorrect pesticide applications.',
-        solution: 'AgriBuddy lets farmers photograph crop leaves and instantly runs it through a mobile-optimized CNN model to deliver highly accurate diagnosis files.',
-        features: [
-          'Off-line compatible Convolutional Neural Network (CNN) model caching.',
-          'Automated multi-lingual treatment sheets listing organic and chemical remedies.',
-          'GPS-linked mapping tracking local crop disease spreads.'
-        ]
-      }
-    },
-    {
-      id: 2,
-      title: 'Devoq Labs Portal',
-      subtitle: 'Startup Agency Systems',
-      description: 'The core business dashboard for Devoq Labs, handling automated project milestones, ticketing structures, client invoices, and live UI reviews.',
-      imgUrl: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop',
-      tech: ['Next.js 15', 'TypeScript', 'PostgreSQL', 'Tailwind', 'Stripe'],
-      liveUrl: 'https://devoqlabs.com',
-      gitUrl: 'https://github.com/Manish-10275',
-      caseStudy: {
-        problem: 'Technical agency operations suffer from fragmented tool stacks (Jira, Google Drive, Stripe), delaying project delivery and review feedback.',
-        solution: 'Devoq Labs Portal merges client communications, live milestone tracking, visual design approvals, and invoicing into a unified WebGL workspace.',
-        features: [
-          'Integrated Figma review components letting clients comment on live site frames.',
-          'Smart contract/invoice generation synced with Stripe milestones.',
-          'Encrypted project file storage and task delegation dashboards.'
-        ]
-      }
-    },
-    {
-      id: 3,
-      title: 'Finozest',
-      subtitle: 'Market Intelligence Engine',
-      description: 'A clean financial modeling application displaying asset patterns, forecasting market spikes, and compiling personalized stock reports.',
-      imgUrl: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=800&auto=format&fit=crop',
-      tech: ['React.js', 'FastAPI', 'Tableau API', 'Pandas', 'Docker'],
-      liveUrl: 'https://devoqlabs.com',
-      gitUrl: 'https://github.com/Manish-10275',
-      caseStudy: {
-        problem: 'Retail investors struggle to dissect complex market data sets and coordinate financial variables across different charting portals.',
-        solution: 'Finozest parses global indicators, summarizes trends using LLMs, and presents real-time data through glassmorphic charts.',
-        features: [
-          'Auto-updating chart pipelines plotting historical prices and moving averages.',
-          'AI-synthesized morning portfolio reports compiled automatically.',
-          'Interactive sliders for simulating investment return scenarios.'
-        ]
-      }
-    },
-    {
-      id: 4,
-      title: 'Space Portfolio',
-      subtitle: 'Cinematic Digital Realm',
-      description: 'The award-winning portfolio you are experiencing, featuring Web Audio API sound engines, raw Three.js particle spheres, and Command Palettes.',
-      imgUrl: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&auto=format&fit=crop',
-      tech: ['Next.js 15', 'Three.js', 'Framer Motion', 'Web Audio API', 'SEO'],
-      liveUrl: '#',
-      gitUrl: 'https://github.com/Manish-10275',
-      caseStudy: {
-        problem: 'Most developer portfolios are flat, templated, and fail to demonstrate high-end engineering capabilities, blending into generic layouts.',
-        solution: 'Built a multi-sensory futuristic dashboard that highlights technical mastery, data analytics expertise, and design aesthetics simultaneously.',
-        features: [
-          'On-the-fly browser synthesized sound effects utilizing Web Audio API oscillators.',
-          'Lightweight WebGL galaxy models and responsive custom cursor rings.',
-          'Structured JSON-LD entity mappings achieving perfect 100 SEO scores.'
-        ]
-      }
-    }
-  ];
-
   return (
-    <section id="projects" className="py-24 relative overflow-hidden bg-background">
-      {/* Decorative grids */}
-      <div className="absolute top-1/2 left-0 w-[450px] h-[450px] rounded-full bg-brand-blue/5 blur-[130px] pointer-events-none" />
-      <div className="absolute bottom-0 right-0 w-[350px] h-[350px] rounded-full bg-brand-purple/5 blur-[100px] pointer-events-none" />
-
-      <div className="max-w-6xl mx-auto px-4 md:px-8">
+    <section id="projects" className="py-24 px-6 md:px-10 border-b border-[#E2E4DC]">
+      <div className="max-w-6xl mx-auto">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="inline-flex items-center space-x-2 bg-white/5 border border-white/10 rounded-full px-3 py-1 text-xs text-brand-purple mb-4 tracking-widest uppercase font-mono"
-          >
-            <span>Showcase</span>
-          </motion.div>
-          <h2 className="text-3xl md:text-5xl font-display font-black tracking-tight mb-4">
-            Innovative <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue via-brand-purple to-brand-accent">Build Showcase</span>
+        <div className="max-w-3xl mb-16">
+          <div className="inline-flex items-center space-x-2 text-xs font-mono uppercase tracking-wider text-[#58745C] font-semibold mb-3">
+            <span>Key Projects &amp; Technical Leadership</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-semibold tracking-tight text-[#20231F] mb-4">
+            Engineered systems, AI platforms &amp; prototypes.
           </h2>
-          <p className="text-white/60 text-sm md:text-lg max-w-2xl mx-auto font-sans">
-            Explore advanced AI systems, enterprise SaaS frameworks, and custom web experiences. Click a card to read case study details.
+          <p className="text-base md:text-lg text-[#6B7168] leading-relaxed">
+            All five technical projects from my finalized curriculum vitae, covering full-stack backend architectures, machine learning workflows, and research prototypes.
           </p>
         </div>
 
-        {/* Horizontal Projects Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.map((proj, idx) => (
-            <ProjectCard
-              key={proj.id}
-              project={proj}
-              onClick={() => {
-                setSelectedProject(proj);
-                playClickSound();
-              }}
-              playHoverSound={playHoverSound}
-              index={idx}
-            />
+        {/* Project Cards */}
+        <div className="space-y-8">
+          {PROJECTS.map((project, index) => (
+            <article
+              key={project.id}
+              className="bg-white border border-[#E2E4DC] rounded-2xl p-7 md:p-9 shadow-card-subtle hover:border-[#D1D4CA] transition-all duration-200"
+            >
+              {/* Header meta */}
+              <div className="flex flex-wrap items-center justify-between gap-3 mb-5 pb-5 border-b border-[#EBECE6]">
+                <div className="flex items-center space-x-3">
+                  <div className="p-2 rounded-lg bg-[#EBF1EC] border border-[#D7E2D9]">
+                    {project.icon}
+                  </div>
+                  <div>
+                    <span className="text-xs font-mono uppercase tracking-wider text-[#6B7168] block">
+                      {project.category}
+                    </span>
+                    <span className="text-xs font-mono font-medium text-[#58745C]">
+                      Project 0{index + 1}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="flex items-center space-x-2">
+                  {project.isPrototype && (
+                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-mono font-medium bg-[#FAF3E8] text-[#8C5E28] border border-[#E8D9C0]">
+                      Prototype
+                    </span>
+                  )}
+                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-mono font-medium bg-[#F1F2EC] text-[#20231F] border border-[#E2E4DC]">
+                    {project.status}
+                  </span>
+                </div>
+              </div>
+
+              {/* Title & Subtitle */}
+              <div className="mb-5">
+                <h3 className="text-2xl sm:text-3xl font-display font-bold text-[#20231F] tracking-tight mb-1">
+                  {project.title}
+                </h3>
+                <p className="text-sm font-mono text-[#58745C] font-medium">
+                  {project.subtitle}
+                </p>
+              </div>
+
+              {/* Bullets directly from CV */}
+              <div className="space-y-2.5 mb-6">
+                {project.bullets.map((bullet, bIdx) => (
+                  <div key={bIdx} className="flex items-start space-x-3 text-sm md:text-base text-[#20231F]/90 leading-relaxed font-normal">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#58745C] mt-2.5 flex-shrink-0" />
+                    <span>{bullet}</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Disclaimer if present */}
+              {project.disclaimer && (
+                <div className="mb-6 p-3.5 rounded-lg bg-[#FAF9F5] border border-[#E2E4DC] flex items-start space-x-2.5 text-xs text-[#6B7168] leading-relaxed">
+                  <AlertCircle className="w-4 h-4 text-[#58745C] flex-shrink-0 mt-0.5" />
+                  <span>{project.disclaimer}</span>
+                </div>
+              )}
+
+              {/* Tech Tags & Repository Action */}
+              <div className="pt-5 border-t border-[#EBECE6] flex flex-wrap items-center justify-between gap-4">
+                <div className="flex flex-wrap items-center gap-1.5">
+                  <span className="text-xs font-mono text-[#8D938A] mr-1">Tech:</span>
+                  {project.technologies.map((tech) => (
+                    <span
+                      key={tech}
+                      className="text-xs font-mono px-2.5 py-1 rounded bg-[#F1F2EC] text-[#20231F] border border-[#E2E4DC]"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+
+                {project.repoUrl && (
+                  <a
+                    href={project.repoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center space-x-1.5 text-xs font-medium text-[#20231F] hover:text-[#58745C] transition-colors py-1 px-2.5 rounded hover:bg-[#F1F2EC]"
+                  >
+                    <Github className="w-3.5 h-3.5" />
+                    <span>GitHub profile &amp; repositories</span>
+                    <ArrowUpRight className="w-3 h-3" />
+                  </a>
+                )}
+              </div>
+            </article>
           ))}
         </div>
       </div>
-
-      {/* Case Study Modal */}
-      <AnimatePresence>
-        {selectedProject && (
-          <div className="fixed inset-0 z-[9995] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              transition={{ duration: 0.3, ease: 'easeOut' }}
-              className="w-full max-w-3xl bg-background/95 border border-white/10 rounded-2xl overflow-hidden shadow-2xl glass-panel max-h-[85vh] flex flex-col"
-            >
-              {/* Header */}
-              <div className="px-6 py-4 border-b border-white/10 bg-white/5 flex justify-between items-center flex-shrink-0">
-                <div className="flex items-center space-x-2">
-                  <Sparkles className="w-5 h-5 text-brand-blue" />
-                  <span className="text-xs font-mono text-white/50 uppercase tracking-widest">Case Study Analysis</span>
-                </div>
-                <button
-                  onClick={() => {
-                    setSelectedProject(null);
-                    playClickSound();
-                  }}
-                  className="text-white/50 hover:text-white transition-colors"
-                >
-                  <X className="w-6 h-6" />
-                </button>
-              </div>
-
-              {/* Scrollable Modal Content */}
-              <div className="p-6 md:p-8 overflow-y-auto space-y-8 no-scrollbar flex-1">
-                {/* Intro */}
-                <div>
-                  <h3 className="text-2xl md:text-4xl font-display font-black tracking-tight text-white mb-2">
-                    {selectedProject.title}
-                  </h3>
-                  <p className="text-brand-blue font-mono text-xs md:text-sm">{selectedProject.subtitle}</p>
-                </div>
-
-                {/* Grid info */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 border-y border-white/5 py-6">
-                  <div>
-                    <h4 className="text-xs font-bold font-mono tracking-wider text-white/40 mb-2 uppercase">The Problem</h4>
-                    <p className="text-white/70 text-xs md:text-sm leading-relaxed font-sans">{selectedProject.caseStudy.problem}</p>
-                  </div>
-                  <div>
-                    <h4 className="text-xs font-bold font-mono tracking-wider text-white/40 mb-2 uppercase">Our Solution</h4>
-                    <p className="text-white/70 text-xs md:text-sm leading-relaxed font-sans">{selectedProject.caseStudy.solution}</p>
-                  </div>
-                </div>
-
-                {/* Key specs */}
-                <div>
-                  <h4 className="text-xs font-bold font-mono tracking-wider text-white/40 mb-4 uppercase">Core Capabilities & Integrations</h4>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                    {selectedProject.caseStudy.features.map((feat, fIdx) => (
-                      <div key={fIdx} className="flex items-start space-x-3 bg-white/5 border border-white/5 rounded-xl p-3.5">
-                        <Check className="w-4.5 h-4.5 text-brand-purple flex-shrink-0 mt-0.5" />
-                        <span className="text-xs md:text-sm text-white/70 leading-relaxed font-sans">{feat}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Tech tags */}
-                <div className="space-y-3">
-                  <h4 className="text-xs font-bold font-mono tracking-wider text-white/40 uppercase">Technology Constellation</h4>
-                  <div className="flex flex-wrap gap-2">
-                    {selectedProject.tech.map((tag) => (
-                      <span key={tag} className="text-xs font-mono bg-white/5 border border-white/10 rounded-full px-3 py-1.5 text-white/80">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              {/* Footer */}
-              <div className="px-6 py-4 border-t border-white/10 bg-white/5 flex justify-end space-x-3 flex-shrink-0">
-                <a
-                  href={selectedProject.gitUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center space-x-2 border border-white/10 hover:border-white/20 bg-white/5 hover:bg-white/10 rounded-xl px-4 py-2.5 text-xs font-mono text-white transition-all cursor-pointer"
-                >
-                  <Github className="w-4 h-4" />
-                  <span>GitHub Repository</span>
-                </a>
-                <a
-                  href={selectedProject.liveUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center space-x-2 bg-gradient-to-r from-brand-blue to-brand-purple hover:shadow-lg rounded-xl px-4 py-2.5 text-xs font-mono text-white transition-all cursor-pointer"
-                >
-                  <ExternalLink className="w-4 h-4" />
-                  <span>Execute Live Demo</span>
-                </a>
-              </div>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
     </section>
-  );
-};
-
-// 3D Tilt Card Wrapper Component
-interface CardProps {
-  project: Project;
-  onClick: () => void;
-  playHoverSound: () => void;
-  index: number;
-}
-
-const ProjectCard: React.FC<CardProps> = ({ project, onClick, playHoverSound, index }) => {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const [rotateX, setRotateX] = useState(0);
-  const [rotateY, setRotateY] = useState(0);
-  const [coords, setCoords] = useState({ x: 0, y: 0 });
-  const [isHovered, setIsHovered] = useState(false);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current) return;
-    const card = cardRef.current;
-    const rect = card.getBoundingClientRect();
-    
-    // Normalize coordinates to [-0.5, 0.5] relative to center
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-
-    // Set rotation angles
-    setRotateX(-y * 15); // Rotate around X based on vertical offset
-    setRotateY(x * 15);  // Rotate around Y based on horizontal offset
-
-    // Track cursor coordinates relative to card bounds
-    setCoords({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top
-    });
-  };
-
-  const handleMouseLeave = () => {
-    setRotateX(0);
-    setRotateY(0);
-    setIsHovered(false);
-  };
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-    >
-      <div
-        ref={cardRef}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-        onMouseEnter={() => {
-          setIsHovered(true);
-          playHoverSound();
-        }}
-        onClick={onClick}
-        style={{
-          transformStyle: 'preserve-3d',
-          transform: `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`,
-          transition: 'transform 0.15s cubic-bezier(0.25, 1, 0.5, 1)'
-        }}
-        className="group bg-white/[0.02] border border-white/5 rounded-2xl overflow-hidden glass-panel-hover cursor-pointer p-4 flex flex-col justify-between h-[380px] relative select-none"
-      >
-        {/* Spotlight Background Glow */}
-        {isHovered && (
-          <div
-            className="absolute pointer-events-none transition-opacity duration-300 z-0"
-            style={{
-              width: '400px',
-              height: '400px',
-              background: `radial-gradient(circle 140px at ${coords.x}px ${coords.y}px, rgba(139, 92, 246, 0.08), transparent)`,
-              left: 0,
-              top: 0,
-              transform: 'translate(-50%, -50%)',
-            }}
-          />
-        )}
-
-        {/* Spotlight Border */}
-        {isHovered && (
-          <div
-            className="absolute inset-0 pointer-events-none rounded-2xl z-10"
-            style={{
-              border: '1px solid rgba(59, 130, 246, 0.3)',
-              maskImage: `radial-gradient(circle 120px at ${coords.x}px ${coords.y}px, black, transparent)`,
-              WebkitMaskImage: `radial-gradient(circle 120px at ${coords.x}px ${coords.y}px, black, transparent)`,
-            }}
-          />
-        )}
-        <div style={{ transform: 'translateZ(10px)', transformStyle: 'preserve-3d' }}>
-          {/* Project Thumbnail */}
-          <div
-            style={{ transform: 'translateZ(30px)' }}
-            className="w-full h-[160px] rounded-xl overflow-hidden mb-5 border border-white/5 relative"
-          >
-            <img
-              src={project.imgUrl}
-              alt={project.title}
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/10 to-transparent opacity-60" />
-            <span className="absolute bottom-3 right-3 text-[9px] font-mono text-white/70 bg-black/80 px-2 py-0.5 rounded border border-white/10 uppercase tracking-widest">
-              {project.tech[0]}
-            </span>
-          </div>
-
-          <span
-            style={{ transform: 'translateZ(20px)' }}
-            className="text-[10px] font-mono text-brand-blue uppercase tracking-widest mb-1.5 block"
-          >
-            {project.subtitle}
-          </span>
-          <h3
-            style={{ transform: 'translateZ(40px)' }}
-            className="text-lg md:text-xl font-bold text-white tracking-tight mb-2 group-hover:text-brand-purple transition-colors"
-          >
-            {project.title}
-          </h3>
-          <p
-            style={{ transform: 'translateZ(25px)' }}
-            className="text-white/60 text-xs md:text-sm line-clamp-2 leading-relaxed font-sans mb-4"
-          >
-            {project.description}
-          </p>
-        </div>
-
-        <div className="flex justify-between items-center mt-4 pt-4 border-t border-white/5">
-          {/* Render tags */}
-          <div className="flex space-x-1">
-            {project.tech.slice(0, 3).map((t) => (
-              <span key={t} className="text-[8px] md:text-[9px] font-mono bg-white/5 border border-white/5 px-2 py-0.5 rounded text-white/50">
-                {t}
-              </span>
-            ))}
-          </div>
-          <ChevronRight className="w-4 h-4 text-white/30 group-hover:text-brand-blue group-hover:translate-x-1.5 transition-all" />
-        </div>
-      </div>
-    </motion.div>
   );
 };
 

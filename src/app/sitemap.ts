@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://manish.devoq-labs.online';
-  
+
   return [
     {
       url: baseUrl,
@@ -11,16 +11,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1.0,
     },
     {
-      url: `${baseUrl}/#about`,
+      url: `${baseUrl}/#projects`,
       lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/#skills`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
+      changeFrequency: 'weekly',
+      priority: 0.9,
     },
     {
       url: `${baseUrl}/#experience`,
@@ -29,13 +23,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/#projects`,
+      url: `${baseUrl}/#competencies`,
       lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.9,
+      changeFrequency: 'monthly',
+      priority: 0.8,
     },
     {
-      url: `${baseUrl}/#achievements`,
+      url: `${baseUrl}/#education`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/#about`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.7,
@@ -45,6 +45,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.8,
-    }
+    },
   ];
 }

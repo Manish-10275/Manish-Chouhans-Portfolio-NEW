@@ -1,237 +1,106 @@
 'use client';
 
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { useApp } from '@/context/AppContext';
-import { BookOpen, GraduationCap, Building2, Cpu, Rocket, Music, ArrowRight } from 'lucide-react';
-
-interface TimelineEvent {
-  id: number;
-  year: string;
-  title: string;
-  icon: React.ReactNode;
-  tag: string;
-  description: string;
-  details: string[];
-}
+import React from 'react';
+import { BookOpen, Compass, Award, CheckCircle2 } from 'lucide-react';
 
 export const AboutSection: React.FC = () => {
-  const { playClickSound, playHoverSound } = useApp();
-  const [activeEvent, setActiveEvent] = useState<number>(0);
-
-  const timelineEvents: TimelineEvent[] = [
-    {
-      id: 0,
-      year: 'Early Journey',
-      title: 'Government School Student',
-      icon: <GraduationCap className="w-5 h-5 text-brand-blue" />,
-      tag: 'Grit & Foundation',
-      description: 'Struggled and learned in a local Government School, discovering a deep passion for coding and building early computer programs.',
-      details: [
-        'Built strong self-taught programming habits in Python and basic web structures.',
-        'Overcame systemic educational resource barriers through open-source software.',
-        'Established early leadership by mentoring classmates in computer basics.'
-      ]
-    },
-    {
-      id: 1,
-      year: '2025 - 2029',
-      title: 'IIT Madras BS Data Science',
-      icon: <BookOpen className="w-5 h-5 text-brand-purple" />,
-      tag: 'Academic Excellence',
-      description: 'Accepted into the Indian Institute of Technology, Madras for BS in Data Science & Applications. Gaining expertise in statistical algorithms, machine learning model lifecycles, and large scale data processing.',
-      details: [
-        'Core Team Member of Paradox IIT Madras (2026), orchestrating operational logistics.',
-        'Completed rigorous courses in Database Management systems, Linear Algebra, and Deep Learning.',
-        'Collaborating on open-source scientific computing projects.'
-      ]
-    },
-    {
-      id: 2,
-      year: 'June 2025 - Present',
-      title: 'Founder & CEO of Devoq Labs',
-      icon: <Building2 className="w-5 h-5 text-brand-accent" />,
-      tag: 'Entrepreneurship',
-      description: 'Launched a high-growth tech startup offering premium software engineering, custom AI integrations, and branding strategies.',
-      details: [
-        'Successfully delivered custom solutions for startups and global creators.',
-        'Coordinating agile developer teams, designer boards, and marketing divisions.',
-        'Increased client project retention by 150% through high-performance SLA execution.'
-      ]
-    },
-    {
-      id: 3,
-      year: '2025',
-      title: 'AI Projects & Builds',
-      icon: <Cpu className="w-5 h-5 text-brand-blue" />,
-      tag: 'AI Engineering',
-      description: 'Conceptualized and built advanced machine learning models and pipelines addressing real-world pain points.',
-      details: [
-        'Mind Mitra: Created a custom AI-driven psychological companion powered by NLP.',
-        'AgriBuddy: Engineered a diagnostic computer vision tool identifying crop health anomalies.',
-        'Finozest: Built real-time analytics models for forecasting market asset trends.'
-      ]
-    },
-    {
-      id: 4,
-      year: 'Present',
-      title: 'Startup Builder & PM',
-      icon: <Rocket className="w-5 h-5 text-brand-purple" />,
-      tag: 'Product Leadership',
-      description: 'Serving as Project Manager for JJGillespie.com and associate positions, orchestrating developer roadmaps and shipping products fast.',
-      details: [
-        'Organizing cross-functional backlogs using Agile/Scrum processes in Jira and Trello.',
-        'Defining MVP scoping, go-to-market strategies, and client alignment interfaces.',
-        'Bridging the gap between engineering complexity and corporate client objectives.'
-      ]
-    },
-    {
-      id: 5,
-      year: 'Creative Outlets',
-      title: 'Author & Music Creator',
-      icon: <Music className="w-5 h-5 text-brand-accent" />,
-      tag: 'Art & Expression',
-      description: 'Expressing vision and storytelling through books and sound synthesis. Published author of 3 books, poet, songwriter, and composer.',
-      details: [
-        'Published 3 books exploring human emotions, startup growth hacks, and poetry.',
-        'Singer-songwriter composing acoustic and synth original tracks.',
-        'Actively sharing thoughts on personal branding, creative growth, and AI philosophy.'
-      ]
-    }
-  ];
-
   return (
-    <section id="about" className="py-24 relative overflow-hidden bg-background">
-      {/* Background radial glow */}
-      <div className="absolute top-1/2 left-0 w-[400px] h-[400px] rounded-full bg-brand-blue/5 blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-0 right-0 w-[300px] h-[300px] rounded-full bg-brand-purple/5 blur-[100px] pointer-events-none" />
-
-      <div className="max-w-6xl mx-auto px-4 md:px-8">
+    <section id="about" className="py-24 px-6 md:px-10 border-b border-[#E2E4DC]">
+      <div className="max-w-6xl mx-auto">
         {/* Section Header */}
-        <div className="text-center mb-16 relative">
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="inline-flex items-center space-x-2 bg-white/5 border border-white/10 rounded-full px-3 py-1 text-xs text-brand-blue mb-4 tracking-widest uppercase font-mono"
-          >
-            <span>Storyline</span>
-          </motion.div>
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-3xl md:text-5xl font-display font-black tracking-tight mb-4"
-          >
-            The Journey of <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-brand-purple">Manish Chouhan</span>
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-            className="text-white/60 text-sm md:text-lg max-w-2xl mx-auto font-sans"
-          >
-            A fusion of technical rigor, startup speed, and artistic creation.
-          </motion.p>
+        <div className="max-w-3xl mb-16">
+          <div className="inline-flex items-center space-x-2 text-xs font-mono uppercase tracking-wider text-[#58745C] font-semibold mb-3">
+            <span>About Me</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-semibold tracking-tight text-[#20231F] mb-4">
+            Bridging management discipline with technical execution.
+          </h2>
+          <p className="text-base md:text-lg text-[#6B7168] leading-relaxed">
+            Combining rigorous management principles from Harvard University with advanced technical foundations from IIT Madras.
+          </p>
         </div>
 
-        {/* Timeline Desktop Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          {/* Left: Interactive Timeline Buttons */}
-          <div className="lg:col-span-5 space-y-3 relative z-10">
-            {timelineEvents.map((evt, idx) => {
-              const isActive = activeEvent === idx;
-              return (
-                <motion.button
-                  key={evt.id}
-                  onClick={() => {
-                    setActiveEvent(idx);
-                    playClickSound();
-                  }}
-                  onMouseEnter={playHoverSound}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: idx * 0.08 }}
-                  className={`w-full flex items-center justify-between p-4 rounded-xl text-left border transition-all duration-300 ${
-                    isActive
-                      ? 'bg-gradient-to-r from-brand-blue/10 to-brand-purple/10 border-brand-blue shadow-lg scale-[1.02]'
-                      : 'bg-white/5 border-white/5 hover:border-white/10 hover:bg-white/10'
-                  }`}
-                >
-                  <div className="flex items-center space-x-4">
-                    <div className={`p-2 rounded-lg border transition-colors ${
-                      isActive ? 'bg-brand-blue/20 border-brand-blue/30 text-white' : 'bg-white/5 border-white/5 text-white/50'
-                    }`}>
-                      {evt.icon}
-                    </div>
-                    <div>
-                      <span className="text-[10px] font-mono text-brand-blue uppercase tracking-widest block mb-0.5">{evt.year}</span>
-                      <h3 className="font-semibold text-xs md:text-sm text-white">{evt.title}</h3>
-                    </div>
-                  </div>
-                  {isActive && <ArrowRight className="w-4 h-4 text-brand-purple" />}
-                </motion.button>
-              );
-            })}
+        {/* 2-Column Editorial Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          {/* Left Column: Narrative */}
+          <div className="lg:col-span-7 space-y-6 text-[#20231F] leading-relaxed font-normal text-base md:text-lg">
+            <p className="text-[#20231F]/90">
+              I am a results-driven Project Manager, AI Automation Associate, and Technical Builder. My focus centers on directing end-to-end product lifecycles, managing distributed developer teams, and designing automated pipelines that eliminate friction across modern operational workflows.
+            </p>
+
+            <p className="text-[#6B7168] text-base">
+              Through my roles directing digital transformations at Devoq Labs, automating media operations at Pixellab.Media, and managing enterprise sprints at JJGillespie.com, I have consistently aligned commercial client objectives with engineering roadmaps. I specialize in turning complex software architectures into predictable, on-time delivery milestones.
+            </p>
+
+            <p className="text-[#6B7168] text-base">
+              My technical grounding in data science at IIT Madras coupled with business management coursework at Harvard University allows me to speak the language of both software engineers and business stakeholders, ensuring clarity, risk mitigation, and execution speed.
+            </p>
+
+            {/* Creative Note: Published Author */}
+            <div className="pt-4 border-t border-[#EBECE6]">
+              <div className="p-5 rounded-xl bg-white border border-[#E2E4DC] flex items-start space-x-4 shadow-card-subtle">
+                <div className="p-2.5 rounded-lg bg-[#EBF1EC] border border-[#D7E2D9] text-[#58745C] flex-shrink-0 mt-0.5">
+                  <BookOpen className="w-5 h-5" />
+                </div>
+                <div>
+                  <h4 className="text-sm font-display font-bold text-[#20231F] mb-1">
+                    Published Author &amp; Creative Reflection
+                  </h4>
+                  <p className="text-xs md:text-sm text-[#6B7168] leading-relaxed">
+                    Beyond engineering and agile management, I have authored and published three poetry collections. This discipline cultivates clarity of thought, active listening, and human empathy—attributes that directly elevate team leadership and technical product design.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
 
-          {/* Right: Detailed Card */}
-          <div className="lg:col-span-7 h-full">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeEvent}
-                initial={{ opacity: 0, x: 30, scale: 0.98 }}
-                animate={{ opacity: 1, x: 0, scale: 1 }}
-                exit={{ opacity: 0, x: -30, scale: 0.98 }}
-                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                className="w-full h-full p-6 md:p-8 rounded-2xl glass-panel relative flex flex-col justify-between"
-              >
-                {/* Glowing subtle light inside card */}
-                <div className="absolute top-0 right-0 w-[150px] h-[150px] rounded-full bg-brand-purple/10 blur-[50px] pointer-events-none" />
+          {/* Right Column: Key Tenets */}
+          <div className="lg:col-span-5 space-y-5">
+            <div className="bg-white border border-[#E2E4DC] rounded-xl p-6 shadow-card-subtle">
+              <h3 className="text-sm font-mono uppercase tracking-wider font-bold text-[#20231F] mb-4">
+                Core Leadership Tenets
+              </h3>
 
-                <div>
-                  <div className="flex justify-between items-center mb-6">
-                    <span className="text-xs font-mono text-brand-purple border border-brand-purple/30 bg-brand-purple/10 px-2.5 py-1 rounded-full uppercase tracking-wider">
-                      {timelineEvents[activeEvent].tag}
-                    </span>
-                    <span className="text-xs font-mono text-white/40">{timelineEvents[activeEvent].year}</span>
+              <div className="space-y-4 text-xs md:text-sm text-[#6B7168]">
+                <div className="flex items-start space-x-3">
+                  <CheckCircle2 className="w-4 h-4 text-[#58745C] flex-shrink-0 mt-0.5" />
+                  <div>
+                    <strong className="text-[#20231F] block">Clear Requirements &amp; Scope</strong>
+                    <span>Eliminating ambiguity early through rigorous backlog documentation, milestone mapping, and user story refinement.</span>
                   </div>
-
-                  <h3 className="text-xl md:text-3xl font-display font-bold text-white mb-4">
-                    {timelineEvents[activeEvent].title}
-                  </h3>
-
-                  <p className="text-white/70 text-sm md:text-base leading-relaxed mb-6 font-sans">
-                    {timelineEvents[activeEvent].description}
-                  </p>
-
-                  <h4 className="text-xs font-bold font-mono tracking-wider text-white/50 mb-3 uppercase">Key Details & Achievements</h4>
-                  <ul className="space-y-3">
-                    {timelineEvents[activeEvent].details.map((detail, idx) => (
-                      <motion.li
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.3, delay: idx * 0.1 }}
-                        key={idx}
-                        className="flex items-start space-x-2.5 text-xs md:text-sm text-white/60 leading-relaxed font-sans"
-                      >
-                        <span className="w-1.5 h-1.5 rounded-full bg-brand-blue mt-2 flex-shrink-0" />
-                        <span>{detail}</span>
-                      </motion.li>
-                    ))}
-                  </ul>
                 </div>
 
-                <div className="mt-8 pt-6 border-t border-white/5 flex items-center space-x-3 text-[10px] font-mono text-white/40">
-                  <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                  <span>VERIFIED INSTANCE PROTOCOL</span>
+                <div className="flex items-start space-x-3">
+                  <CheckCircle2 className="w-4 h-4 text-[#58745C] flex-shrink-0 mt-0.5" />
+                  <div>
+                    <strong className="text-[#20231F] block">Predictable Sprint Velocity</strong>
+                    <span>Utilizing Scrum and Agile best practices to unblock technical contributors and maintain consistent delivery cadence.</span>
+                  </div>
                 </div>
-              </motion.div>
-            </AnimatePresence>
+
+                <div className="flex items-start space-x-3">
+                  <CheckCircle2 className="w-4 h-4 text-[#58745C] flex-shrink-0 mt-0.5" />
+                  <div>
+                    <strong className="text-[#20231F] block">AI-Driven Process Optimization</strong>
+                    <span>Integrating language models and custom automations to eliminate repetitive engineering and operational overhead.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-white border border-[#E2E4DC] rounded-xl p-6 shadow-card-subtle">
+              <span className="text-xs font-mono uppercase tracking-wider text-[#6B7168] block mb-2">
+                Institutional Foundations
+              </span>
+              <div className="space-y-2 text-xs font-mono text-[#20231F]">
+                <div className="p-2.5 rounded bg-[#F1F2EC] border border-[#E2E4DC]">
+                  Harvard University — Bachelor of Liberal Arts (Business Administration Mgmt)
+                </div>
+                <div className="p-2.5 rounded bg-[#F1F2EC] border border-[#E2E4DC]">
+                  IIT Madras — BS in Data Science &amp; Applications (2025 – 2029)
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
