@@ -8,7 +8,7 @@ A polished, credible, and editorial personal portfolio built with **Next.js 15 (
 
 *   **Professional Title**: Project Manager & Technical Product Leader
 *   **Summary**: Results-driven Project Manager, AI Automation Associate, and Technical Builder combining rigorous management principles from Harvard University with advanced technical foundations from IIT Madras. Proven track record of leading cross-functional teams, directing end-to-end project lifecycles, and deploying scalable AI-driven automation workflows and enterprise web applications.
-*   **Direct Contact**: `manishchouhan123@gmail.com` • `+91 89056 94021` • Sojat Road, Pali, Rajasthan
+*   **Direct Contact**: `manishchouchan123@gmail.com` • `+91 89056 94021` • Sojat Road, Pali, Rajasthan
 *   **Portfolio URL**: [manish.devoq-labs.online](https://manish.devoq-labs.online)
 
 ---

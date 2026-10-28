@@ -26,7 +26,7 @@ const PRESET_QAS = [
   },
   {
     q: 'How can we collaborate with him?',
-    a: 'You can work with Manish by clicking "Let\'s Build Together" to open the contact panel, emailing him at manishchouhan123@gmail.com, or scheduling a call directly through the Calendly widget in the Contact section.'
+    a: 'You can work with Manish by clicking "Let\'s Build Together" to open the contact panel, emailing him at manishchouchan123@gmail.com, or scheduling a call directly through the Calendly widget in the Contact section.'
   }
 ];
 
@@ -67,7 +67,7 @@ export const AIAssistant: React.FC = () => {
     setTimeout(() => {
       // Find matches in presets or defaults
       const query = text.toLowerCase();
-      let answer = "I'm not quite sure how to answer that specific question, but you can check out the sections on About, Skills, and Experience, or shoot Manish an email directly at manishchouhan123@gmail.com!";
+      let answer = "I'm not quite sure how to answer that specific question, but you can check out the sections on About, Skills, and Experience, or shoot Manish an email directly at manishchouchan123@gmail.com!";
       
       const match = PRESET_QAS.find(
         (qa) => query.includes(qa.q.toLowerCase()) || qa.q.toLowerCase().includes(query)

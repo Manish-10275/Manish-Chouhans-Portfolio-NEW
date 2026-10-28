@@ -61,12 +61,12 @@ export const HeroSection: React.FC = () => {
           {/* Direct contact items */}
           <div className="flex flex-wrap items-center gap-5 text-sm text-[#6B7168]">
             <a
-              href="mailto:manishchouhan123@gmail.com"
+              href="mailto:manishchouchan123@gmail.com"
               className="inline-flex items-center space-x-2 hover:text-[#20231F] transition-colors"
               aria-label="Email Manish Chouhan"
             >
               <Mail className="w-4 h-4 text-[#58745C]" />
-              <span>manishchouhan123@gmail.com</span>
+              <span>manishchouchan123@gmail.com</span>
             </a>
 
             <a

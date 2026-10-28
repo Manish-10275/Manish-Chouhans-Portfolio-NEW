@@ -94,10 +94,10 @@ export const AboutSection: React.FC = () => {
               </span>
               <div className="space-y-2 text-xs font-mono text-[#20231F]">
                 <div className="p-2.5 rounded bg-[#F1F2EC] border border-[#E2E4DC]">
-                  Harvard University — Management &amp; Leadership Principles
+                  Harvard University — Bachelor of Liberal Arts (Business Administration Mgmt)
                 </div>
                 <div className="p-2.5 rounded bg-[#F1F2EC] border border-[#E2E4DC]">
-                  IIT Madras — Data Science &amp; Computational Algorithms
+                  IIT Madras — BS in Data Science &amp; Applications (2025 – 2029)
                 </div>
               </div>
             </div>

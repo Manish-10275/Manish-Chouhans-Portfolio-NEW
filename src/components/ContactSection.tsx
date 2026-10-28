@@ -9,7 +9,7 @@ export const ContactSection: React.FC = () => {
   const [submitted, setSubmitted] = useState(false);
 
   const handleCopyEmail = () => {
-    navigator.clipboard.writeText('manishchouhan123@gmail.com');
+    navigator.clipboard.writeText('manishchouchan123@gmail.com');
     setCopied(true);
     setTimeout(() => setCopied(false), 2500);
   };
@@ -27,7 +27,7 @@ export const ContactSection: React.FC = () => {
       `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
     );
 
-    window.location.href = `mailto:manishchouhan123@gmail.com?subject=${subjectLine}&body=${bodyText}`;
+    window.location.href = `mailto:manishchouchan123@gmail.com?subject=${subjectLine}&body=${bodyText}`;
     setSubmitted(true);
   };
 
@@ -63,10 +63,10 @@ export const ContactSection: React.FC = () => {
                   Email Address
                 </span>
                 <a
-                  href="mailto:manishchouhan123@gmail.com"
+                  href="mailto:manishchouchan123@gmail.com"
                   className="text-base font-mono font-medium text-[#20231F] hover:text-[#58745C] transition-colors block break-all mb-2"
                 >
-                  manishchouhan123@gmail.com
+                  manishchouchan123@gmail.com
                 </a>
                 <button
                   type="button"

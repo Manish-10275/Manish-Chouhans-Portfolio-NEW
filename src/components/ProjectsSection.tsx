@@ -76,7 +76,7 @@ const PROJECTS: Project[] = [
     status: 'Backend Microservice',
     isPrototype: false,
     icon: <Server className="w-5 h-5 text-[#58745C]" />,
-    technologies: ['Node.js', 'Express.js', 'Google Cloud Speech-to-Text', 'AI33.pro TTS', 'Docker', 'API Key Auth'],
+    technologies: ['Node.js', 'Express.js', 'Google Cloud Speech-to-Text', 'AI33.pro TTS', 'Docker'],
     bullets: [
       'Engineered a centralized microservice gateway integrating Google Speech-to-Text with AI33.pro Text-to-Speech endpoints for automated voice synthesis.',
       'Implemented client API key authentication, request validation, and containerized deployment workflows using Docker.'

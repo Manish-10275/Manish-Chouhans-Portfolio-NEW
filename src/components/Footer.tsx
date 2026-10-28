@@ -56,7 +56,7 @@ export const Footer: React.FC = () => {
         <div className="pt-8 border-t border-[#EBECE6] flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-[#8D938A]">
           <div className="flex flex-wrap items-center gap-6">
             <a
-              href="mailto:manishchouhan123@gmail.com"
+              href="mailto:manishchouchan123@gmail.com"
               className="hover:text-[#20231F] transition-colors flex items-center space-x-1.5"
             >
               <Mail className="w-3.5 h-3.5" />

@@ -80,7 +80,7 @@ export default function RootLayout({
         name: 'Manish Chouhan',
         jobTitle: 'Project Manager & Technical Product Leader',
         telephone: '+918905694021',
-        email: 'manishchouhan123@gmail.com',
+        email: 'manishchouchan123@gmail.com',
         url: 'https://manish.devoq-labs.online',
         address: {
           '@type': 'PostalAddress',
