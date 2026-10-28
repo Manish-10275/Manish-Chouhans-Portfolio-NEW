@@ -11,7 +11,7 @@ import Footer from '@/components/Footer';
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-[#F7F7F2] text-[#20231F] selection:bg-[#EBF1EC] selection:text-[#20231F]">
+    <div id="top" className="min-h-screen bg-[#F7F7F2] text-[#20231F] selection:bg-[#EBF1EC] selection:text-[#20231F]">
       {/* Accessible skip to main content */}
       <a
         href="#main-content"

@@ -166,16 +166,6 @@ export const ContactSection: React.FC = () => {
                   <FileText className="w-3.5 h-3.5" />
                   <span>Download CV (PDF)</span>
                 </a>
-
-                <a
-                  href="https://canva.link/z8w8qqvzceccfyk"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center space-x-1.5 px-4 py-2.5 rounded-lg text-xs font-medium text-[#20231F] bg-[#F1F2EC] hover:bg-[#E8EAE2] transition-colors border border-[#E2E4DC]"
-                >
-                  <span>View Online CV</span>
-                  <ExternalLink className="w-3.5 h-3.5 text-[#6B7168]" />
-                </a>
               </div>
             </div>
           </div>
@@ -193,10 +183,14 @@ export const ContactSection: React.FC = () => {
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-mono uppercase tracking-wider text-[#6B7168] mb-1.5 font-medium">
+                    <label
+                      htmlFor="contact-name"
+                      className="block text-xs font-mono uppercase tracking-wider text-[#6B7168] mb-1.5 font-medium"
+                    >
                       Your Name <span className="text-[#58745C]">*</span>
                     </label>
                     <input
+                      id="contact-name"
                       type="text"
                       required
                       value={formData.name}
@@ -207,10 +201,14 @@ export const ContactSection: React.FC = () => {
                   </div>
 
                   <div>
-                    <label className="block text-xs font-mono uppercase tracking-wider text-[#6B7168] mb-1.5 font-medium">
+                    <label
+                      htmlFor="contact-email"
+                      className="block text-xs font-mono uppercase tracking-wider text-[#6B7168] mb-1.5 font-medium"
+                    >
                       Email Address <span className="text-[#58745C]">*</span>
                     </label>
                     <input
+                      id="contact-email"
                       type="email"
                       required
                       value={formData.email}
@@ -222,10 +220,14 @@ export const ContactSection: React.FC = () => {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-mono uppercase tracking-wider text-[#6B7168] mb-1.5 font-medium">
+                  <label
+                    htmlFor="contact-subject"
+                    className="block text-xs font-mono uppercase tracking-wider text-[#6B7168] mb-1.5 font-medium"
+                  >
                     Subject / Topic
                   </label>
                   <input
+                    id="contact-subject"
                     type="text"
                     value={formData.subject}
                     onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
@@ -235,10 +237,14 @@ export const ContactSection: React.FC = () => {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-mono uppercase tracking-wider text-[#6B7168] mb-1.5 font-medium">
+                  <label
+                    htmlFor="contact-message"
+                    className="block text-xs font-mono uppercase tracking-wider text-[#6B7168] mb-1.5 font-medium"
+                  >
                     Message <span className="text-[#58745C]">*</span>
                   </label>
                   <textarea
+                    id="contact-message"
                     required
                     rows={5}
                     value={formData.message}
