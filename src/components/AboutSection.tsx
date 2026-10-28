@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { GraduationCap, BookOpen, Heart, Sparkles } from 'lucide-react';
+import { BookOpen, Compass, Award, CheckCircle2 } from 'lucide-react';
 
 export const AboutSection: React.FC = () => {
   return (
@@ -13,10 +13,10 @@ export const AboutSection: React.FC = () => {
             <span>About Me</span>
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-semibold tracking-tight text-[#20231F] mb-4">
-            A developer working between technology, product thinking, and execution.
+            Bridging management discipline with technical execution.
           </h2>
           <p className="text-base md:text-lg text-[#6B7168] leading-relaxed">
-            From self-taught programming beginnings in Rajasthan to foundational studies at IIT Madras and building Devoq Labs.
+            Combining rigorous management principles from Harvard University with advanced technical foundations from IIT Madras.
           </p>
         </div>
 
@@ -25,18 +25,18 @@ export const AboutSection: React.FC = () => {
           {/* Left Column: Narrative */}
           <div className="lg:col-span-7 space-y-6 text-[#20231F] leading-relaxed font-normal text-base md:text-lg">
             <p className="text-[#20231F]/90">
-              I&apos;m an AI automation professional and developer who enjoys working at the intersection of technology, product thinking, and execution. Through my projects and work with Devoq Labs, I&apos;ve explored how software, AI models, and automation can turn complex ideas into practical tools.
+              I am a results-driven Project Manager, AI Automation Associate, and Technical Builder. My focus centers on directing end-to-end product lifecycles, managing distributed developer teams, and designing automated pipelines that eliminate friction across modern operational workflows.
             </p>
 
             <p className="text-[#6B7168] text-base">
-              My technical journey began with self-taught Python scripting and web fundamentals while overcoming educational resource constraints in a local government school in Rajasthan. That early grounding taught me to build with whatever tools were accessible, debug tenaciously, and respect the discipline required to write clean, modular software.
+              Through my roles directing digital transformations at Devoq Labs, automating media operations at Pixellab.Media, and managing enterprise sprints at JJGillespie.com, I have consistently aligned commercial client objectives with engineering roadmaps. I specialize in turning complex software architectures into predictable, on-time delivery milestones.
             </p>
 
             <p className="text-[#6B7168] text-base">
-              Today, I split my focus between engineering AI workflows, coordinating software development roadmaps as a project manager, and pursuing rigorous academic foundations in computational statistics and business management.
+              My technical grounding in data science at IIT Madras coupled with business management coursework at Harvard University allows me to speak the language of both software engineers and business stakeholders, ensuring clarity, risk mitigation, and execution speed.
             </p>
 
-            {/* Small Personal Detail: Published Author */}
+            {/* Creative Note: Published Author */}
             <div className="pt-4 border-t border-[#EBECE6]">
               <div className="p-5 rounded-xl bg-white border border-[#E2E4DC] flex items-start space-x-4 shadow-card-subtle">
                 <div className="p-2.5 rounded-lg bg-[#EBF1EC] border border-[#D7E2D9] text-[#58745C] flex-shrink-0 mt-0.5">
@@ -47,76 +47,59 @@ export const AboutSection: React.FC = () => {
                     Published Author &amp; Creative Reflection
                   </h4>
                   <p className="text-xs md:text-sm text-[#6B7168] leading-relaxed">
-                    Outside of technical engineering, I have authored and published poetry books exploring emotional depth, self-awareness, and human reflection. Writing poetry cultivates precision of thought, empathy, and creative clarity that directly informs how I design human-centered digital products.
+                    Beyond engineering and agile management, I have authored and published three poetry collections. This discipline cultivates clarity of thought, active listening, and human empathy—attributes that directly elevate team leadership and technical product design.
                   </p>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Right Column: Factual Education & Academic Milestones */}
-          <div className="lg:col-span-5 space-y-6">
-            <div className="bg-white border border-[#E2E4DC] rounded-xl p-6 md:p-7 shadow-card-subtle">
-              <div className="flex items-center space-x-3 mb-4">
-                <div className="p-2 rounded-lg bg-[#EBF1EC] border border-[#D7E2D9] text-[#58745C]">
-                  <GraduationCap className="w-5 h-5" />
-                </div>
-                <div>
-                  <span className="text-xs font-mono uppercase tracking-wider text-[#6B7168] block">
-                    Higher Education
-                  </span>
-                  <span className="text-xs font-mono text-[#58745C] font-medium">
-                    2025 — 2029 (In Progress)
-                  </span>
-                </div>
-              </div>
-
-              <h3 className="text-lg md:text-xl font-display font-bold text-[#20231F] mb-1">
-                Indian Institute of Technology, Madras
+          {/* Right Column: Key Tenets */}
+          <div className="lg:col-span-5 space-y-5">
+            <div className="bg-white border border-[#E2E4DC] rounded-xl p-6 shadow-card-subtle">
+              <h3 className="text-sm font-mono uppercase tracking-wider font-bold text-[#20231F] mb-4">
+                Core Leadership Tenets
               </h3>
-              <p className="text-xs font-mono text-[#6B7168] mb-3">
-                BS in Data Science and Applications
-              </p>
-              <p className="text-xs md:text-sm text-[#6B7168] leading-relaxed mb-4">
-                Rigorous degree program focusing on statistical algorithms, machine learning lifecycles, database system design, and large-scale computational analysis.
-              </p>
 
-              <div className="pt-3 border-t border-[#EBECE6] text-xs text-[#6B7168] space-y-1.5">
-                <div className="flex items-center space-x-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#58745C]" />
-                  <span>Core Team Member, Paradox IIT Madras 2026 (Operations &amp; Logistics)</span>
+              <div className="space-y-4 text-xs md:text-sm text-[#6B7168]">
+                <div className="flex items-start space-x-3">
+                  <CheckCircle2 className="w-4 h-4 text-[#58745C] flex-shrink-0 mt-0.5" />
+                  <div>
+                    <strong className="text-[#20231F] block">Clear Requirements &amp; Scope</strong>
+                    <span>Eliminating ambiguity early through rigorous backlog documentation, milestone mapping, and user story refinement.</span>
+                  </div>
                 </div>
-                <div className="flex items-center space-x-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#58745C]" />
-                  <span>Coursework: Linear Algebra, Database Management, Machine Learning</span>
+
+                <div className="flex items-start space-x-3">
+                  <CheckCircle2 className="w-4 h-4 text-[#58745C] flex-shrink-0 mt-0.5" />
+                  <div>
+                    <strong className="text-[#20231F] block">Predictable Sprint Velocity</strong>
+                    <span>Utilizing Scrum and Agile best practices to unblock technical contributors and maintain consistent delivery cadence.</span>
+                  </div>
+                </div>
+
+                <div className="flex items-start space-x-3">
+                  <CheckCircle2 className="w-4 h-4 text-[#58745C] flex-shrink-0 mt-0.5" />
+                  <div>
+                    <strong className="text-[#20231F] block">AI-Driven Process Optimization</strong>
+                    <span>Integrating language models and custom automations to eliminate repetitive engineering and operational overhead.</span>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div className="bg-white border border-[#E2E4DC] rounded-xl p-6 md:p-7 shadow-card-subtle">
-              <div className="flex items-center space-x-3 mb-4">
-                <div className="p-2 rounded-lg bg-[#EBF1EC] border border-[#D7E2D9] text-[#58745C]">
-                  <GraduationCap className="w-5 h-5" />
+            <div className="bg-white border border-[#E2E4DC] rounded-xl p-6 shadow-card-subtle">
+              <span className="text-xs font-mono uppercase tracking-wider text-[#6B7168] block mb-2">
+                Institutional Foundations
+              </span>
+              <div className="space-y-2 text-xs font-mono text-[#20231F]">
+                <div className="p-2.5 rounded bg-[#F1F2EC] border border-[#E2E4DC]">
+                  Harvard University — Management &amp; Leadership Principles
                 </div>
-                <div>
-                  <span className="text-xs font-mono uppercase tracking-wider text-[#6B7168] block">
-                    Management Studies
-                  </span>
-                  <span className="text-xs font-mono text-[#58745C] font-medium">
-                    Coursework Studies (Active)
-                  </span>
+                <div className="p-2.5 rounded bg-[#F1F2EC] border border-[#E2E4DC]">
+                  IIT Madras — Data Science &amp; Computational Algorithms
                 </div>
               </div>
-
-              <h3 className="text-lg md:text-xl font-display font-bold text-[#20231F] mb-1">
-                Harvard University DCE
-              </h3>
-              <p className="text-xs font-mono text-[#6B7168] mb-3">
-                ALB in Business Administration &amp; Management
-              </p>
-              <p className="text-xs md:text-sm text-[#6B7168] leading-relaxed">
-                Academic studies encompassing strategic management, product economics, organizational leadership, and commercial execution.
-              </p>
             </div>
           </div>
         </div>

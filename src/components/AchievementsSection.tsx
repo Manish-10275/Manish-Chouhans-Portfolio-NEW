@@ -1,120 +1,139 @@
 'use client';
 
 import React from 'react';
-import { Award, ShieldCheck, Globe2, BookOpen, Users } from 'lucide-react';
+import { GraduationCap, Award, ShieldCheck, BookOpen } from 'lucide-react';
 
-interface Credential {
-  id: string;
-  title: string;
-  issuer: string;
-  date: string;
-  category: string;
-  description: string;
-  icon: React.ReactNode;
+interface EducationItem {
+  degree: string;
+  institution: string;
+  period?: string;
+  notes?: string;
 }
 
-const CREDENTIALS: Credential[] = [
+interface CertificationItem {
+  title: string;
+  issuerOrFocus: string;
+  badge?: string;
+}
+
+const EDUCATION: EducationItem[] = [
   {
-    id: 'kaggle-ai-agents',
-    title: 'AI Agents Intensive Course',
-    issuer: 'Kaggle',
-    date: '2025',
-    category: 'AI & Autonomous Systems',
-    description:
-      'Completed practical coursework on building autonomous agents, multi-step tool use, function calling, evaluation frameworks, and agentic reasoning architectures.',
-    icon: <ShieldCheck className="w-5 h-5 text-[#58745C]" />,
+    degree: 'Bachelor of Liberal Arts (Business Administration Mgmt)',
+    institution: 'Harvard University',
+    notes: 'Rigorous management principles, organizational leadership, strategy, and commercial execution.',
   },
   {
-    id: 'google-ai',
-    title: 'Google AI Learning Programs',
-    issuer: 'Google',
-    date: '2025',
-    category: 'Machine Learning & Cloud',
-    description:
-      'Foundational learning in applied AI concepts, machine learning model lifecycles, and Google Cloud AI service integration.',
-    icon: <Award className="w-5 h-5 text-[#58745C]" />,
+    degree: 'BS in Data Science & Applications',
+    institution: 'IIT Madras',
+    period: '2025 – 2029',
+    notes: 'Statistical algorithms, machine learning model lifecycles, database management systems, and large-scale data engineering.',
+  },
+];
+
+const CERTIFICATIONS: CertificationItem[] = [
+  {
+    title: 'Credential of Leadership, Impact, & Management',
+    issuerOrFocus: 'Team Leadership, Strategy, Finance, Digital World',
   },
   {
-    id: 'neoteric-summit',
-    title: 'Neoteric Summit Dubai 2026',
-    issuer: 'Neoteric Global Platform',
-    date: '2026',
-    category: 'Global Tech & Innovation',
-    description:
-      'Selected participant and delegate exploring emerging technologies, global founder ecosystems, and generative AI operational frameworks in Dubai.',
-    icon: <Globe2 className="w-5 h-5 text-[#58745C]" />,
+    title: 'Google Ads Apps & Play Academy',
+    issuerOrFocus: 'Google Certification',
   },
   {
-    id: 'paradox-operations',
-    title: 'Core Team Operations & Sponsorships',
-    issuer: 'Paradox, IIT Madras',
-    date: '2026',
-    category: 'Event Leadership & Logistics',
-    description:
-      'Organized logistical operations and coordinate corporate partner sponsorships for Paradox, the flagship annual symposium at IIT Madras.',
-    icon: <Users className="w-5 h-5 text-[#58745C]" />,
-  },
-  {
-    id: 'published-books',
-    title: 'Published Author of 3 Poetry Collections',
-    issuer: 'Independent Literary Publishing',
-    date: '2024 — 2025',
-    category: 'Writing & Reflection',
-    description:
-      'Authored and published three distinct creative collections exploring human emotion, creative growth, and introspective philosophical thought.',
-    icon: <BookOpen className="w-5 h-5 text-[#58745C]" />,
+    title: 'AWS Job Roles in Cloud & ML Prep',
+    issuerOrFocus: 'Amazon Web Services',
   },
 ];
 
 export const AchievementsSection: React.FC = () => {
   return (
-    <section id="credentials" className="py-24 px-6 md:px-10 border-b border-[#E2E4DC]">
+    <section id="education" className="py-24 px-6 md:px-10 border-b border-[#E2E4DC]">
       <div className="max-w-6xl mx-auto">
         {/* Section Header */}
         <div className="max-w-3xl mb-16">
           <div className="inline-flex items-center space-x-2 text-xs font-mono uppercase tracking-wider text-[#58745C] font-semibold mb-3">
-            <span>Verified Credentials</span>
+            <span>Education &amp; Credentials</span>
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-semibold tracking-tight text-[#20231F] mb-4">
-            Honors, certifications &amp; milestones.
+            Academic foundations &amp; certifications.
           </h2>
           <p className="text-base md:text-lg text-[#6B7168] leading-relaxed">
-            Evidence-based programs, institute responsibilities, and verified technical learning milestones.
+            Preserved exactly from my finalized CV: academic programs from Harvard University and IIT Madras alongside verified technical and leadership credentials.
           </p>
         </div>
 
-        {/* Credentials Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {CREDENTIALS.map((cred) => (
-            <div
-              key={cred.id}
-              className="bg-white border border-[#E2E4DC] rounded-xl p-6 shadow-card-subtle flex flex-col justify-between hover:border-[#D1D4CA] transition-colors duration-150"
-            >
-              <div>
-                <div className="flex items-center justify-between mb-4">
-                  <div className="p-2 rounded-lg bg-[#EBF1EC] border border-[#D7E2D9]">
-                    {cred.icon}
-                  </div>
-                  <span className="text-xs font-mono text-[#58745C] bg-[#EBF1EC] px-2.5 py-0.5 rounded-full border border-[#D7E2D9]">
-                    {cred.date}
-                  </span>
-                </div>
-
-                <span className="text-[11px] font-mono uppercase tracking-wider text-[#8D938A] block mb-1">
-                  {cred.category}
-                </span>
-                <h3 className="text-base font-display font-bold text-[#20231F] mb-1">
-                  {cred.title}
-                </h3>
-                <p className="text-xs font-mono text-[#6B7168] font-medium mb-3">
-                  {cred.issuer}
-                </p>
-                <p className="text-xs text-[#6B7168] leading-relaxed">
-                  {cred.description}
-                </p>
-              </div>
+        {/* 2-Column Layout: Education (Left) & Certifications (Right) */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+          {/* Education Sub-Section */}
+          <div className="lg:col-span-6 space-y-6">
+            <div className="flex items-center space-x-2.5 pb-3 border-b border-[#E2E4DC]">
+              <GraduationCap className="w-5 h-5 text-[#58745C]" />
+              <h3 className="text-sm font-mono uppercase tracking-wider font-bold text-[#20231F]">
+                Education
+              </h3>
             </div>
-          ))}
+
+            <div className="space-y-6">
+              {EDUCATION.map((edu, idx) => (
+                <div
+                  key={idx}
+                  className="bg-white border border-[#E2E4DC] rounded-xl p-6 shadow-card-subtle hover:border-[#D1D4CA] transition-colors"
+                >
+                  <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 mb-2">
+                    <h4 className="text-lg font-display font-bold text-[#20231F]">
+                      {edu.degree}
+                    </h4>
+                    {edu.period && (
+                      <span className="text-xs font-mono text-[#58745C] bg-[#EBF1EC] px-2.5 py-0.5 rounded-full border border-[#D7E2D9] self-start sm:self-auto">
+                        {edu.period}
+                      </span>
+                    )}
+                  </div>
+                  <p className="text-sm font-mono text-[#58745C] font-semibold mb-3">
+                    {edu.institution}
+                  </p>
+                  {edu.notes && (
+                    <p className="text-xs text-[#6B7168] leading-relaxed">
+                      {edu.notes}
+                    </p>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Certifications Sub-Section */}
+          <div className="lg:col-span-6 space-y-6">
+            <div className="flex items-center space-x-2.5 pb-3 border-b border-[#E2E4DC]">
+              <Award className="w-5 h-5 text-[#58745C]" />
+              <h3 className="text-sm font-mono uppercase tracking-wider font-bold text-[#20231F]">
+                Certifications &amp; Training
+              </h3>
+            </div>
+
+            <div className="space-y-4">
+              {CERTIFICATIONS.map((cert, idx) => (
+                <div
+                  key={idx}
+                  className="bg-white border border-[#E2E4DC] rounded-xl p-6 shadow-card-subtle hover:border-[#D1D4CA] transition-colors"
+                >
+                  <div className="flex items-start space-x-3.5">
+                    <div className="p-2 rounded-lg bg-[#EBF1EC] border border-[#D7E2D9] text-[#58745C] flex-shrink-0 mt-0.5">
+                      <ShieldCheck className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <h4 className="text-base font-display font-bold text-[#20231F] mb-1">
+                        {cert.title}
+                      </h4>
+                      <p className="text-xs font-mono text-[#6B7168]">
+                        {cert.issuerOrFocus}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>

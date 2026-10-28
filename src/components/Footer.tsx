@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { ArrowUp, Github, Linkedin, Mail } from 'lucide-react';
+import { ArrowUp, Github, Linkedin, Mail, Phone } from 'lucide-react';
 
 export const Footer: React.FC = () => {
   const scrollToTop = () => {
@@ -18,51 +18,56 @@ export const Footer: React.FC = () => {
               Manish Chouhan
             </span>
             <p className="text-xs font-mono text-[#6B7168]">
-              Founder, Devoq Labs • IIT Madras Data Science • Project Manager
+              Project Manager &amp; Technical Product Leader • AI Automation • IIT Madras &amp; Harvard Studies
             </p>
           </div>
 
           {/* Footer Navigation */}
           <nav className="flex flex-wrap items-center gap-6 text-xs font-medium text-[#6B7168]">
-            <a href="#work" className="hover:text-[#20231F] transition-colors">
-              Work
+            <a href="#projects" className="hover:text-[#20231F] transition-colors">
+              Projects
             </a>
             <a href="#experience" className="hover:text-[#20231F] transition-colors">
               Experience
             </a>
+            <a href="#competencies" className="hover:text-[#20231F] transition-colors">
+              Competencies
+            </a>
+            <a href="#education" className="hover:text-[#20231F] transition-colors">
+              Education
+            </a>
             <a href="#about" className="hover:text-[#20231F] transition-colors">
               About
-            </a>
-            <a href="#skills" className="hover:text-[#20231F] transition-colors">
-              Skills
-            </a>
-            <a href="#credentials" className="hover:text-[#20231F] transition-colors">
-              Credentials
             </a>
             <a href="#contact" className="hover:text-[#20231F] transition-colors">
               Contact
             </a>
             <a
               href="/resume.pdf"
-              download="Manish_Chouhan_Resume.pdf"
+              download="Manish_Chouhan_CV.pdf"
               className="text-[#58745C] hover:text-[#47604B] transition-colors font-semibold"
             >
-              Resume (PDF)
+              Final CV (PDF)
             </a>
           </nav>
         </div>
 
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-[#EBECE6] flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-[#8D938A]">
-          <div className="flex items-center space-x-6">
+          <div className="flex flex-wrap items-center gap-6">
             <a
-              href="https://github.com/Manish-10275"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="mailto:manishchouhan123@gmail.com"
               className="hover:text-[#20231F] transition-colors flex items-center space-x-1.5"
             >
-              <Github className="w-3.5 h-3.5" />
-              <span>GitHub</span>
+              <Mail className="w-3.5 h-3.5" />
+              <span>Email</span>
+            </a>
+            <a
+              href="tel:+918905694021"
+              className="hover:text-[#20231F] transition-colors flex items-center space-x-1.5"
+            >
+              <Phone className="w-3.5 h-3.5" />
+              <span>+91 89056 94021</span>
             </a>
             <a
               href="https://www.linkedin.com/in/manish-chouhan-2301a7230/"
@@ -74,11 +79,13 @@ export const Footer: React.FC = () => {
               <span>LinkedIn</span>
             </a>
             <a
-              href="mailto:manishchouhan123@gmail.com"
+              href="https://github.com/Manish-10275"
+              target="_blank"
+              rel="noopener noreferrer"
               className="hover:text-[#20231F] transition-colors flex items-center space-x-1.5"
             >
-              <Mail className="w-3.5 h-3.5" />
-              <span>Email</span>
+              <Github className="w-3.5 h-3.5" />
+              <span>GitHub</span>
             </a>
           </div>
 

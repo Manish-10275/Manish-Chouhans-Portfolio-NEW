@@ -1,133 +1,140 @@
 'use client';
 
 import React from 'react';
-import { Cpu, Code, Target, BarChart3 } from 'lucide-react';
+import { Target, Cpu, Code2, Briefcase, Terminal } from 'lucide-react';
 
-interface SkillGroup {
+interface CompetencyGroup {
   id: string;
-  title: string;
+  category: string;
   icon: React.ReactNode;
-  summary: string;
+  description: string;
   skills: string[];
 }
 
-const SKILL_GROUPS: SkillGroup[] = [
+const COMPETENCY_GROUPS: CompetencyGroup[] = [
   {
-    id: 'ai-automation',
-    title: 'AI & Automation',
+    id: 'project-methodologies',
+    category: 'Project Methodologies',
+    icon: <Target className="w-5 h-5 text-[#58745C]" />,
+    description: 'Frameworks and operational structures used to lead engineering sprints and deliver on-time software milestones.',
+    skills: [
+      'Agile Project Management',
+      'Sprint Planning',
+      'Scrum',
+      'Risk Assessment',
+      'Resource Allocation'
+    ],
+  },
+  {
+    id: 'ai-workflow-automation',
+    category: 'AI & Workflow Automation',
     icon: <Cpu className="w-5 h-5 text-[#58745C]" />,
-    summary:
-      'Applying machine learning models, autonomous workflows, and LLM interfaces to solve discrete operational and scientific challenges.',
+    description: 'Designing automated pipelines, integrating LLM APIs, and eliminating operational latency across digital processes.',
+    skills: [
+      'AI Automation',
+      'Prompt Engineering',
+      'OpenAI APIs',
+      'Process Optimization',
+      'Pipeline Integration'
+    ],
+  },
+  {
+    id: 'technical-stack',
+    category: 'Technical Stack',
+    icon: <Code2 className="w-5 h-5 text-[#58745C]" />,
+    description: 'Core languages, backend frameworks, and frontend architectures used across production codebases.',
     skills: [
       'Python',
-      'LLM API Integration',
-      'AI Agents',
-      'Workflow Automation',
-      'Model Evaluation',
-      'API Integration',
-      'Prompt Engineering',
-      'Computer Vision Basics'
-    ],
-  },
-  {
-    id: 'development',
-    title: 'Development',
-    icon: <Code className="w-5 h-5 text-[#58745C]" />,
-    summary:
-      'Building performant, accessible web applications and reliable backend microservices with modern TypeScript and component libraries.',
-    skills: [
       'TypeScript',
       'JavaScript',
-      'React',
+      'React.js',
       'Next.js',
-      'Node.js',
-      'Express',
-      'Tailwind CSS',
-      'HTML / Semantic CSS',
-      'REST APIs',
-      'Git & GitHub'
+      'Fastify',
+      'Prisma',
+      'PostgreSQL',
+      'AWS'
     ],
   },
   {
-    id: 'product-delivery',
-    title: 'Product & Delivery',
-    icon: <Target className="w-5 h-5 text-[#58745C]" />,
-    summary:
-      'Guiding agile software cycles, managing task dependencies, authoring clear documentation, and bridging technical and business priorities.',
+    id: 'business-operations',
+    category: 'Business & Operations',
+    icon: <Briefcase className="w-5 h-5 text-[#58745C]" />,
+    description: 'Strategic management practices connecting client objectives with engineering implementation.',
     skills: [
-      'Product Thinking',
-      'Project Coordination',
-      'Requirements Analysis',
-      'Stakeholder Communication',
-      'Workflow Design',
+      'Strategic Planning',
+      'Client Communication',
       'Technical Documentation',
-      'Agile / Scrum Cycles',
-      'Jira & Trello Management'
+      'Product Lifecycle Management'
     ],
   },
   {
-    id: 'data-analytics',
-    title: 'Data & Analytics',
-    icon: <BarChart3 className="w-5 h-5 text-[#58745C]" />,
-    summary:
-      'Extracting, transforming, and interpreting data structures to evaluate system performance and support evidence-based decisions.',
+    id: 'technical-systems',
+    category: 'Technical & Systems',
+    icon: <Terminal className="w-5 h-5 text-[#58745C]" />,
+    description: 'DevOps, database management, cloud environments, and analytical reporting systems.',
     skills: [
+      'Git & GitHub',
+      'Docker',
+      'REST API Architecture',
+      'Node.js & Express',
       'SQL',
-      'Data Analysis',
-      'Python Data Processing',
-      'Pandas & NumPy',
-      'Excel (Advanced)',
-      'Power BI & Reporting',
-      'Statistical Fundamentals'
+      'Supabase',
+      'Google Cloud Platform',
+      'FastAPI',
+      'TensorFlow',
+      'Power BI',
+      'Advanced Excel'
     ],
   },
 ];
 
 export const SkillsSection: React.FC = () => {
   return (
-    <section id="skills" className="py-24 px-6 md:px-10 border-b border-[#E2E4DC]">
+    <section id="competencies" className="py-24 px-6 md:px-10 border-b border-[#E2E4DC]">
       <div className="max-w-6xl mx-auto">
         {/* Section Header */}
         <div className="max-w-3xl mb-16">
           <div className="inline-flex items-center space-x-2 text-xs font-mono uppercase tracking-wider text-[#58745C] font-semibold mb-3">
-            <span>Capabilities &amp; Stack</span>
+            <span>Project Management &amp; Core Competencies</span>
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-semibold tracking-tight text-[#20231F] mb-4">
-            Technical and delivery skills.
+            Technical competencies &amp; delivery tools.
           </h2>
           <p className="text-base md:text-lg text-[#6B7168] leading-relaxed">
-            A grounded overview of technologies, tools, and methodologies I actively use across engineering, product management, and data analysis.
+            The complete spectrum of technical stacks, project methodologies, systems, and operational competencies directly from my finalized CV.
           </p>
         </div>
 
-        {/* 4-Column / 2x2 Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {SKILL_GROUPS.map((group) => (
+        {/* 5 Category Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {COMPETENCY_GROUPS.map((group, idx) => (
             <div
               key={group.id}
-              className="bg-white border border-[#E2E4DC] rounded-xl p-7 md:p-8 shadow-card-subtle flex flex-col justify-between hover:border-[#D1D4CA] transition-colors duration-150"
+              className={`bg-white border border-[#E2E4DC] rounded-xl p-7 shadow-card-subtle flex flex-col justify-between hover:border-[#D1D4CA] transition-colors duration-150 ${
+                idx === 4 ? 'md:col-span-2 lg:col-span-2' : ''
+              }`}
             >
               <div>
-                <div className="flex items-center space-x-3 mb-4">
+                <div className="flex items-center space-x-3 mb-3">
                   <div className="p-2 rounded-lg bg-[#EBF1EC] border border-[#D7E2D9]">
                     {group.icon}
                   </div>
-                  <h3 className="text-xl font-display font-bold text-[#20231F] tracking-tight">
-                    {group.title}
+                  <h3 className="text-lg font-display font-bold text-[#20231F] tracking-tight">
+                    {group.category}
                   </h3>
                 </div>
 
-                <p className="text-sm text-[#6B7168] leading-relaxed mb-6">
-                  {group.summary}
+                <p className="text-xs text-[#6B7168] leading-relaxed mb-6">
+                  {group.description}
                 </p>
               </div>
 
-              <div className="pt-5 border-t border-[#EBECE6]">
-                <div className="flex flex-wrap gap-2">
+              <div className="pt-4 border-t border-[#EBECE6]">
+                <div className="flex flex-wrap gap-1.5">
                   {group.skills.map((skill) => (
                     <span
                       key={skill}
-                      className="text-xs font-mono px-3 py-1 rounded bg-[#F1F2EC] text-[#20231F] border border-[#E2E4DC]"
+                      className="text-xs font-mono px-2.5 py-1 rounded bg-[#F1F2EC] text-[#20231F] border border-[#E2E4DC]"
                     >
                       {skill}
                     </span>

@@ -3,9 +3,9 @@ import Header from '@/components/Header';
 import HeroSection from '@/components/HeroSection';
 import ProjectsSection from '@/components/ProjectsSection';
 import ExperienceSection from '@/components/ExperienceSection';
-import AboutSection from '@/components/AboutSection';
 import SkillsSection from '@/components/SkillsSection';
 import AchievementsSection from '@/components/AchievementsSection';
+import AboutSection from '@/components/AboutSection';
 import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
 
@@ -24,29 +24,29 @@ export default function Home() {
       <Header />
 
       <main id="main-content" tabIndex={-1} className="outline-none">
-        {/* Section B: Hero */}
+        {/* 1. Hero and professional introduction */}
         <HeroSection />
 
-        {/* Section C: Selected Work (Most Important Section) */}
+        {/* 2. Selected projects */}
         <ProjectsSection />
 
-        {/* Section 4: Professional Experience */}
+        {/* 3. Professional experience */}
         <ExperienceSection />
 
-        {/* Section 5: About Me */}
-        <AboutSection />
-
-        {/* Section 6: Skills & Technologies */}
+        {/* 4. Technical competencies */}
         <SkillsSection />
 
-        {/* Section 7: Achievements & Credentials */}
+        {/* 5. Education and certifications */}
         <AchievementsSection />
 
-        {/* Section 9: Contact */}
+        {/* 6. About */}
+        <AboutSection />
+
+        {/* 7. Contact */}
         <ContactSection />
       </main>
 
-      {/* Site Footer */}
+      {/* 8. Footer */}
       <Footer />
     </div>
   );

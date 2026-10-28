@@ -1,47 +1,48 @@
 # Manish Chouhan — Professional Personal Portfolio
 
-A polished, credible, and editorial personal portfolio built with **Next.js 15 (App Router)**, **React 19**, **TypeScript**, and **Tailwind CSS**. Designed with an understated, human-crafted aesthetic inspired by modern digital studios and thoughtful independent developer portfolios.
+A polished, credible, and editorial personal portfolio built with **Next.js 15 (App Router)**, **React 19**, **TypeScript**, and **Tailwind CSS**, aligned directly with the finalized curriculum vitae (`Enhanced CV - Manish Chouhan - Final Layout.pdf`).
 
 ---
 
-## 🌿 Design System & Visual Direction
+## 🌿 Professional Profile & Positioning
 
-The visual design emphasizes clarity, credibility, generous whitespace, and restrained typography:
-
-*   **Background**: `#F7F7F2` (Warm Off-White)
-*   **Primary Text**: `#20231F` (Deep Charcoal — WCAG AAA contrast ratio > 14:1)
-*   **Secondary Text**: `#6B7168` (Muted Slate — WCAG AA compliant)
-*   **Accent Color**: `#58745C` (Restrained Forest Green)
-*   **Accent Hover**: `#47604B`
-*   **Borders**: `#E2E4DC` (Subtle Warm Borders)
-*   **Card Background**: `#FFFFFF` (Crisp Editorial Card)
-*   **Typography**: Clean sans-serif hierarchy utilizing **DM Sans** and **Space Grotesk**
+*   **Professional Title**: Project Manager & Technical Product Leader
+*   **Summary**: Results-driven Project Manager, AI Automation Associate, and Technical Builder combining rigorous management principles from Harvard University with advanced technical foundations from IIT Madras. Proven track record of leading cross-functional teams, directing end-to-end project lifecycles, and deploying scalable AI-driven automation workflows and enterprise web applications.
+*   **Direct Contact**: `manishchouhan123@gmail.com` • `+91 89056 94021` • Sojat Road, Pali, Rajasthan
+*   **Portfolio URL**: [manish.devoq-labs.online](https://manish.devoq-labs.online)
 
 ---
 
-## 🧭 Page Architecture & Flow
+## 🧭 Page Architecture & Verified CV Alignment
 
-The portfolio is structured as a cohesive, accessible single-page layout:
+The portfolio is structured in the exact order requested:
 
-1.  **Header (`Header.tsx`)**: Minimalist wordmark, accessible navigation (`Work`, `Experience`, `About`, `Skills`, `Credentials`, `Contact`), and prominent direct contact action.
-2.  **Hero (`HeroSection.tsx`)**: Clear statement of identity, core focus, verified professional availability status, primary CTAs, and direct links to GitHub, LinkedIn, and email.
-3.  **Selected Work (`ProjectsSection.tsx`)**: Curated technical case studies featuring:
-    *   **HBB Mutation Analyzer**: Bioinformatics research tool parsing HGVS notation, querying ClinVar assertions, and synthesizing PubMed research with Gemini API.
-    *   **Ad Automation OS**: Centralized operations platform for ad network connectors, rule automation, execution history, and audit logs.
-    *   **Devoq Labs Speech Services**: Backend gateway abstracting Speech-to-Text and AI voice generation behind a consistent, secure REST API.
-    *   **AgriBuddy**: Agricultural computer vision prototype diagnosing plant leaf pathogens from imagery.
-    *   **Devoq Labs**: Entrepreneurial venture and digital product studio founded by Manish Chouhan.
-4.  **Professional Experience (`ExperienceSection.tsx`)**: Compact chronological timeline detailing verified roles:
-    *   Founder & CEO — Devoq Labs (Jun 2025 – Present)
-    *   Project Manager — JJGillespie.com (Nov 2025 – Present)
-    *   Associate Project Manager Intern — Excelerate (May 2025 – Jun 2025)
-    *   Student Intern — Scaler School of Technology (2025)
-    *   Python Programmer Intern — Codveda Technologies (2025)
-5.  **About Me (`AboutSection.tsx`)**: Authentic personal background, self-taught programming journey from Rajasthan, ongoing BS in Data Science & Applications at **IIT Madras** (2025–2029), Harvard DCE studies, and published author reflections.
-6.  **Skills (`SkillsSection.tsx`)**: Clean 4-discipline grid covering AI & Automation, Development, Product & Delivery, and Data & Analytics without vanity progress bars.
-7.  **Achievements & Credentials (`AchievementsSection.tsx`)**: Compact, evidence-based credentials including Kaggle AI Agents Intensive, Google AI Programs, Neoteric Summit Dubai 2026, Paradox IIT Madras coordination, and published books.
-8.  **Contact (`ContactSection.tsx`)**: Functional contact form with pre-formatted email dispatch, one-click email copy utility, verified LinkedIn & GitHub profiles, and valid resume download.
-9.  **Footer (`Footer.tsx`)**: Subtle copyright, section navigation, and back-to-top interaction.
+1.  **Hero & Professional Introduction (`HeroSection.tsx`)**: Clear positioning statement, professional summary, phone/email contact links, and verified CV download.
+2.  **Selected Projects (`ProjectsSection.tsx`)**: All five projects from the CV:
+    *   **Ad Automation OS**: Full-stack automated ad management system integrating Meta Graph API with Fastify, Prisma, PostgreSQL/Supabase, deployed on Vercel/Railway.
+    *   **Mind Mitra**: AI-powered mental health platform with dual-user dashboards and NLP counseling companion (clearly labeled as exploratory wellness tool).
+    *   **AgriBuddy**: Smart crop pathogen diagnosis pipeline utilizing computer vision and FastAPI (clearly labeled as research prototype).
+    *   **Devoq Labs Speech Services**: Voice synthesis and audio processing gateway microservice integrating Google Cloud STT and AI33.pro TTS in Docker.
+    *   **HBB Mutation Analyzer**: Genomic variant research tool parsing HGVS nomenclature, ClinVar classifications, and PubMed literature with Gemini AI (clearly labeled as research prototype).
+3.  **Professional Experience (`ExperienceSection.tsx`)**: All six positions from the CV:
+    *   **AI Automation Associate** — Pixellab.Media (Sep 01, 2026 – Present)
+    *   **Founder & Project Director** — Devoq Labs (Jun 2025 – Present)
+    *   **Project Manager** — JJGillespie.com (Nov 2025 – Present)
+    *   **Associate Project Manager Intern** — Excelerate (May 2025 – Jun 2025)
+    *   **Core Team Operations Manager** — Paradox, IIT Madras (2026)
+    *   **Python Programmer Intern** — Codveda Technologies (2025)
+4.  **Technical Competencies (`SkillsSection.tsx`)**: Structured across all five CV categories:
+    *   **Project Methodologies**: Agile Project Management, Sprint Planning, Scrum, Risk Assessment, Resource Allocation
+    *   **AI & Workflow Automation**: AI Automation, Prompt Engineering, OpenAI APIs, Process Optimization, Pipeline Integration
+    *   **Technical Stack**: Python, TypeScript, JavaScript, React.js, Next.js, Fastify, Prisma, PostgreSQL, AWS
+    *   **Business & Operations**: Strategic Planning, Client Communication, Technical Documentation, Product Lifecycle Management
+    *   **Technical & Systems**: Git & GitHub, Docker, REST API Architecture, Node.js & Express, SQL, Supabase, Google Cloud Platform, FastAPI, TensorFlow, Power BI, Advanced Excel
+5.  **Education & Certifications (`AchievementsSection.tsx`)**:
+    *   **Education**: Bachelor of Liberal Arts (Business Administration Mgmt) from Harvard University & BS in Data Science & Applications from IIT Madras (2025–2029).
+    *   **Certifications**: Credential of Leadership, Impact, & Management; Google Ads Apps & Play Academy; AWS Job Roles in Cloud & ML Prep.
+6.  **About Me (`AboutSection.tsx`)**: Concise narrative combining management principles from Harvard with data science foundations from IIT Madras, plus published author notes.
+7.  **Contact (`ContactSection.tsx`)**: Direct email, phone, location, verified LinkedIn & GitHub links, 2-page CV PDF download, and a functional message transmission form.
+8.  **Footer (`Footer.tsx`)**: Navigation anchors, contact links, copyright, and back-to-top interaction.
 
 ---
 
@@ -60,22 +61,16 @@ npm install --legacy-peer-deps
 ```bash
 npm run dev
 ```
-Open [http://localhost:3000](http://localhost:3000) to view the application.
 
 ### Production Build
 ```bash
 npm run build
-```
-
-### Production Preview
-```bash
 npm run start
 ```
 
-### Type Checking & Linting
+### Type Checking
 ```bash
 npx tsc --noEmit
-npm run lint
 ```
 
 ---

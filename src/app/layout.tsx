@@ -22,19 +22,21 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: 'Manish Chouhan | AI Automation, Products & Engineering',
+  title: 'Manish Chouhan | Project Manager & Technical Product Leader',
   description:
-    'Personal portfolio of Manish Chouhan. Founder of Devoq Labs, AI automation professional, and IIT Madras BS Data Science student building practical software products.',
+    'Results-driven Project Manager, AI Automation Associate, and Technical Builder combining rigorous management principles from Harvard University with advanced technical foundations from IIT Madras.',
   keywords: [
     'Manish Chouhan',
-    'Devoq Labs',
-    'AI Automation',
-    'IIT Madras Data Science',
     'Project Manager',
-    'Software Developer India',
-    'Next.js Developer',
-    'Bioinformatics AI',
-    'Startup Founder'
+    'Technical Product Leader',
+    'AI Automation Associate',
+    'Devoq Labs',
+    'Pixellab.Media',
+    'JJGillespie.com',
+    'IIT Madras Data Science',
+    'Harvard University',
+    'Full Stack Engineer',
+    'Agile Scrum PM'
   ],
   authors: [{ name: 'Manish Chouhan' }],
   creator: 'Manish Chouhan',
@@ -43,16 +45,16 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: 'https://manish.devoq-labs.online',
-    title: 'Manish Chouhan | AI Automation, Products & Engineering',
+    title: 'Manish Chouhan | Project Manager & Technical Product Leader',
     description:
-      'Founder of Devoq Labs, AI automation professional, and IIT Madras BS Data Science student building practical software products.',
+      'Results-driven Project Manager, AI Automation Associate, and Technical Builder combining rigorous management principles from Harvard University with advanced technical foundations from IIT Madras.',
     siteName: 'Manish Chouhan Portfolio',
   },
   twitter: {
     card: 'summary',
-    title: 'Manish Chouhan | AI Automation & Products',
+    title: 'Manish Chouhan | Project Manager & Technical Product Leader',
     description:
-      'Founder of Devoq Labs, AI automation developer, and IIT Madras BS Data Science student.',
+      'Results-driven Project Manager, AI Automation Associate, and Technical Builder combining management principles from Harvard with data science foundations from IIT Madras.',
     creator: '@Manish-10275',
   },
   robots: {
@@ -76,32 +78,46 @@ export default function RootLayout({
         '@type': 'Person',
         '@id': 'https://manish.devoq-labs.online/#person',
         name: 'Manish Chouhan',
-        jobTitle: 'Founder & AI Automation Developer',
-        worksFor: {
-          '@type': 'Organization',
-          name: 'Devoq Labs',
-          url: 'https://devoqlabs.com',
-        },
-        alumniOf: {
-          '@type': 'EducationalOrganization',
-          name: 'Indian Institute of Technology, Madras',
-          alternateName: 'IIT Madras',
-        },
+        jobTitle: 'Project Manager & Technical Product Leader',
+        telephone: '+918905694021',
         email: 'manishchouhan123@gmail.com',
         url: 'https://manish.devoq-labs.online',
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: 'Sojat Road, Pali',
+          addressRegion: 'Rajasthan',
+          addressCountry: 'India',
+        },
+        alumniOf: [
+          {
+            '@type': 'EducationalOrganization',
+            name: 'Harvard University',
+          },
+          {
+            '@type': 'EducationalOrganization',
+            name: 'Indian Institute of Technology, Madras',
+            alternateName: 'IIT Madras',
+          },
+        ],
+        worksFor: [
+          {
+            '@type': 'Organization',
+            name: 'Pixellab.Media',
+          },
+          {
+            '@type': 'Organization',
+            name: 'Devoq Labs',
+            url: 'https://devoqlabs.com',
+          },
+          {
+            '@type': 'Organization',
+            name: 'JJGillespie.com',
+          },
+        ],
         sameAs: [
           'https://www.linkedin.com/in/manish-chouhan-2301a7230/',
           'https://github.com/Manish-10275',
         ],
-      },
-      {
-        '@type': 'Organization',
-        '@id': 'https://devoqlabs.com/#organization',
-        name: 'Devoq Labs',
-        url: 'https://devoqlabs.com',
-        founder: {
-          '@id': 'https://manish.devoq-labs.online/#person',
-        },
       },
     ],
   };
