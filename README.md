@@ -68,6 +68,9 @@ npm run build
 npm run start
 ```
 
+### Resume & Finalized CV
+The authentic, approved CV document (`Enhanced CV - Manish Chouhan - Final Layout.pdf`) is preserved in `docs/` and served directly at `public/resume.pdf`. A safety lock in `scripts/generate-resume.js` prevents any automatic or accidental overwrite of the approved PDF during builds or testing.
+
 ### Type Checking
 ```bash
 npx tsc --noEmit

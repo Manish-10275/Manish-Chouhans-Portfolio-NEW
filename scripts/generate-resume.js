@@ -500,6 +500,20 @@ function createFinalCV() {
   pdf += "%%EOF\n";
 
   const targetPath = path.join(__dirname, '..', 'public', 'resume.pdf');
+  const testOutputPath = path.join(__dirname, 'test-generated-resume.pdf');
+  
+  // SAFETY LOCK: Prevent silent overwrite of the approved authentic CV.
+  // public/resume.pdf is reserved for the exact finalized CV (Enhanced CV - Manish Chouhan - Final Layout.pdf).
+  // The synthetic generator will only overwrite public/resume.pdf if explicitly passed the --force-synthetic flag.
+  const forceSynthetic = process.argv.includes('--force-synthetic');
+  if (!forceSynthetic) {
+    fs.writeFileSync(testOutputPath, pdf, 'utf-8');
+    console.log(`[SAFETY LOCK ACTIVE] public/resume.pdf contains the approved authentic finalized CV.`);
+    console.log(`Synthetic resume preview written to: ${testOutputPath}`);
+    console.log(`To force overwrite public/resume.pdf with synthetic version, run with --force-synthetic`);
+    return;
+  }
+
   fs.writeFileSync(targetPath, pdf, 'utf-8');
   console.log(`Successfully generated verified 2-page CV to ${targetPath} (${Buffer.byteLength(pdf, 'utf-8')} bytes)`);
 }
