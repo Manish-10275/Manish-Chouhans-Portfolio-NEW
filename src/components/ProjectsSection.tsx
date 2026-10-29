@@ -111,7 +111,7 @@ const PROJECTS: Project[] = [
     ],
     disclaimer:
       'Genomic variant research prototype: Built exclusively as an exploratory software tool to demonstrate variant nomenclature parsing and automated evidence synthesis. It is not a clinically validated diagnostic tool and must not be used for clinical decision-making or genetic counseling.',
-    repoUrl: 'https://github.com/Manish-10275',
+    repoUrl: 'https://github.com/Manish-10275/HBB-GENE-MUTATION-PROJECT',
   },
 ];
 
