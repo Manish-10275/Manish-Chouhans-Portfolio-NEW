@@ -1,24 +1,29 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { ArrowUpRight, Menu, X } from 'lucide-react';
+import { ArrowUpRight, Menu, X, Terminal } from 'lucide-react';
 
 const NAV_ITEMS = [
   { label: 'Projects', href: '#projects' },
   { label: 'Experience', href: '#experience' },
   { label: 'Competencies', href: '#competencies' },
+  { label: 'Philosophy', href: '#about' },
   { label: 'Education', href: '#education' },
-  { label: 'About', href: '#about' },
   { label: 'Contact', href: '#contact' },
 ];
 
 export const Header: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
+      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+      if (totalHeight > 0) {
+        setScrollProgress((window.scrollY / totalHeight) * 100);
+      }
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
@@ -28,10 +33,17 @@ export const Header: React.FC = () => {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 ${
         scrolled
-          ? 'bg-[#F7F7F2]/90 backdrop-blur-md border-b border-[#E2E4DC] py-3.5 shadow-sm'
+          ? 'bg-[#F7F7F2]/90 backdrop-blur-md border-b border-[#E2E4DC] py-3 shadow-xs'
           : 'bg-transparent py-5'
       }`}
     >
+      {/* Scroll Progress Bar */}
+      <div
+        className="absolute top-0 left-0 h-[2px] bg-[#58745C] transition-all duration-75"
+        style={{ width: `${scrollProgress}%` }}
+        aria-hidden="true"
+      />
+
       <div className="max-w-6xl mx-auto px-6 md:px-10 flex items-center justify-between">
         {/* Brand / Wordmark */}
         <a
@@ -42,7 +54,7 @@ export const Header: React.FC = () => {
             Manish Chouhan
           </span>
           <span className="text-[11px] font-mono text-[#6B7168] sm:pl-2 sm:border-l sm:border-[#E2E4DC]">
-            Project Manager &amp; Technical Product Leader
+            Software Engineer &amp; AI Builder
           </span>
         </a>
 
@@ -98,7 +110,7 @@ export const Header: React.FC = () => {
                 onClick={() => setMobileMenuOpen(false)}
                 className="w-full inline-flex items-center justify-center space-x-2 px-4 py-2.5 rounded-lg text-sm font-medium text-white bg-[#58745C] hover:bg-[#47604B] transition-colors"
               >
-                <span>Get in touch</span>
+                <span>Let&apos;s Connect</span>
                 <ArrowUpRight className="w-4 h-4" />
               </a>
             </div>

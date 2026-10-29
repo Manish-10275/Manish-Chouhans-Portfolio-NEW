@@ -4,10 +4,11 @@ import HeroSection from '@/components/HeroSection';
 import ProjectsSection from '@/components/ProjectsSection';
 import ExperienceSection from '@/components/ExperienceSection';
 import SkillsSection from '@/components/SkillsSection';
-import AchievementsSection from '@/components/AchievementsSection';
 import AboutSection from '@/components/AboutSection';
+import AchievementsSection from '@/components/AchievementsSection';
 import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
+import { SystemBusLine } from '@/components/EngineeringMotif';
 
 export default function Home() {
   return (
@@ -20,29 +21,41 @@ export default function Home() {
         Skip to main content
       </a>
 
-      {/* Main Navigation Header */}
+      {/* Main Navigation Header with Scroll Progress */}
       <Header />
 
       <main id="main-content" tabIndex={-1} className="outline-none">
-        {/* 1. Hero and professional introduction */}
+        {/* 1. Hero and interactive living engineering visualization */}
         <HeroSection />
 
-        {/* 2. Selected projects */}
+        <SystemBusLine />
+
+        {/* 2. Selected engineered systems & pipeline architectures */}
         <ProjectsSection />
 
-        {/* 3. Professional experience */}
+        <SystemBusLine />
+
+        {/* 3. Professional career timeline */}
         <ExperienceSection />
 
-        {/* 4. Technical competencies */}
+        <SystemBusLine />
+
+        {/* 4. Technical competencies & stack */}
         <SkillsSection />
 
-        {/* 5. Education and certifications */}
-        <AchievementsSection />
+        <SystemBusLine />
 
-        {/* 6. About */}
+        {/* 5. Human signature, philosophy & about narrative */}
         <AboutSection />
 
-        {/* 7. Contact */}
+        <SystemBusLine />
+
+        {/* 6. Academic foundations & verified credentials */}
+        <AchievementsSection />
+
+        <SystemBusLine />
+
+        {/* 7. Contact & direct inquiries */}
         <ContactSection />
       </main>
 

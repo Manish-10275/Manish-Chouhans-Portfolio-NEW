@@ -1,7 +1,8 @@
 'use client';
 
 import React from 'react';
-import { GraduationCap, Award, ShieldCheck, BookOpen } from 'lucide-react';
+import { GraduationCap, Award, ShieldCheck } from 'lucide-react';
+import { SectionMarker } from './EngineeringMotif';
 
 interface EducationItem {
   degree: string;
@@ -51,14 +52,12 @@ export const AchievementsSection: React.FC = () => {
       <div className="max-w-6xl mx-auto">
         {/* Section Header */}
         <div className="max-w-3xl mb-16">
-          <div className="inline-flex items-center space-x-2 text-xs font-mono uppercase tracking-wider text-[#58745C] font-semibold mb-3">
-            <span>Education &amp; Credentials</span>
-          </div>
+          <SectionMarker number="SEC.05" code="ACADEMIC_CREDENTIALS" label="Education & Certifications" />
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-semibold tracking-tight text-[#20231F] mb-4">
-            Academic foundations &amp; certifications.
+            Academic foundations &amp; verified credentials.
           </h2>
-          <p className="text-base md:text-lg text-[#6B7168] leading-relaxed">
-            Preserved exactly from my finalized CV: academic programs from Harvard University and IIT Madras alongside verified technical and leadership credentials.
+          <p className="text-base md:text-lg text-[#52584F] leading-relaxed">
+            Preserved directly from my curriculum vitae: degree programs from Harvard University and IIT Madras alongside verified technical and leadership credentials.
           </p>
         </div>
 
@@ -69,7 +68,7 @@ export const AchievementsSection: React.FC = () => {
             <div className="flex items-center space-x-2.5 pb-3 border-b border-[#E2E4DC]">
               <GraduationCap className="w-5 h-5 text-[#58745C]" />
               <h3 className="text-sm font-mono uppercase tracking-wider font-bold text-[#20231F]">
-                Education
+                Academic Programs
               </h3>
             </div>
 
@@ -77,7 +76,7 @@ export const AchievementsSection: React.FC = () => {
               {EDUCATION.map((edu, idx) => (
                 <div
                   key={idx}
-                  className="bg-white border border-[#E2E4DC] rounded-xl p-6 shadow-card-subtle hover:border-[#D1D4CA] transition-colors"
+                  className="bg-white border border-[#E2E4DC] rounded-xl p-6 shadow-card-subtle hover:border-[#CBD1C4] transition-colors"
                 >
                   <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 mb-2">
                     <h4 className="text-lg font-display font-bold text-[#20231F]">
@@ -107,7 +106,7 @@ export const AchievementsSection: React.FC = () => {
             <div className="flex items-center space-x-2.5 pb-3 border-b border-[#E2E4DC]">
               <Award className="w-5 h-5 text-[#58745C]" />
               <h3 className="text-sm font-mono uppercase tracking-wider font-bold text-[#20231F]">
-                Certifications &amp; Training
+                Verified Credentials
               </h3>
             </div>
 
@@ -115,20 +114,18 @@ export const AchievementsSection: React.FC = () => {
               {CERTIFICATIONS.map((cert, idx) => (
                 <div
                   key={idx}
-                  className="bg-white border border-[#E2E4DC] rounded-xl p-6 shadow-card-subtle hover:border-[#D1D4CA] transition-colors"
+                  className="bg-white border border-[#E2E4DC] rounded-xl p-5 shadow-card-subtle flex items-start space-x-4 hover:border-[#CBD1C4] transition-colors"
                 >
-                  <div className="flex items-start space-x-3.5">
-                    <div className="p-2 rounded-lg bg-[#EBF1EC] border border-[#D7E2D9] text-[#58745C] flex-shrink-0 mt-0.5">
-                      <ShieldCheck className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <h4 className="text-base font-display font-bold text-[#20231F] mb-1">
-                        {cert.title}
-                      </h4>
-                      <p className="text-xs font-mono text-[#6B7168]">
-                        {cert.issuerOrFocus}
-                      </p>
-                    </div>
+                  <div className="p-2 rounded-lg bg-[#EBF1EC] border border-[#D7E2D9] text-[#58745C] flex-shrink-0 mt-0.5">
+                    <ShieldCheck className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <h4 className="text-base font-display font-bold text-[#20231F] mb-0.5">
+                      {cert.title}
+                    </h4>
+                    <p className="text-xs font-mono text-[#6B7168]">
+                      {cert.issuerOrFocus}
+                    </p>
                   </div>
                 </div>
               ))}
