@@ -22,13 +22,14 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: 'Manish Chouhan | Project Manager & Technical Product Leader',
+  title: 'Manish Chouhan | Software Engineer, AI Engineer & Product Builder',
   description:
-    'Results-driven Project Manager, AI Automation Associate, and Technical Builder combining rigorous management principles from Harvard University with advanced technical foundations from IIT Madras.',
+    'Software Engineer, AI Engineer, and Product Builder combining rigorous technical foundations in data science from IIT Madras with management principles from Harvard University. Architecting scalable full-stack systems and automated AI pipelines.',
   keywords: [
     'Manish Chouhan',
-    'Project Manager',
-    'Technical Product Leader',
+    'Software Engineer',
+    'AI Engineer',
+    'Product Builder',
     'AI Automation Associate',
     'Devoq Labs',
     'Pixellab.Media',
@@ -36,7 +37,7 @@ export const metadata: Metadata = {
     'IIT Madras Data Science',
     'Harvard University',
     'Full Stack Engineer',
-    'Agile Scrum PM'
+    'Fastify Next.js TypeScript',
   ],
   authors: [{ name: 'Manish Chouhan' }],
   creator: 'Manish Chouhan',
@@ -45,16 +46,16 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: 'https://manish.devoq-labs.online',
-    title: 'Manish Chouhan | Project Manager & Technical Product Leader',
+    title: 'Manish Chouhan | Software Engineer, AI Engineer & Product Builder',
     description:
-      'Results-driven Project Manager, AI Automation Associate, and Technical Builder combining rigorous management principles from Harvard University with advanced technical foundations from IIT Madras.',
+      'Software Engineer, AI Engineer, and Product Builder combining rigorous technical foundations in data science from IIT Madras with management principles from Harvard University.',
     siteName: 'Manish Chouhan Portfolio',
   },
   twitter: {
     card: 'summary',
-    title: 'Manish Chouhan | Project Manager & Technical Product Leader',
+    title: 'Manish Chouhan | Software Engineer, AI Engineer & Product Builder',
     description:
-      'Results-driven Project Manager, AI Automation Associate, and Technical Builder combining management principles from Harvard with data science foundations from IIT Madras.',
+      'Software Engineer, AI Engineer, and Product Builder combining management principles from Harvard with data science foundations from IIT Madras.',
     creator: '@Manish-10275',
   },
   robots: {
@@ -78,7 +79,7 @@ export default function RootLayout({
         '@type': 'Person',
         '@id': 'https://manish.devoq-labs.online/#person',
         name: 'Manish Chouhan',
-        jobTitle: 'Project Manager & Technical Product Leader',
+        jobTitle: 'Software Engineer, AI Engineer & Product Builder',
         telephone: '+918905694021',
         email: 'manishchouchan123@gmail.com',
         url: 'https://manish.devoq-labs.online',

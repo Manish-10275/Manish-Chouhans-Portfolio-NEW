@@ -1,7 +1,8 @@
 'use client';
 
 import React from 'react';
-import { BookOpen, Compass, Award, CheckCircle2 } from 'lucide-react';
+import { BookOpen, Compass, Award, CheckCircle2, Code2, Sparkles, HeartHandshake } from 'lucide-react';
+import { SectionMarker } from './EngineeringMotif';
 
 export const AboutSection: React.FC = () => {
   return (
@@ -9,97 +10,109 @@ export const AboutSection: React.FC = () => {
       <div className="max-w-6xl mx-auto">
         {/* Section Header */}
         <div className="max-w-3xl mb-16">
-          <div className="inline-flex items-center space-x-2 text-xs font-mono uppercase tracking-wider text-[#58745C] font-semibold mb-3">
-            <span>About Me</span>
-          </div>
+          <SectionMarker number="SEC.04" code="HUMAN_SIGNATURE" label="About & Philosophy" />
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-semibold tracking-tight text-[#20231F] mb-4">
-            Bridging management discipline with technical execution.
+            The intersection of code, intelligence &amp; product thinking.
           </h2>
-          <p className="text-base md:text-lg text-[#6B7168] leading-relaxed">
-            Combining rigorous management principles from Harvard University with advanced technical foundations from IIT Madras.
+          <p className="text-base md:text-lg text-[#52584F] leading-relaxed">
+            Analytical rigor in data science from IIT Madras, business management frameworks from Harvard University, and a humanistic approach to technology.
           </p>
         </div>
 
-        {/* 2-Column Editorial Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-          {/* Left Column: Narrative */}
-          <div className="lg:col-span-7 space-y-6 text-[#20231F] leading-relaxed font-normal text-base md:text-lg">
-            <p className="text-[#20231F]/90">
-              I am a results-driven Project Manager, AI Automation Associate, and Technical Builder. My focus centers on directing end-to-end product lifecycles, managing distributed developer teams, and designing automated pipelines that eliminate friction across modern operational workflows.
-            </p>
-
-            <p className="text-[#6B7168] text-base">
-              Through my roles directing digital transformations at Devoq Labs, automating media operations at Pixellab.Media, and managing enterprise sprints at JJGillespie.com, I have consistently aligned commercial client objectives with engineering roadmaps. I specialize in turning complex software architectures into predictable, on-time delivery milestones.
-            </p>
-
-            <p className="text-[#6B7168] text-base">
-              My technical grounding in data science at IIT Madras coupled with business management coursework at Harvard University allows me to speak the language of both software engineers and business stakeholders, ensuring clarity, risk mitigation, and execution speed.
-            </p>
-
-            {/* Creative Note: Published Author */}
-            <div className="pt-4 border-t border-[#EBECE6]">
-              <div className="p-5 rounded-xl bg-white border border-[#E2E4DC] flex items-start space-x-4 shadow-card-subtle">
-                <div className="p-2.5 rounded-lg bg-[#EBF1EC] border border-[#D7E2D9] text-[#58745C] flex-shrink-0 mt-0.5">
-                  <BookOpen className="w-5 h-5" />
-                </div>
-                <div>
-                  <h4 className="text-sm font-display font-bold text-[#20231F] mb-1">
-                    Published Author &amp; Creative Reflection
-                  </h4>
-                  <p className="text-xs md:text-sm text-[#6B7168] leading-relaxed">
-                    Beyond engineering and agile management, I have authored and published three poetry collections. This discipline cultivates clarity of thought, active listening, and human empathy—attributes that directly elevate team leadership and technical product design.
-                  </p>
-                </div>
+        {/* 3-Column Editorial Pillars */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+          {/* Pillar 1: The Engineer */}
+          <div className="bg-white border border-[#E2E4DC] rounded-xl p-7 shadow-card-subtle flex flex-col justify-between hover:border-[#CBD1C4] transition-colors">
+            <div>
+              <div className="w-10 h-10 rounded-lg bg-[#EBF1EC] border border-[#D7E2D9] flex items-center justify-center text-[#58745C] mb-4">
+                <Code2 className="w-5 h-5" />
               </div>
+              <h3 className="text-lg font-display font-bold text-[#20231F] mb-2">
+                The Systems &amp; AI Engineer
+              </h3>
+              <p className="text-xs md:text-sm text-[#52584F] leading-relaxed">
+                Trained in mathematical data science, algorithmic thinking, and machine learning lifecycles at <strong className="text-[#20231F]">IIT Madras</strong>. I favor deterministic architectures—strict schemas, clean TypeScript, and resilient APIs—upon which generative intelligence can be reliably built.
+              </p>
+            </div>
+            <div className="mt-6 pt-3 border-t border-[#F0F1EA] text-[11px] font-mono text-[#8D938A]">
+              IIT MADRAS • DATA SCIENCE &amp; APPLICATIONS
             </div>
           </div>
 
-          {/* Right Column: Key Tenets */}
-          <div className="lg:col-span-5 space-y-5">
-            <div className="bg-white border border-[#E2E4DC] rounded-xl p-6 shadow-card-subtle">
-              <h3 className="text-sm font-mono uppercase tracking-wider font-bold text-[#20231F] mb-4">
-                Core Leadership Tenets
-              </h3>
-
-              <div className="space-y-4 text-xs md:text-sm text-[#6B7168]">
-                <div className="flex items-start space-x-3">
-                  <CheckCircle2 className="w-4 h-4 text-[#58745C] flex-shrink-0 mt-0.5" />
-                  <div>
-                    <strong className="text-[#20231F] block">Clear Requirements &amp; Scope</strong>
-                    <span>Eliminating ambiguity early through rigorous backlog documentation, milestone mapping, and user story refinement.</span>
-                  </div>
-                </div>
-
-                <div className="flex items-start space-x-3">
-                  <CheckCircle2 className="w-4 h-4 text-[#58745C] flex-shrink-0 mt-0.5" />
-                  <div>
-                    <strong className="text-[#20231F] block">Predictable Sprint Velocity</strong>
-                    <span>Utilizing Scrum and Agile best practices to unblock technical contributors and maintain consistent delivery cadence.</span>
-                  </div>
-                </div>
-
-                <div className="flex items-start space-x-3">
-                  <CheckCircle2 className="w-4 h-4 text-[#58745C] flex-shrink-0 mt-0.5" />
-                  <div>
-                    <strong className="text-[#20231F] block">AI-Driven Process Optimization</strong>
-                    <span>Integrating language models and custom automations to eliminate repetitive engineering and operational overhead.</span>
-                  </div>
-                </div>
+          {/* Pillar 2: The Product Leader */}
+          <div className="bg-white border border-[#E2E4DC] rounded-xl p-7 shadow-card-subtle flex flex-col justify-between hover:border-[#CBD1C4] transition-colors">
+            <div>
+              <div className="w-10 h-10 rounded-lg bg-[#EBF1EC] border border-[#D7E2D9] flex items-center justify-center text-[#58745C] mb-4">
+                <Compass className="w-5 h-5" />
               </div>
+              <h3 className="text-lg font-display font-bold text-[#20231F] mb-2">
+                The Technical Product Leader
+              </h3>
+              <p className="text-xs md:text-sm text-[#52584F] leading-relaxed">
+                Coursework in business administration and management from <strong className="text-[#20231F]">Harvard University</strong>. Having founded Devoq Labs and managed engineering sprints across enterprise clients, I bridge commercial goals with developer tasks to ensure on-time delivery.
+              </p>
+            </div>
+            <div className="mt-6 pt-3 border-t border-[#F0F1EA] text-[11px] font-mono text-[#8D938A]">
+              HARVARD UNIVERSITY • MANAGEMENT STUDIES
+            </div>
+          </div>
+
+          {/* Pillar 3: The Human Touch */}
+          <div className="bg-white border border-[#E2E4DC] rounded-xl p-7 shadow-card-subtle flex flex-col justify-between hover:border-[#CBD1C4] transition-colors">
+            <div>
+              <div className="w-10 h-10 rounded-lg bg-[#EBF1EC] border border-[#D7E2D9] flex items-center justify-center text-[#58745C] mb-4">
+                <BookOpen className="w-5 h-5" />
+              </div>
+              <h3 className="text-lg font-display font-bold text-[#20231F] mb-2">
+                The Creative Signature
+              </h3>
+              <p className="text-xs md:text-sm text-[#52584F] leading-relaxed">
+                Published author of <strong className="text-[#20231F]">three poetry collections</strong>. Creative writing cultivates acute attention to language, deep empathy for user perspectives, and the patience to listen before designing solutions.
+              </p>
+            </div>
+            <div className="mt-6 pt-3 border-t border-[#F0F1EA] text-[11px] font-mono text-[#8D938A]">
+              PUBLISHED AUTHOR • 3 COLLECTIONS
+            </div>
+          </div>
+        </div>
+
+        {/* Engineering Tenets / How I Build */}
+        <div className="p-8 rounded-2xl bg-white border border-[#E2E4DC] shadow-card-subtle">
+          <div className="max-w-2xl mb-6">
+            <span className="text-xs font-mono uppercase tracking-wider text-[#58745C] font-semibold block mb-1">
+              Guiding Engineering Principles
+            </span>
+            <h3 className="text-xl md:text-2xl font-display font-bold text-[#20231F]">
+              How I approach software and AI development
+            </h3>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs md:text-sm text-[#52584F]">
+            <div className="space-y-1.5 p-4 rounded-xl bg-[#FAF9F5] border border-[#E2E4DC]">
+              <strong className="text-[#20231F] block font-mono text-xs uppercase">
+                1. Predictable Foundations
+              </strong>
+              <p className="leading-relaxed">
+                AI should enhance well-engineered systems, not paper over fragile architecture. I prioritize clean data models, idempotency, and automated test coverage.
+              </p>
             </div>
 
-            <div className="bg-white border border-[#E2E4DC] rounded-xl p-6 shadow-card-subtle">
-              <span className="text-xs font-mono uppercase tracking-wider text-[#6B7168] block mb-2">
-                Institutional Foundations
-              </span>
-              <div className="space-y-2 text-xs font-mono text-[#20231F]">
-                <div className="p-2.5 rounded bg-[#F1F2EC] border border-[#E2E4DC]">
-                  Harvard University — Bachelor of Liberal Arts (Business Administration Mgmt)
-                </div>
-                <div className="p-2.5 rounded bg-[#F1F2EC] border border-[#E2E4DC]">
-                  IIT Madras — BS in Data Science &amp; Applications (2025 – 2029)
-                </div>
-              </div>
+            <div className="space-y-1.5 p-4 rounded-xl bg-[#FAF9F5] border border-[#E2E4DC]">
+              <strong className="text-[#20231F] block font-mono text-xs uppercase">
+                2. Real-World Practicality
+              </strong>
+              <p className="leading-relaxed">
+                Avoid unnecessary complexity. Measure latency, token consumption, and actual client requirements before introducing heavyweight frameworks.
+              </p>
+            </div>
+
+            <div className="space-y-1.5 p-4 rounded-xl bg-[#FAF9F5] border border-[#E2E4DC]">
+              <strong className="text-[#20231F] block font-mono text-xs uppercase">
+                3. End-to-End Ownership
+              </strong>
+              <p className="leading-relaxed">
+                From initial stakeholder requirements and API schema design to CI/CD pipeline automation and post-launch monitoring, I take pride in complete delivery.
+              </p>
             </div>
           </div>
         </div>
